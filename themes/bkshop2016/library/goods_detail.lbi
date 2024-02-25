@@ -1,0 +1,172 @@
+<div class="bgheading clearfix" itemscope="itemscope" itemtype="http://schema.org/Product">
+<div class="wrap-content">
+	<h1><span itemprop="name" id="gdsname">{$goods.goods_name}</span> {if $cfg.show_goodssn}<span class="no">{$lang.goods_sn}{$lang.colon}<span itemprop="mpn" id="gdshts">{$goods.goods_sn}</span></span>{/if}</h1>
+         	<span class="hidden" itemprop="description">{$goods.goods_brief}</span>
+        <aside class="leftimg">
+           <div class="sslider" style="margin:0 auto">
+           		{if $goods.goods_brand eq 'Apple' and $catid eq 2 }
+           		<span><i class="iconbkit-apple-reseller"></i></span>	
+           		{/if}
+           		<div class="wrapslide">
+				<ul class="bigImg">		
+					{foreach from=$pictures item=picture name=pictures}
+					<li><img src="{$option.static_path}{$picture.img_url}" alt="{if $picture.img_desc}{$picture.img_desc}{else}{$goods.goods_name}{/if}" ></li>
+					{/foreach}
+				</ul>
+				{if $goods.goods_brand eq 'Apple' and $catid eq 2 }
+				<i class="iconbkit-1doi1"></i>
+				{/if}
+				</div>	
+				<div class="smallScroll">
+					<a class="sPrev" href="javascript:void(0)">←</a>
+					<div class="smallImg">
+						<ul>
+							{foreach from=$pictures item=picture name=pictures}
+							<li><img src="{$option.static_path}{$picture.thumb_url}" alt="{if $picture.img_desc}{$picture.img_desc}{else}{$goods.goods_name}{/if}" ></li>
+							{/foreach}
+						</ul>		
+					</div>
+					<a class="sNext" href="javascript:void(0)">→</a>	
+				</div>	
+			</div>
+        </aside>
+         <aside class="righttext" >         	
+         	{if $goods.on_sale eq 1}
+	         	<div class="clearfix">
+	         		<div class="info-left">
+	         			<p style="margin-bottom:10px;">
+			         		<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			         		 <meta itemprop="priceCurrency" content="VND" />
+			         		{if $goods.is_promote and $goods.gmt_end_time}
+			         		 <span itemprop="price" class="pricesell" fprice="{$price_final}" id="gdspricekm">{$goods.promote_price}</span>
+			         		 <del>{$goods.shop_price_formated}</del>
+			         		{else}
+			         		 {if $goods.preoder}Giá dự kiến: {/if}<span itemprop="price" fprice="{$price_final}" class="pricesell" id="gdsprice">{$goods.shop_price_formated}</span>
+			         		{/if}
+						    <link itemprop="availability" href="http://schema.org/InStock"/> <span class="hidden">Còn hàng ! Đặt mua</span> 	
+						    </span>
+						  </span>
+			         		
+			         	  {siy:goods_label_status goods=$goods}
+			         	 
+			         	</p>
+						{if $goods.timegift eq 1}
+							{if $goods.gmt_end_time}{if $goods.goods_gift neq ''}<div class="gift" id="gdsgift">{$goods.goods_gift}</div>{/if}{/if}
+	         	  		{else}
+	         	  			{if $goods.goods_gift neq ''}<div class="gift" id="gdsgift">{$goods.goods_gift}</div>{/if}
+	         	  		{/if}
+	         	  		{if $goods.is_promote and $goods.gmt_end_time}
+						<div class="end_time_wrapper">
+							{$lang.end_time}{$lang.colon}
+							<span class="end_time" title="{siy:date_format date=$goods.gmt_end_time format='Y-m-d-G-i-s'}">{siy:date_format date=$goods.gmt_end_time}</span>
+						</div>
+						{/if}
+						{if $goods.pack neq ""}
+						<p><b>✔</b> Bộ sản phẩm bao gồm: {$goods.pack|escape:html}</p>
+						{/if}
+						 <p>
+			         	{if $goods.goods_brand and $cfg.show_brand}
+						<span class="hidden" itemprop="brand">{$goods.goods_brand}</span>
+						{/if} {if $goods.warranty} <b>✔</b> Bảo hành: {$goods.warranty} <a href="/thong-tin/tim-trung-tam-bao-hanh-hang-3.html">(Xem điểm bảo hành)</a> {/if}
+			         	  <span class="hidden" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+						    <span itemprop="ratingValue">{$goods.comment_rank}</span> sao, trên 
+						    <span itemprop="reviewCount">{$goods.click_count}</span> bình chọn.
+						  </span>
+			         	</p>
+			         	{if $daydoitra eq 15}
+			         	<p><b>✔</b> Đổi trả sản phẩm lỗi miễn phí trong <strong>15 ngày</strong> <a href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+			         	{elseif $daydoitra eq 60}
+			         	<p><b>✔</b> Đổi trả sản phẩm lỗi miễn phí trong <strong>60 ngày</strong> <a href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+			         	<p><b>✔</b> Bảo hành 1 đổi 1 trong vòng 1 năm</p>
+			         	{elseif $daydoitra eq 7}
+			         	<p><b>✔</b> Đổi trả sản phẩm lỗi miễn phí trong <strong>7 ngày</strong> <a href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+			         	{/if}
+			         	{if $goods.goods_brand eq 'Apple'}
+			         	<p><i class="iconbkit-apple-icloud"></i><a href="/tin-tuc/tim-hieu-ve-icloud-de-bao-ve-thiet-bi-cua-ban-112.html">Tìm hiểu về iCloud để bảo vệ thiết bị của bạn</a></p>
+			         	{/if}
+
+	         	  		<form action="javascript:buy({$goods.goods_id})" method="post" id="purchase_form">
+	         	  			{if $specification}
+							<div class="properties clearfix">
+								{foreach from=$specification item=spec key=spec_key name=specification}
+								<dl{if $spec.attr_type eq 2} title="{$lang.multi_choice}"{/if}>
+									<dt>{$spec.name}{$lang.colon}</dt>
+									{if $spec.attr_type eq 1}
+									<dd class="radio">
+										{foreach from=$spec.values item=value key=key}
+										<label for="spec_value_{$value.id}" title="{if $value.price gt 0}{$lang.plus}{$value.format_price|abs}{elseif $value.price lt 0}{$lang.minus}{$value.format_price|abs}{/if}">
+											<input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" data="{$value.price}" {if $key eq 0} checked="checked"{/if} />
+										{$value.label}</label>
+										{/foreach}
+									</dd>
+									{else}
+									<dd class="checkbox">
+										{foreach from=$spec.values item=value key=key}
+										<label for="spec_value_{$value.id}" title="{if $value.price gt 0}{$lang.plus}{$value.format_price|abs}{elseif $value.price lt 0}{$lang.minus}{$value.format_price|abs}{/if}">
+											<input type="checkbox" data="{$value.price}" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" />
+										{$value.label}</label>
+										{/foreach}
+									</dd>
+									{/if}
+								</dl>
+								<input type="hidden" name="spec_list" value="{$key}" />
+								{/foreach}
+							</div>
+							{/if}
+						<div class="action clearfix">
+		     	  			{if ($goods.goods_number eq '1') and ($option.use_storage eq '1')}
+			     	  			<a href="javascript:buy({$goods.goods_id})" class="btn btn-round btn-tragop">
+									ĐẶT TRƯỚC <br/>
+									<span class="atotal">Chúng tôi sẽ liên hệ ngay khi có hàng</span>
+									</a>
+								
+							{else}
+								<a href="javascript:buy({$goods.goods_id})" class="btn btn-round btn-buy ">
+								{$lang.btn_buy} <br/>
+								<span class="atotal">{$lang.amount}{$lang.colon} <span class="amount">{if $goods.is_promote and $goods.gmt_end_time }{$goods.promote_price}{else}{$goods.shop_price}{/if}</span></span>
+								</a>
+								{if $is_tragop}
+								<a href="{$option.static_path}{$request_uri}/tra-gop" class="btn btn-round btn-tragop">MUA TRẢ GÓP <br/>
+								<span class="atotal">Chỉ {$gopmoithang}/tháng</span>
+								</a>{/if}
+								{if $is_tragop AND $goods.showtragop eq 0}<p class="tragop-online">Duyệt trả góp qua điện thoại <a href="/tin-tuc/tra-gop-online-duyet-ho-so-qua-dien-thoai-ti-le-duyet-cao-23.html">(Tìm hiểu ngay)</a> <img src="{$option.static_path}static/img/mui-ten-duyet-ho-so.png" height="24" width="29"> </p>{/if}
+							{/if}
+							
+						</div>
+						<div>
+			         		Gọi đặt mua: <strong>1900.636.472</strong>  
+			         		{if $is_tragop} | Trả góp: <strong>0938.33.11.00</strong>{/if}
+			         	</div>
+         	  		</form>
+	         	 
+
+         	{else}
+         	<span class="labelstatus outstock">Ngừng Kinh Doanh</span>
+         	{/if} <!-- het if $goods.on_sale -->
+         		</div>
+         	  <div class="info-right">
+         	  	<p class="title5">THẢNH THƠI MUA SẮM</p>
+         	  	<ul class="loiich">
+         	  		<li><i class="iconbkit-rocket"></i> Giao hàng toàn quốc</li>
+         	  		<li><i class="iconbkit-shop"></i> Đặt giữ hàng tại shop</li>
+         	  		<li><i class="iconbkit-bh"></i>  Bảo hành chính hãng </li>
+         	  		<li><i class="iconbkit-doitra60"></i> Đổi trả miễn phí đến <strong>60</strong> ngày</li>
+         	  		<li><i class="iconbkit-support"></i>Hỗ trợ kỹ thuật trực truyến</li>
+         	  	</ul>
+         	  </div><!-- end inforing -->
+         	</div><!-- clearfix -->
+         	 <!-- preoder ip6s -->
+	         	{if $id eq 511 || $id eq 512}
+	         	<p style="margin-top:12px;color:red">
+	         		ĐẶT TRƯỚC NHẬN NGAY BỘ QUÀ TẶNG KHỦNG TRỊ GIÁ <strong>3,5 TRIỆU</strong>
+	         	</p>
+	         	<img src="{$option.static_path}static/qua-tang-iphone-6s.png" alt="Quà tặng iPhone 6s đến 3,5 triệu" >
+	         	<p>
+	         		Áp dụng cho <strong>50</strong> khách hàng đầu tiên, đặt cọc tối thiểu <strong>500.000đ</strong>.
+	         	</p>
+	         	<p>Từ ngày <strong>31/10</strong>  đến hết ngày <strong>05/11/2015</strong> và có thể kết thúc sớm hơn nếu hết quà tặng</p>
+	         	{/if}
+         </aside>
+</div>
+</div>
+<div class="clr"></div>

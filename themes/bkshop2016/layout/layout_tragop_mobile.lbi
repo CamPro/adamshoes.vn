@@ -1,0 +1,312 @@
+<div class="wrapper5">
+		<div class="areatop">
+        <h1>Mua trả góp {$goods.goods_name|escape:html}, Giá Trả góp: <span class="pricein">{if $goods.tragop_price_raw > 0} {$goods.tragop_price} {else} {$goods.shop_price_formated} {/if}</span></h1>
+	    </div>
+        {if $goods.tragop_gift}
+        <div class="notice_box" style="margin-top: 10px">{$goods.tragop_gift}</div>
+        {/if}
+	    <div class="pricing_table_wdg clearfix">
+        <ul>
+            <li>Gói trả góp</li>
+            <li>Trả trước</li>
+            <li>Góp mỗi tháng</li>
+            <li>Lãi suất <span class="question" onmouseover="$('.tooltip').show()" onmouseout="$('.tooltip').hide()"> (?)</span>
+                <span class="tooltip"><b>+ LÃI SUẤT THỰC(thể hiện trên hợp đồng):</b> Là lãi suất tính trên dư nợ giảm dần.<br>
+                    <b>+ LÃI SUẤT PHẲNG:</b> Là lãi suất tính trên số tiền vay ban đầu.( Để giúp khách hàng dễ hiểu hơn, chúng tôi đưa thêm cách tính thông dụng ngoài thị trường. Cách tính này ra số tiền góp hàng tháng tương tự như lãi suất thực).
+                </span>
+            </li>
+            <li>Tổng góp</li>
+            <li>Chênh lệch so với giá bán</li>
+            <li class="pager">Giấy tờ cần có</li>
+            <li></li>
+        </ul>
+        {if $acs}
+        <ul>
+            <li class="packagename"><b>Lãi suất {$acs.laisuat}%</b></li>
+            <li> <b>{$acs.tratruoc}</b> <span class="percent">({$acs.percen_tt}%)</span> </li>
+            <li><strong id="zgopMTACS">{$acs.gopMTf}</strong>
+                <span class="insmonth">Góp {$acs.kyhan} tháng.</span>
+                <div class="payment-detail">
+                    <span>Gốc: {$acs.gopMTf}</span>
+                    <span>Bảo hiểm: <b>0đ</b>, Phí thu hộ: <b>0đ</b></span>
+                </div>
+            </li>
+            <li id="zlsACS">{$acs.laisuat}% (Hạn đến: {$acs.endday})</li>
+            <li class="total"><strong id="zTotalACS">{$acs.TongGopf}</strong> (gồm phí HS: {$acs.phihs})</li>
+            <li><b id="zlechACS">{$acs.cLechf}</b></li>
+            <li class="pager">{$acs.thutuc_info}</li>
+            <li> <a class="regbuy" href="javascript:void(0)">Công ty ACS</a> </li>
+        </ul>
+        {/if}
+        {if $hc}
+        <ul>
+            <li class="packagename"><b>Lãi suất {$hc.laisuat}%</b></li>
+            <li> <b>{$hc.tratruoc}</b> <span class="percent">({$hc.percen_tt}%)</span> </li>
+            <li><strong id="zgopMTHC">{$hc.gopMTf}</strong>
+                <span class="insmonth">Góp {$hc.kyhan} tháng.</span>
+                <div class="payment-detail">
+                    <span>Gốc: {$hc.gocLai}</span>
+                    <span>Bảo hiểm: <b>{$hc.baohiem}</b></span>
+                    <span>Phí thu hộ: <b>13.000đ</b></span>
+                </div>
+            </li>
+            <li id="zlsHC">{$hc.laisuat}% (Hạn đến: {$hc.endday})</li>
+            <li class="total"><strong id="zTotalHC">{$hc.TongGopf}</strong></li>
+            <li><b id="zlechHC">{$hc.cLechf}</b></li>
+            <li class="pager">{$hc.thutuc_info}</li>
+            <li> <a class="regbuy" href="javascript:void(0)">HomeCredit</a> </li>
+        </ul>
+        {/if}
+        {if $hd}
+        <ul>
+            <li class="packagename"><b>Lãi suất {$hd.laisuat}%</b></li>
+            <li> <b>{$hd.tratruoc}</b> <span class="percent">({$hd.percen_tt}%)</span> </li>
+            <li><strong id="zgopMTHD">{$hd.gopMTf}</strong>
+                <span class="insmonth">Góp {$hd.kyhan} tháng.</span>
+                <div class="payment-detail">
+                    <span>Gốc: {$hd.gocLai}</span>
+                    <span>Bảo hiểm: <b>0đ</b></span>
+                    <span>Phí thu hộ: <b>13.000đ</b></span>
+                </div>
+            </li>
+            <li id="zlsHD">{$hd.laisuat}% (Hạn đến: {$hd.endday})</li>
+            <li class="total"><strong id="zTotalHD">{$hd.TongGopf}</strong></li>
+            <li><b id="zlechHD">{$hd.cLechf}</b></li>
+            <li class="pager">{$hd.thutuc_info}</li>
+            <li> <a class="regbuy" href="javascript:void(0)">HDSaison</a> </li>
+        </ul>
+        {/if}
+        {if $fe}
+        <ul>
+            <li class="packagename"><b>Lãi suất {$fe.laisuat}%</b></li>
+            <li> <b>{$fe.tratruoc}</b> <span class="percent">({$fe.percen_tt}%)</span> </li>
+            <li>
+                <strong id="zgopMTFE">{$fe.gopMTf}</strong>
+                <span class="insmonth">Góp {$fe.kyhan} tháng.</span>
+                <div class="payment-detail">
+                    <span>Gốc: {$fe.gocLai}</span>
+                    <span>Bảo hiểm: <b>{$fe.baohiem}</b></span>
+                    <span>Phí thu hộ: <b>12.000đ</b></span>
+                </div>
+            </li>
+            <li id="zlsFE">{$fe.laisuat}% (Hạn đến: {$fe.endday})</li>
+            <li class="total"><strong id="zTotalFE">{$fe.TongGopf}</strong></li>
+            <li><b id="zlechFE">{$fe.cLechf}</b></li>
+            <li class="pager">{$fe.thutuc_info}</li>
+            <li> <a class="regbuy" href="javascript:void(0)">FECredit</a> </li>
+        </ul>
+        {/if}
+        {if $goods.is_tragop neq 1}
+        <ul>
+            <li class="packagename"><b>Lãi suất 0%</b></li>
+            <li>Không (30% với iPhone)</li>
+            <li><strong> {$VISA_gopMT}</strong>
+                <span class="insmonth">Góp 12 tháng</span>
+                <div class="payment-detail">
+                    <span>Gốc: {$VISA_gopMT}</span>
+                    <span>Bảo hiểm: <b>0đ</b></span>
+                    <span>Phí thu hộ: <b>0đ</b></span>
+                </div>
+            </li>
+            <li>0% (đến 31/12/2017)</li>
+            <li class="total"><strong>{if $goods.tragop_price_raw > 0} {$goods.tragop_price} {else} {$goods.shop_price_formated} {/if}</strong></li>
+            <li><b>0 đ</b></li>
+            <li class="pager">Thẻ tín dụng Sacombank và CMND</li>
+            <li><a class="regbuy" href="javascript:void(0)">VISA Sacombank</a></li>
+        </ul>
+        {/if}
+        {if $zero_dong}
+        <ul>
+            <li class="packagename"><b>0 đồng trả trước</b></li>
+            <li>0 đ</li>
+            <li><strong >{$zero_dong.gopMTf}</strong>
+                <span class="insmonth">Góp 12 tháng</span>
+                <div class="payment-detail">
+                    <span>Gốc + lãi: {$zero_dong.gocLai}</span>
+                    <span>Bảo hiểm: <b>{$zero_dong.baohiem}</b></span>
+                    <span>Phí thu hộ: <b>12.000đ</b></span>
+                </div>
+            </li>
+            <li>2.17%</li>
+            <li class="total"><strong>{$zero_dong.TongGopf}</strong></li>
+            <li><b>{$zero_dong.cLechf}</b></li>
+            <li class="pager">CMND + Hộ Khẩu + Hóa đơn điện</li>
+            <li><a class="regbuy" href="javascript:void(0)">FECredit</a></li>
+        </ul>
+        {/if}
+        {if !$hc and !$fe and !$hd and !$acs and !$zero_dong and $goods.is_tragop eq 1}
+            <ul>
+                <li class="packagename"><b>Thông báo</b></li>
+                <li>Hiện không có gói trả góp ưu đãi nào cho sản phẩm này.</li>
+                <li></li>
+                <li></li>
+                <li class="total"></li>
+                <li></li>
+                <li class="pager"></li>
+                <li>Vui lòng chọn gói trả góp khác bên dưới</li>
+            </ul>
+         {/if}
+    </div>
+    <div class="note">Lưu ý: Số tiền thực tế có thể lệch đến 10.000đ/tháng</div>
+    <div class="choosestep">
+            <span class="one">không chọn được gói phù hợp?</span>
+        <span>Lựa chọn gói trả góp dựa theo số tiền trả trước, giấy tờ bạn có:</span>
+        <div class="areachoose">
+        <select name="slprofile" id="slprofile" class="chone">
+            <option value="-1">Chọn giấy tờ bạn có</option>
+                <option value="1">CMND + Hộ Khẩu</option>
+                <option value="2">CMND + Bằng lái xe</option>
+                <option value="3">CMND + Bằng lái /Hộ khẩu + Hóa đơn điện</option>
+                <option value="4">Gói giấy tờ để chứng minh thu nhập</option>
+                <option value="5">Sinh viên</option>
+                <option value="6">Công chức, giáo viên</option>
+        </select>
+    <select name="slpercent" id="slpercent" class="chtwo">
+        <option value="-1">Chọn số tiền trả trước</option>
+        <option value="0" data-prepaid="">Trả trước  0%</option>
+        <option value="10" prepaid="">Trả trước 10% (1.999.000₫)</option>
+        <option value="20" prepaid="">Trả trước 20% (3.998.000₫)</option>
+        <option value="30" prepaid="">Trả trước 30% (5.997.000₫)</option>
+        <option value="40" prepaid="">Trả trước 40% (7.996.000₫)</option>
+        <option value="50" prepaid="">Trả trước 50% (9.995.000₫)</option>
+        <option value="60" prepaid="">Trả trước 60% (11.994.000₫)</option>
+        <option value="70" prepaid="">Trả trước 70% (13.993.000₫)</option>
+    </select>
+    <select name="slmonth" id="slmonth" class="chthree">
+        <option value="-1">Chọn kỳ hạn vay</option>
+        <option value="4">Kỳ hạn vay 4 tháng</option>
+        <option value="6">Kỳ hạn vay 6 tháng</option>
+        <option value="9">Kỳ hạn vay 9 tháng</option>
+        <option value="12">Kỳ hạn vay 12 tháng</option>
+        <option value="15">Kỳ hạn vay 15 tháng</option>
+        <option value="18">Kỳ hạn vay 18 tháng</option>
+        <option value="24">Kỳ hạn vay 24 tháng</option>
+    </select>
+    <input type="hidden" value="{if $goods.tragop_price_raw > 0}{$goods.tragop_price_raw}{else}{$goods.shop_price}{/if}" name="price_final" id="price_final">
+    <input type="hidden" value="{$catid}" name="catid" id="catid">
+    <a href="javascript:void(0)" class="viewmoney" onclick="CalculateInstallment();">Xem gói trả góp</a>
+    </div>
+</div>
+<div id="responsive"></div>
+    </div>
+	    <!-- ket qua -->
+        <div class="insform" id="zoneACS">
+            <div class="logo">acs</div>
+            <label>Trả trước:  <span id="prepaidacs"></span><span id="percentacs" class="detail-percent"></span></label>
+            <label>
+                Góp mỗi tháng:  <span id="ppmacs"></span><br/>
+                (Gốc +lãi: <span id="detail-ppm-acs">...</span>, Bảo hiểm: <span id="insacs">0đ</span>, Phí thu hộ: <span id="spdetail-fee-acs">0đ</span>)
+            </label>
+            <label>Phí HS/1 bộ: <span id="feecontractacs">300.000đ</span></label>
+            <label>Lãi suất: <span id="rateacs"></span></label>
+            <label>Tổng tiền: <strong id="ttpacs"></strong></label>
+            <label>Chênh lệch giá bán: <span id="difacs"></span></label>
+        </div>
+        <div class="insform" id="zoneFE">
+            <div class="logo">fecredit</div>
+            <label>Trả trước:  <span id="prepaidfe"></span><span id="percentfe" class="detail-percent"></span></label>
+            <label>
+                Góp mỗi tháng:  <span id="ppmfe"></span><br/>
+                (Gốc +lãi: <span id="detail-ppm-fe">...</span>, Bảo hiểm: <span id="insfe">...</span>, Phí thu hộ: <span id="spdetail-fee-fe">12.000đ</span>)
+            </label>
+            <label>Lãi suất: <span id="ratefe"></span></label>
+            <label>Tổng tiền: <strong id="ttpfe"></strong></label>
+            <label>Chênh lệch giá bán: <span id="diffe"></span></label>
+        </div>
+        <div class="insform" id="zoneHC">
+            <div class="logo">home credit</div>
+            <label>Trả trước: <span id="prepaidhc"></span><span id="percenthc" class="detail-percent"></span></label>
+            <label>
+                Góp mỗi tháng: <span id="ppmhc"></span><br/>
+                (Gốc +lãi: <span id="detail-ppm-hc">...</span>, Bảo hiểm: <span id="inshc">...</span>, Phí thu hộ: <span id="spdetail-fee-hc">13.000đ</span>)
+            </label>
+            <label>Lãi suất: <span id="ratehc"></span></label>
+            <label>Tổng tiền: <strong id="ttphc"></strong></label>
+            <label>Chênh lệch giá bán: <span id="difhc"></span></label>
+        </div>
+        <div class="insform" id="zoneHD">
+            <div class="logo">hdsaison</div>
+            <label>Trả trước:  <span id="prepaidhd"></span><span id="percenthd" class="detail-percent"></span></label>
+            <label>
+                Góp mỗi tháng:  <span id="ppmhd"></span><br/>
+                (Gốc +lãi: <span id="detail-ppm-hd">...</span>, Bảo hiểm: <span id="inshd">0đ</span>, Phí thu hộ: <span id="spdetail-fee-hd">13.000đ</span>)
+            </label>
+            <label>Lãi suất: <span id="ratehd"></span></label>
+            <label>Tổng tiền: <strong id="ttphd"></strong></label>
+            <label>Chênh lệch giá bán: <span id="difhd"></span></label>
+        </div>
+	    <!--end ket qua -->
+    </div>
+    <div class="footerinstallment">
+    <div class="consultinstallment">
+        <div class="textconsult">Tư vấn trả góp</div>
+        <div class="calltime">
+            <p>Gọi <b>1900.636.472</b> hoặc 0938.33.11.00 (8h00 - 22h00 hàng ngày)</p>
+        </div>
+        <div class="callback">
+         <form action="javascript:;" onsubmit="goituvan({$goods.goods_id}, '{$goods.goods_name|escape:html}', '{$goods.goods_sn}', '{$goods.shop_price_formated}', '{$goods.promote_price}')" method="post" id="formtragop">
+            <span>Thông tin người mua:</span>
+            <label for="rdmale">
+                <input type="radio" checked="" value="1" name="csex" id="rdmale">&nbsp;Anh
+            </label>
+            <label for="rdfemale">
+                <input type="radio" value="0" name="csex" id="rdfemale">&nbsp;Chị
+            </label>
+            <div class="clr"></div>
+            <input type="text" maxlength="50" placeholder="Họ tên của bạn" id="txtnamecallme" name="cname" required>
+            <input type="text" minlength="10" maxlength="11" placeholder="Số điện thoại" id="txtcallme" name="cmobile" required>
+            <select name="province" id="province">
+                <option value="0">Đang ở tỉnh/TP ?</option>}
+               {html_options options=$region_list selected=0}
+           </select>
+            <button id="btn_buytragop" type="submit">Tư vấn cho tôi</button>
+            </form>
+        </div>
+    </div>
+
+    <aside class="advantage">
+        <h4>Điều cần biết khi mua trả góp</h4>
+        <span><b>●</b> Điều kiện và giấy tờ gốc cần có
+        <i>- Tuổi từ 20 - 60 (tính theo ngày tháng năm sinh trên chứng minh nhân dân), <strong>Chứng minh nhân dân</strong> còn hạn sử dụng (15 năm tính từ ngày cấp), <strong>Hộ khẩu</strong> (người mua hàng phải có tên trong hộ khẩu). Nếu khoản vay dưới 10 triệu có thể thay hộ khẩu bằng bằng lái xe. <br/>
+        - Nếu bạn là SINH VIÊN thì phải: Từ 18 tuổi, có chứng minh nhân dân, thẻ sinh viên và biên lai đóng học phí học kỳ gần nhất, Hộ khẩu có tên bạn, Bản sao chứng minh nhân dân của Bố hoặc Mẹ có công chứng 6 tháng.
+        </i></span>
+        <span><b>●</b> Bí kíp để duyệt hồ sơ tỉ lệ đậu cao
+        <i>- Số tiền góp mỗi tháng nên bằng một nửa số tiền bạn còn dư sau khi chi tiêu. VD: thu nhập của bạn là 8tr, bạn chi tiêu bình quân 5tr còn dư 3tr thì tốt nhất bạn nên góp 1,5tr/tháng. <br/>
+    - Số điện thoại người tham chiếu nên là người thân của mình như vợ/chồng, anh/chị/em trong gia đình, bạn thân và phải biết việc mình chuẩn bị mua trả góp.<br/>
+    - Lịch sử vay trả góp tốt: trả hết, trả đúng hạn.
+        </i></span>
+    </aside>
+
+    <div class="processesinstallment">
+        <h4>Câu hỏi thường gặp</h4>
+        <div class="process">
+            <p><strong>1. Tôi có được mua trả góp tiếp khi đang trả góp hàng tháng sản phẩm khác không? </strong></p>
+            <p>Yêu cầu mua trả góp của anh/chị sẽ được công ty tài chính xem xét tùy vào tình trạng hồ sơ. Tuy nhiên, để hồ sơ dễ dàng được công ty tài chính duyệt, anh/chị nên góp hết hợp đồng cũ rồi mới làm tiếp hợp đồng khác.</p>
+        </div>
+        <div class="process">
+            <p><strong>2. Khi mua trả góp tôi có được hưởng đầy đủ khuyến mãi như mua bình thường không?</strong></p>
+            <p>Không được hưởng giá khuyến mãi hoặc quà tặng nếu có (ngoại trừ có chương trình đặc biệt áp dụng cho từng sản phẩm cụ thể)</p>
+        </div>
+        <div class="process">
+           <p><strong>3. Tôi có thể đóng tiền góp hàng tháng ở đâu ?</strong></p>
+            <p>Có thể đóng tiền ở tất cả các địa điểm có thu hộ trả góp nhà tài chính bạn đã đăng ký mua trả góp (Ví dụ: Bưu điện, Ngân hàng, hệ thống Bách Khoa Shop)</p>
+        </div>
+    	</div>
+	</div>
+
+<div class="tabs">
+   <input id="tab1" type="radio" name="tabs" checked>
+  <label for="tab1">Bình luận</label>
+  <input id="tab2" type="radio" name="tabs">
+  <label for="tab2">Bách Khoa Shop</label>
+
+  <div class="content">
+      <div id="content1">
+         <div class="fb-comments" data-href="{$option.static_path}{$request_uri}" data-width="600" data-numposts="10"></div>
+      </div>
+
+      <div id="content2">
+       {if $option.comment_enabled}{include file='library/comments.lbi'}{/if}
+      </div>
+  </div>
+</div> <!--end tabs-->

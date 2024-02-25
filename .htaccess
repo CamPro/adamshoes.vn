@@ -1,0 +1,51 @@
+<FilesMatch "\.(bak|inc|lib|sh|tpl|lbi|dwt)$">
+    order deny,allow
+    deny from all
+</FilesMatch>
+
+RewriteEngine On
+#RewriteBase /
+Redirect /may-doi-tra.html$ /may-cu.html$
+
+# direct one-word access
+RewriteRule ^home$    index\.php [L]
+RewriteRule ^he-thong-sieu-thi$    agency\.php [L]
+RewriteRule ^category$      index\.php [L]
+
+RewriteRule ^lien-he$					    message\.php [L]
+RewriteRule ^nhom-mua$                      group_buy\.php [L]
+
+RewriteRule ^gio-hang$                      flow\.php [L]
+RewriteRule ^dat-hang-thanh-cong$           flow\.php\?step=finished [L]
+RewriteRule ^thanh-toan-thanh-cong$         flow\.php\?step=paysuccess [L]
+
+
+
+RewriteRule ^g/([0-9a-zA-Z_-]+)$                                 		groupproduct\.php?slug=$1 [L]
+RewriteRule ^viec-lam[\/]*$                                             jobs\.php [L]
+RewriteRule ^viec-lam/([0-9a-zA-Z_-]+)$                                 jobs\.php\?jmod=$1   [QSA,L]
+
+RewriteRule ^tim-kiem\?([0-9-a-zA-Z]+)$                                search\.php\?keywords=$1 [QSA,L]
+RewriteRule ^tim-kiem$       								 		   search\.php [L]
+RewriteRule ^tin-tuc*$                               				   article_index\.php   [QSA,L]
+RewriteRule ^tin-tuc/(.*)/([0-9]+)[\/]*$                               article_cat\.php\?turl=$1&id=$2   [QSA,L]
+RewriteRule ^tin-tuc/(.*)-([0-9]+).html$                               article\.php\?id=$2   [QSA,L]
+RewriteRule ^thong-tin/(.*)-([0-9]+).html$                             article\.php\?id=$2   [QSA,L]
+RewriteRule ^khuyen-mai/([0-9a-zA-Z_-]+).html$                         topic\.php\?slug=$1 [QSA,L]
+RewriteRule ^gia-soc/([0-9a-zA-Z_-]+).html$                            giasoc\.php\?slug=$1 [QSA,L]
+RewriteRule ^hang-([0-9a-zA-Z_-]+).html$                               brand\.php\?slug=$1 [QSA,L]
+
+#category
+RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+).html$                    category\.php\?caturl=$1&hang=$2  [QSA,L]
+RewriteRule ^([0-9a-zA-Z_-]+).html$                                      category\.php\?caturl=$1  [QSA,L]
+
+RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)/tra-gop[\/]*$   		   goods\.php\?durl=$2&tragop=1 [QSA,L]
+RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)/dat-hang[\/]*$          goods\.php\?durl=$2&steporder=1 [QSA,L]
+RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)/dat-truoc[\/]*$         goods\.php\?durl=$2&steporder=3 [QSA,L]
+RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)[\/]*$  		   		   goods\.php\?durl=$2 [QSA,L]
+
+
+
+RewriteRule ^snatch-([0-9]+)$                                     snatch\.php\?id=$1 [QSA,L]
+RewriteRule ^group_buy-([0-9]+)$                                  group_buy\.php\?act=view&id=$1 [QSA,L]
+RewriteRule ^auction-([0-9]+)$                                    auction\.php\?act=view&id=$1 [QSA,L]

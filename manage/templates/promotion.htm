@@ -1,0 +1,18 @@
+{include file="pageheader.htm"}
+<div class="form-div">
+   Định dạng file upload là .csv Tải file mẫu <a target="_blank" href="templates/promotion.csv">tại đây</a><br/>
+   Quy tắc làm file: <br/>
+   - Nếu cột <strong>gift</strong> trống thì cột <strong>giftday</strong> = 0; <strong>gift</strong> có, <strong>giftday</strong> = 1 có nghĩa là Quà tặng áp dụng theo ngày kết thúc <br/>
+   - Cột <strong>ngày</strong> định dạng yyyy-mm-dd, giử phím Ctrl rồi kéo góc phải ô để sao chép giá trị ngày. <br/>
+   - Cột <strong>Price</strong> formart theo định dạng <strong>General</strong> tức là không phân cách hàng nghìn, trăm....<br/>
+   - Cột <strong>Gift</strong> viết theo định dạng html nếu muốn xuống hàng, thụt đầu dòng... <br/>
+   Khuyến cáo cập nhật các sản phẩm có mã HTS cố định, ko theo màu sắc <br/>
+   <hr>
+    <p class="label">Import file Excel .xlsx</p>
+     <form method="post" action="promotion.php" enctype="multipart/form-data">
+        <input type="file" name="file2" />
+        <input type="hidden" name="act" value="run" />
+        <input type="submit" value="Submit" class="button" name="submit">
+    </form>
+</div>
+{include file="pagefooter.htm"}

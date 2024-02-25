@@ -1,0 +1,6 @@
+<div class="navhome navacc">
+    <a href="phan-mem-virus.html" {if $category eq 67}class="active"{/if}><h4>Phần mềm<br/>Diệt Virus</h4></a>
+    <a href="phan-mem-office.html" {if $category eq 69}class="active"{/if}><h4>Phần mềm<br/>Office</h4></a>
+    <a href="phan-mem-windows.html" {if $category eq 68}class="active"{/if}><h4>Phần mềm<br/>Windows</h4></a>
+    <a href="phan-mem-dan-duong.html" {if $category eq 96}class="active"{/if}><h4>Phần mềm<br/>Dẫn đường</h4></a>
+</div>

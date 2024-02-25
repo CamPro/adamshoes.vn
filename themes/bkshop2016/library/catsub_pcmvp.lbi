@@ -1,0 +1,62 @@
+<div   id="list_child_cat_acc">
+<ul class="listsubcatacc clearfix">
+<li><strong>Máy văn phòng:</strong></li>
+   <li> <a href="may-in.html" {if $category eq 29}class="active"{/if}><h4>Máy in</h4></a></li>
+    <li><a href="may-fax.html" {if $category eq 30}class="active"{/if}><h4>Máy fax</h4></a></li>
+    <li><a href="may-chieu.html" {if $category eq 31}class="active"{/if}><h4>Máy chiếu</h4></a></li>
+    <li><a href="may-scan.html" {if $category eq 70}class="active"{/if}><h4>Máy Scan</h4></a></li>
+    <li><a href="bo-luu-dien.html" {if $category eq 93}class="active"{/if}><h4>Bộ lưu điện</h4></a></li>
+    <li><a href="may-bo-pc.html" {if $category eq 4}class="active"{/if}><h4>Máy bộ PC</h4></a></li>
+    <li>
+    <span>Xem tất cả <i class="fa fa-caret-down"></i></span>
+    <ul>
+        <li  class=" all "><a title="Tất cả" href="pc-may-van-phong.html"><i></i>Tất cả</a></li>
+            <li><a href="pin-sac-du-phong.html" {if $category eq 35 || $cat_root_id eq 35}class="active"{/if}><i></i> Pin, sạc dự phòng</a>
+
+    </li>
+        <li> <a href="may-in.html" {if $category eq 29}class="active"{/if}><i></i>Máy in</a></li>
+        <li><a href="may-fax.html" {if $category eq 30}class="active"{/if}><i></i>Máy fax</a></li>
+        <li><a href="may-chieu.html" {if $category eq 31}class="active"{/if}><i></i>Máy chiếu</a></li>
+        <li><a href="may-scan.html" {if $category eq 70}class="active"{/if}><i></i>Máy Scan</a></li>
+        <li><a href="bo-luu-dien.html" {if $category eq 93}class="active"{/if}><i></i>Bộ lưu điện</a></li>
+        <li><a href="may-bo-pc.html" {if $category eq 4}class="active"{/if}><i></i>Máy bộ PC</a></li>
+        <li><a href="man-hinh-lcd.html" {if $category eq 71}class="active"{/if}><i></i>Màn hình LCD</a></li>
+        <li><a href="may-tinh-tien.html" {if $category eq 94}class="active"{/if}><i></i>Máy tính tiền</a></li>
+        <li><a href="may-dem-tien.html" {if $category eq 226}class="active"{/if}><i></i>Máy đếm tiền</a></li>
+        <li><a href="may-huy-tai-lieu.html" {if $category eq 32}class="active"{/if}><i></i>Máy hủy tài liệu</a></li>
+        <li><a href="may-cham-cong.html" {if $category eq 224}class="active"{/if}><i></i>Máy chấm công</a></li>
+        <li><a href="may-tro-giang.html" {if $category eq 225}class="active"{/if}><i></i>Máy trợ giảng</a></li>
+    </ul>
+    </li>
+    {if $brands.1 || $filter_attr_list}
+    <li>Lọc theo:</li>
+    {/if}
+     {if $brands.1}
+    <li>
+    <span>Thương hiệu <i class="fa fa-caret-down"></i></span>
+    <ul>
+          {foreach from=$brands item=brand name=brands}
+                      <li> <a href="{$brand.url}" {if $brand.selected } class="current" {/if}>{$brand.brand_name}</a></li>
+                       {/foreach}
+
+    </ul>
+    </li>
+    {/if}
+     {if $filter_attr_list}
+
+
+
+                    {foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+                    <li><span>{$filter_attr.filter_attr_name|escape:html} <i class="fa fa-caret-down"></i> </span>
+                       <ul>
+                        {foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+                           <li> <a href="{$attr.url}" {if $attr.selected } class="current" {/if}>{$attr.attr_value}</a></li>
+                        {/foreach} </ul>
+                   </li>
+                    {/foreach}
+
+
+
+    {/if}
+</ul>
+</div>

@@ -1,0 +1,38 @@
+ {foreach from=$goods_list item=goods name=goods_list}
+           {if $goods.goods_id}
+            <li {if $goods.is_special eq 1}class="feature"{/if} >
+                <a href="{$goods.url}">
+                    <aside class="left">
+                            {if $goods.is_special eq 1}
+                                {$goods.goods_thumb2col}
+                            {else}
+                            <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="100" height="100">
+                            {/if}
+                    </aside>
+                    <aside class="right">
+                        <h3>{$goods.goods_style_name}</h3>
+                        <div class="price-box">
+                        <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+                        {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                            <label class="tagss cmsoon">Đặt trước</label>
+                        {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                            <label class="tagss outstock">Tạm hết hàng</label>
+                        {else}
+                            {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                            <label class="tagss installment">Trả góp 0%</label>
+                            {else}
+                                {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                                {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Bán chạy</label>{/if}
+                            {/if}
+                        {/if}
+                        </div>
+                        {if $goods.text_status}
+                        <div class="promotion">
+                           <span>{$goods.text_status}</span>
+                        </div>
+                         {/if}
+                    </aside>
+                </a>
+            </li>
+         {/if}
+        {/foreach}

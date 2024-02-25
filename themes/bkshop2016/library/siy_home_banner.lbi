@@ -1,0 +1,11 @@
+{if $banner}
+ <div class="homebanner">
+    {foreach from=$banner item=banner name=banner}
+    {if $smarty.foreach.banner.index < 6}
+    <div class="item"><a href="{$banner.url}" ><img src="{$banner.src}" alt="{$banner.text|escape:html}" ></a></div>
+    {/if}
+    {/foreach}
+ </div>
+{/if}
+
+

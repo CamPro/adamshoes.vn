@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>{$goods.goods_title} | bachkhoashop.com</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/owl.carousel.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+<style type="text/css">
+    #page_goods .navhome{display: none}
+</style>
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+{if $parent_catid eq 5}
+    <div class="cat-header baracc" id="activecat"><i class="iconmobile-menuacc"></i> Menu Danh mục phụ kiện</div>
+    <div class="navhome navacc hide" id="showcat">
+        <a href="usb.html"><h3>USB</h3></a>
+        <a href="the-nho.html"><h3>Thẻ nhớ</h3></a>
+        <a href="pin-sac-du-phong.html"><h3>Pin dự phòng</h3> </a>
+        <a href="chuot-may-tinh.html"><h3>Chuột</h3> </a>
+        <a href="tai-nghe.html"><h3>Tai nghe</h3> </a>
+        <a href="ban-phim.html"><h3>Bàn phím</h3> </a>
+        <a href="loa-bluetooth.html"><h3>Loa Bluetooth</h3> </a>
+        <a href="loa-nghe-nhac.html"><h3>Loa máy tính</h3> </a>
+        <a href="o-cung.html"><h3>Ổ cứng</h3> </a>
+        <a href="do-choi-doc-la.html"><h3>Độc lạ</h3> </a>
+        <a href="thiet-bi-mang.html"><h3>T.bị mạng</h3> </a>
+        <a href="ky-thuat-so.html"><h3>Kỹ thuật số</h3> </a>
+    </div>
+{/if}
+{if $parent_catid eq 7}
+  <!--   <div class="cat-header baracc" id="activecat"><i class="iconmobile-menuacc"></i> Danh mục Thiết bị mạng</div>
+    {include file='library/catsub_network.lbi'}-->
+  {/if}
+{if $parent_catid eq 8}
+  <!--   <div class="cat-header baracc" id="activecat"><i class="iconmobile-menuacc"></i> Danh mục Máy văn phòng</div>
+    {include file='library/catsub_pcmvp.lbi'}-->
+  {/if}
+{if $parent_catid eq 9}
+   <!-- <div class="cat-header baracc" id="activecat"><i class="iconmobile-menuacc"></i> Danh mục Máy đã sử dụng</div>
+    {include file='library/catsub_maydoitra.lbi'}-->
+  {/if}
+
+{if $buytragop eq 1}
+	{include file='layout/layout_tragop_mobile.lbi'}
+{else}
+    {if $goods.online_raw}
+       <div id="productlayoutonline"> {include file='layout/layout_goods_mobile_online.lbi'}</div>
+    {else}
+        {include file='layout/layout_goods_mobile.lbi'}
+    {/if}
+
+{/if}<!-- if tra gop-->
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+{$render.before_html_footer}
+
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.vi_vn.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.mobile.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+ <!--- Javascrip Plugin Bottom Page -->
+<script type="text/javascript" src="{$option.static_path}static/asset_mobile/js/owl.carousel.min.js"></script>
+
+{if $buytragop neq 1}
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	    	var owl = $("#productslider");
+	        owl.owlCarousel({
+	      	slideSpeed : 300,
+	      	paginationSpeed : 400,
+	     	singleItem:true,
+	        lazyLoad : true,
+	        navigation:false,
+	        pagination: false,
+            autoHeight : true,
+	        dots: false,
+	        afterAction : afterAction
+	        });
+
+			function afterAction(){
+				$('div.num').text((this.owl.currentItem+1)+'/'+this.owl.owlItems.length);
+			}
+
+	    });
+
+	</script>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	    	var fprice = $('#gdsprice').attr('fprice');
+	    	var area = $('#purchase_form');
+			// Xem them noi dung mo table
+			$('#view2').hide();
+			$('.btn-viewmore').click(function(e){
+				$('.product_description').toggleClass('short_view');
+				$('#view1').addClass('hide');
+				$('#view2').show();
+				e.preventDefault();
+			});
+
+			 
+
+             $('#activecat').click(function(){
+                $('#showcat').toggleClass('show');
+            });
+
+
+
+
+             $('#detail-spec').click(function(f){
+        $("body").after('<div class="fixparameter"></div>');
+        $("body").addClass('hide-scroll');
+        $(".fullparameter,.closebtn").show();
+        f.preventDefault();
+      });
+  $(".closebtn").click(function(e){
+      e.preventDefault();
+      $(".fixparameter").remove();
+      $("body").removeClass('hide-scroll');
+      $(".fullparameter,.closebtn").hide();
+  });
+
+	});
+	 </script>
+     <!-- preorder -->
+    <script type="text/javascript" src="{$option.static_path}static/js/preorder.desktop.js"></script>
+
+
+{/if} <!-- end dat hang -->
+
+{if $buytragop eq 1}
+<script type="text/javascript" src="{$option.static_path}static/js/tragop.v2.min.js"></script>
+{/if}
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=679139665490899";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>
+
+

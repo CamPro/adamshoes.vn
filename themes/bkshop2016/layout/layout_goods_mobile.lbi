@@ -1,0 +1,211 @@
+<h1><span id="gdsname">{$goods.goods_name|escape:html}</span> {if $cfg.show_goodssn}<span class="no">{$lang.goods_sn}{$lang.colon}<span itemprop="mpn" id="gdshts">{$goods.goods_sn}</span></span>{/if}</h1>
+	<!-- Slider banner -->
+	{if $pictures}
+	  <div id="productslider" class="owl-carousel">
+	  {foreach from=$pictures item=picture name=pictures}
+		 <div class="item"><img class="lazyOwl" data-src="{$option.static_path}{$picture.img_url}" alt="{$picture.img_desc}">
+		 {if $picture.img_desc} <p>{$picture.img_desc}</p> {/if}
+		  <div class="num"></div>
+		 </div>
+	    {/foreach}
+	</div>
+    {else}
+    <img src="" alt="">
+         <div id="productslider" class="owl-carousel">
+         <div class="item"><img class="lazyOwl" data-src="{$option.static_path}{$goods.goods_img}" alt="{$goods.goods_name|escaple:html}"> </div>
+          </div>
+	{/if}
+
+	<div class="goods_info">
+    {if $goods.on_sale eq 1}
+        {if $goods.sell_price eq 0} <!-- Hàng chưa có giá -->
+            <span style="color: red;">Mới ra mắt</span>
+        {else}
+    		<p>
+    			<span>
+    			{if $goods.is_promote and $goods.gmt_end_time}
+    			 <span class="pricesell" fprice="{$goods.price_final}" id="gdsprice">{$goods.promote_price}</span>
+    			 <del>{$goods.shop_price_formated}</del>
+    			{else}
+                 <span class="hide">{$goods.sell_price}</span>
+    			 {if $goods.preoder}Giá dự kiến: {/if}
+                 <span  class="pricesell" fprice="{$goods.price_final}" id="gdsprice">{$goods.shop_price_formated}</span>
+    			{/if}
+    	    </span>
+    	       {if $goods.is_os eq 3 and $goods.onsale eq 1}<span class="installment">Trả góp 0%</span>{/if}
+    	  </p>
+        {/if}
+        {if ($goods.timegift eq 1 &&  $goods.gmt_end_time ) || $goods.goods_gift ||   $viettin || $sacom || $acs || $hc || $fe || $hd}   
+        <div class="area_promotion" id="gdsgift">
+            <div class="protit">Khuyến mãi, ưu đãi</div>
+            <div class="prob">
+             {if $goods.timegift eq 1}
+                            {if $goods.gmt_end_time}{if $goods.goods_gift}{siy:efom_text text=$goods.goods_gift}{/if}{/if}
+            {else}
+                            {if $goods.goods_gift}{siy:efom_text text=$goods.goods_gift}{/if}
+            {/if}
+            
+            <!-- tragop va uu dai khac -->
+            <!-- tragop va uu dai khac -->
+                    {if $parent_catid eq 1 || $parent_catid eq 2 || $parent_catid eq 3 || $parent_catid eq 4 || $parent_catid eq 9}
+                        <!-- qua tang more -->
+                        {if $parent_catid eq 1}
+                            <p>Mua Office 365 bản quyền với giá chỉ 199.000đ cho sinh viên <a target="_blank" href="/phan-mem-office/phan-mem-office-365-personal">Chi tiết</a></p>
+                            {/if}
+                        <!-- tra gop more -->
+                        {if viettin || $sacom || $acs || $hc || $fe || $hd}
+
+                            {if $acs} <p>Trả góp {$acs.laisuat}% lãi suất với ACS (đến {$acs.endday})</p>{/if}
+                            {if $hc}<p>Trả góp {$hc.laisuat}% lãi suất với HomeCredit (đến {$hc.endday}) </p> {/if}
+                            {if $hd}<p>Trả góp {$hd.laisuat}% lãi suất với HD Saison (đến {$hd.endday}) </p> {/if}
+                            {if $fe}<p>Trả góp {$fe.laisuat}% lãi suất với FECredit (đến {$fe.endday}) </p>{/if}
+                            {if ($sacom eq 1 || $viettin eq 1) and $goods.is_tragop neq 1}
+                            <p>Trả góp 0% lãi suất với thẻ VISA {if $sacom eq 1}/ Sacombank{/if} (đến 31/12) </p>
+                            {/if}
+                        {/if}
+                    {/if}
+            </div>
+        </div>
+        {/if}
+        <div class="box_check_list">
+        {if $goods.pack neq ""}
+        <p>Bộ sản phẩm bao gồm: <strong>{$goods.pack|escape:html}</strong> </p>
+        {/if}
+    	<p>
+    	 	{if $goods.goods_brand and $cfg.show_brand}
+    		   <span class="hide"itemprop="brand">{$goods.goods_brand}</span>
+    		{/if}Bảo hành{if $goods.noibaohanh eq bks} tại BKS{else}{if $goods.noibaohanh eq ch} chính hãng{/if}{/if}: <strong>{if $goods.warranty}{$goods.warranty} </strong>{else}<strong> Không </strong>{/if}
+    	</p>
+        {if $goods.is_shipping}
+             <p>Giao hàng TẬN NƠI, MIỄN PHÍ toàn quốc.<a target="_blank" href="{$mydomain}/thong-tin/giao-hang-thanh-toan-14.html">Tìm hiểu</a></p>
+            {/if}
+    	{if $daydoitra eq 15}
+    	 	<p><strong>1 đổi 1 trong 30</strong> ngày với sản phẩm lỗi. <a target="_blank" href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+    	 	{elseif $daydoitra eq 60}
+    	 	<p><strong>1 đổi 1 trong 60</strong> ngày với sản phẩm lỗi.<a target="_blank" href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+    	 	<p><strong>Bảo hành 1 đổi 1</strong> trong vòng 1 năm</p>
+    	 	{elseif $daydoitra eq 7}
+    	 	<p><strong>1 đổi 1 trong 7</strong> ngày với sản phẩm lỗi. <a target="_blank" href="/thong-tin/chinh-sach-doi-tra-1.html">Tìm hiểu</a></p>
+    	{/if}
+    	{if $goods.goods_brand eq 'Apple'}
+     	<p><i class="iconmobile-icloud"></i><a href="/tin-tuc/tim-hieu-ve-icloud-de-bao-ve-thiet-bi-cua-ban-112.html">Tìm hiểu về iCloud để bảo vệ thiết bị của bạn</a></p>
+     	{/if}
+        </div>
+    	<form action="" method="post" id="purchase_form" style="margin-top: 10px">
+    	{if $specification}
+    	<div class="properties clearfix">
+    		{foreach from=$specification item=spec key=spec_key name=specification}
+    		<dl{if $spec.attr_type eq 2} title="{$lang.multi_choice}"{/if}>
+                <dt>{$spec.name}{$lang.colon}</dt>
+                {if $spec.attr_type eq 1}
+                <dd class="radio">
+                    {foreach from=$spec.values item=value key=key}
+                    <label for="spec_value_{$value.id}" >
+                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" data-price="{$value.price}" data-attr="{$value.label}" {if $key eq 0} checked="checked"{/if} />
+                    {$value.label}</label>
+                    {/foreach}
+                </dd>
+                {else}
+                <dd class="checkbox">
+                    {foreach from=$spec.values item=value key=key}
+                    <label for="spec_value_{$value.id}" >
+                        <input type="checkbox" data-price="{$value.price}" name="spec_{$spec_key}" value="{$value.id}" data-attr="{$value.label}" id="spec_value_{$value.id}" />
+                    {$value.label}</label>
+                    {/foreach}
+                </dd>
+                {/if}
+            </dl>
+    		<input type="hidden" name="spec_list" value="{$key}" />
+    		{/foreach}
+    	</div>
+    	{/if}
+
+        {if ($goods.goods_number neq '0')}
+            <a href="javascript:buy({$goods.goods_id})" class="buy_now">
+               Đặt mua Online <span>Xem hàng, không thích không mua</span>
+            </a>
+            {if $is_tragop}
+            <a href="{$option.static_path}{$request_uri}/tra-gop" class="buy_ins">
+            MUA TRẢ GÓP {if $goods.is_os eq 3}0%{/if}<span>Xét duyệt qua điện thoại</span>
+            </a>{/if}
+        {/if}
+
+	</form>
+    {if ($goods.goods_number eq '0') and ($option.use_storage eq '1')}
+    <form action="javascript:;" onsubmit="preorder(3)" method="post" id="preorder_form">
+         <div class="choisesex"> <span class="stepname"><strong>Thông tin người mua:</strong></span> <input type="radio" name="sex" value="1" checked id="male"> <label for="male">Anh</label> <input type="radio" name="sex" value="0" id="female"> <label for="female">Chị</label> </div>
+        <div class="input_form">
+            <input type="text" maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="fullname" />
+            <input type="text" minlength="10" maxlength="11"  placeholder="Số di động (Bắt buộc)" name="mobile" />
+            <input type="email"   placeholder="Email (Không Bắt buộc)" name="email" >
+        </div>
+         <div id="resorder"></div>
+        <button id="done" type="submit" class="buy_ins btnpre">ĐẶT TRƯỚC<span>Chúng tôi sẽ liên hệ ngay khi có hàng.</span></button>
+    </form>
+    {/if} {include file='layout/goods/requestcall.lbi'}   
+    <p class="hotline_support">Gọi đặt mua: <strong>1900.63.64.72</strong> (8:00-21:30)
+            <a href="https://www.messenger.com/t/bachkhoashopcom" target="_blank"><i class="fa fa-comments" aria-hidden="true"></i>
+Chat với tư vấn viên</a>
+        </p>
+    
+    {else}
+         {if $goods.label_status eq 1}
+                                <span class="labelstatus preoder">Ngừng kinh doanh</span>
+                            {else}
+                                <span class="labelstatus outstock">Tin đồn</span>
+        {/if}
+        <div class="suponline">
+            Gọi tư vấn: <strong>1900.636.472</strong>
+        </div>
+    {/if}
+    {if $goods.goods_brief}
+	<span  itemprop="description" class="goods_brief">{$goods.goods_brief}</span>
+    {/if}
+	<div class="clr"></div>
+	 {if $goods.goods_cauhinh and $goods.goods_cauhinh neq ''}
+	<div class="area_parameter">
+	    <h4 class="heading_title">Thông số kỹ thuật</h4>
+		<ul class="table">
+			{foreach from=$goods.goods_cauhinh key=k item=v}
+           <li><span>{$k}:</span><div>{$v}</div></li>
+           {/foreach}
+		</ul>
+        {if $properties}
+        <a class="closebtn" href="#"><i class="fa  fa-remove"></i></a>
+        <button id="detail-spec" class="viewparameterfull" type="button">Xem đầy đủ thông số kỹ thuật sản phẩm</button>
+
+             <div class="boxcauhinh fullparameter" id="properties">
+                <div class="scroll">
+                <h4>Thông số kỹ thuật</h4>
+                <div class="bd">
+                    <dl class="property_list">
+                        {foreach from=$properties item=property_group key=key}
+                        <dt>{$key|escape}</dt>
+                        {foreach from=$property_group item=property}
+                        <dd><strong>{$property.name|escape:html}</strong><span>{$property.value}</span></dd>
+                        {/foreach}
+                        {/foreach}
+                    </dl>
+                </div>
+            </div>
+            </div>
+
+        {/if}
+	</div>
+	{/if}
+
+	{if $goods.goods_desc}
+		<div class="goods_desc box clearfix" id="description">
+		 
+			<div class="bd">
+				<div class="product_description short_view">{$goods.goods_desc}
+				</div>
+				<div class="view-more">
+						<p class="btn-viewmore"><span id="view1">Đọc thêm <i class="fa fa-caret-down"></i></span></p>
+					</div>
+			</div>
+		</div>
+		<div class="clr"></div>
+	{/if}
+	 {if $option.comment_enabled}{include file='library/comments.lbi'}{/if}
+	</div>

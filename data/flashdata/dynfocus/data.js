@@ -1,0 +1,19 @@
+imgUrl1="data/afficheimg/lenovo20170412.png";
+imgtext1="Đón Hè rực rỡ, phám phá Korea cùng Lenovo";
+imgLink1=escape("https://www.bachkhoashop.com/tin-tuc/km-don-he-ruc-ro-kham-pha-korea-cung-lenovo-600.html");
+imgUrl2="data/afficheimg/oppo-f320170505.png";
+imgtext2="Đặt trước OPPO F3 - Nhận gói quà khủng";
+imgLink2=escape("https://www.bachkhoashop.com/dtdd/oppo-f3");
+imgUrl3="data/afficheimg/gia-soc-chao-he20170506.png";
+imgtext3="Quảng cáo số 1";
+imgLink3=escape("https://www.bachkhoashop.com/khuyen-mai/dien-thoai.html");
+imgUrl4="data/afficheimg/len-doi-samsung20170506.png";
+imgtext4="Lên đời Samsung A 2017 - Tiết kiệm đến 3 triệu";
+imgLink4=escape("https://www.bachkhoashop.com/dtdd/samsung-galaxy-a5-2017");
+imgUrl5="data/afficheimg/banner-home20170506.png";
+imgtext5="Sắm thả ga với Trả góp 0% lãi suất";
+imgLink5=escape("https://www.bachkhoashop.com/khuyen-mai/tra-gop.html");
+
+var pics=imgUrl1+"|"+imgUrl2+"|"+imgUrl3+"|"+imgUrl4+"|"+imgUrl5;
+var links=imgLink1+"|"+imgLink2+"|"+imgLink3+"|"+imgLink4+"|"+imgLink5;
+var texts=imgtext1+"|"+imgtext2+"|"+imgtext3+"|"+imgtext4+"|"+imgtext5;

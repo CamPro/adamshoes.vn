@@ -1,0 +1,31 @@
+ {if $goods.goods_id    || $goods.id}
+            <li {if $goods.is_special eq 1}class="feature"{/if} >
+                <a href="{$goods.url}">
+                    <aside class="left">
+                            {if $goods.is_special eq 1}
+                                {$goods.goods_thumb2col}
+                            {else}
+                                {if $goods.thumb}
+                                <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="100" height="100">
+                                {else}
+                                <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="100" height="100">
+                                {/if}
+                            {/if}
+                    </aside>
+                    <aside class="right">
+                        <h3>{$goods.goods_style_name}</h3>
+                        <div class="price-box">
+                        {siy:egoods_price  goods=$goods cat_root_id=$cat_root_id}
+
+                        {siy:goods_tagss_status goods=$goods}
+                         
+                        </div>
+                        {if $goods.text_status}
+                        <div class="promotion">
+                           <span>{$goods.text_status}</span>
+                        </div>
+                         {/if}
+                    </aside>
+                </a>
+            </li>
+         {/if}

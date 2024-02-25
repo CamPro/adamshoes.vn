@@ -1,0 +1,87 @@
+<div class="group_goods group2">
+	<div class="group_head">
+
+		<h4>{$group.group_name}</h4>
+		<a href="{$group.link}" class="viewmorelinks">(Xem tất cả)</a>
+        <div class="more_links">{$group.links}</div>
+	</div>
+	<div class="group_list">
+        <div class="qcleft">
+       <a href="{$banner.ad_link}"> <img src="{$banner.ad_image}"/></a>
+        </div>
+		<ul class="cate">
+		{foreach from=$list_goods item=goods}
+		<li class="igoods">
+
+				 <a href="{$goods.url}" title="{$goods.goods_name|escape:html}">
+             
+            <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+            {siy:efom_show_price_online goods=$goods}
+            <div class="box_ginfo">
+<h3>{$goods.goods_name}</h3>
+              {if $is_mobile eq 1}     {*stick neu la giao dien mobile*}
+                {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                <label class="tagss cmsoon">Đặt trước</label>
+            {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                <label class="tagss outstock">Tạm hết hàng</label>
+            {else}
+                {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                <label class="tagss installment">Trả góp 0%</label>
+                {else}
+                    {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                    {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Bán chạy</label>{/if}
+                {/if}
+            {/if}
+            {/if}
+
+
+            
+            <div class="price_box">
+            <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+
+             {if $is_mobile eq 0}     {*stick neu la giao dien pc*}
+              {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                <label class="tagss cmsoon">Đặt trước</label>
+            {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                <label class="tagss outstock">Tạm hết hàng</label>
+            {else}
+                {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                <label class="tagss installment">Trả góp 0%</label>
+                {else}
+                    {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                    {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Bán chạy</label>{/if}
+                {/if}
+            {/if}
+
+             {/if}
+
+
+            </div>
+            </div>
+            
+          <!--  <div class="promotion">
+               {if $goods.text_status}<span>{$goods.text_status}</span> {/if}
+            </div>-->
+            {if $category eq 1 || $category eq 100} 
+            <figure class="bginfo">
+                {$goods.goods_desc_short}
+            </figure>
+            {else}
+            <figure class="bginfo">
+                 <span class="name">{$goods.goods_name}</span>
+                
+                <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+                
+                 <div class="desc">
+              {$goods.goods_desc_short}
+              </div>
+              	 
+            </figure>
+            {/if}
+        	 </a>
+
+		</li>
+		{/foreach}
+		</ul>
+	</div>
+</div>

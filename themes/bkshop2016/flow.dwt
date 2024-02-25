@@ -1,0 +1,14 @@
+
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<section>
+	{$render.before_main}
+
+	{if $step eq 'cart'}{include file='library/flow_cart.lbi'}{/if}
+	{if $step eq 'finished'}{include file='library/flow_finished.lbi'}{/if}
+
+
+	{$render.after_main}
+</section>
+
+{include file='library/html_footer.lbi'}

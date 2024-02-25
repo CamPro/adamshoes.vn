@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{if $pname neq 'respond' and $message.back_url}<meta http-equiv="refresh" content="3;url={$message.back_url}">{/if}
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+<div class="clearfix"></div>
+<dl class="message_wrapper message_info">
+	<dt>{$message.content}</dt>
+	<dd>
+		{if $message.url_info}
+		<p>
+		{foreach from=$message.url_info key=info item=url}
+		<a href="{$url}"><span>{$info}</span></a>
+		{/foreach}
+		</p>
+		{/if}
+	</dd>
+	</dl>
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+    

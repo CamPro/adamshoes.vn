@@ -1,0 +1,18 @@
+{if $articles}
+<div class="new_articles goods_news clearfix">
+	<div class="hd"><h3>{$articles_cat.name|escape:html}</h3></div>
+	<div>
+		<ul class="infoList">
+			{foreach from=$articles item=article_item name=articles}
+			<li>
+			<a href="{$article_item.url}" title="{$article_item.title|escape:html}">
+			<img src="{$article_item.small_thumb}" alt="{$article_item.title|escape:html}" width="100" height="60">
+			<h3>{$article_item.short_title|escape:html}</h3>
+			<span class="date">{$article_item.add_time}</span>
+			</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}

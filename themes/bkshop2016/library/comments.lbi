@@ -1,0 +1,5 @@
+
+<div class="comment_box clearfix" id="comment">
+	<h2>{siy:efom_heading_comment_count id=$id type=$type} {$lang.goods_comment} về <strong>{$goods.goods_name}</strong></h2>
+	<div id="comment_wrapper">{insert name='comments' type=$type id=$id}</div>
+</div>

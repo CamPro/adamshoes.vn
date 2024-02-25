@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="vi">
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+<div class="topic_content clearfix">{$topic.intro}</div>
+{foreach from=$sort_goods_arr item=sort key=sort_name name=sorts}
+    <h2 class="cat_topic"><a name="cat{$smarty.foreach.sorts.index}"></a>{$sort_name}</h2>
+    {if $sort}
+        <ul class="cate">
+            {foreach from=$sort item=goods name=sort}
+                {if $goods.goods_id}
+                <li>
+                <div>
+                    <a href="{$goods.url}" title="{$goods.goods_style_name|escape:html}">
+                        
+                    <aside class="left">
+                        <img src="{$option.static_path}{$goods.goods_thumb}" alt="{$goods.goods_style_name|escape:html}">
+                   </aside>     
+                                       <aside class="right">
+                                        <h3>{$goods.goods_style_name}</h3>
+                                        <div class="price-box">
+                                        {if $goods.promote_price}
+                                        <strong>{$goods.promote_price}</strong>
+                                        {else}
+                                        <strong>{$goods.shop_price}</strong>
+                                        {/if}
+                                        {if $topic.discount_method eq 0}
+                        {if $goods.rate_sale and $goods.rate_sale > 1} <span class="tag_discount">-{$goods.rate_sale}%</em></span>{/if}
+                    {else}
+                        {if $goods.discount}
+                       <span class="tag_discount">{$goods.discount}</span>
+                        {/if}
+                    {/if}
+                                         </div>
+                                       </aside>
+                    </a>
+                    
+                   <!--    <a href="javascript:buy({$goods.goods_id})" class="button" target="_blank">MUA NGAY</a>
+                  <div class="note">{$goods.text_status}</div>-->
+
+                    
+                </div>
+                </li>
+                {/if}
+            {/foreach}
+        </ul>
+        {/if}
+    {/foreach}
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.{$option.lang}.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.mobile.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.4&appId=679139665490899";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>
+
+

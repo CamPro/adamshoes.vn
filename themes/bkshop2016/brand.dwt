@@ -1,0 +1,24 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<section>
+	{$render.before_main}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="box brand_details">
+		<div class="bd">
+			<h1>{$brand.brand_name}</h1>
+			{if $brand.brand_logo}
+			<p class="logo">
+				{if $brand.site_url}<a href="{$brand.site_url}" target="_blank"><img src="{$option.static_path}data/brandlogo/{$brand.brand_logo}"></a>{else}
+				<img src="{$option.static_path}data/brandlogo/{$brand.brand_logo}">{/if}
+			</p>
+			{/if}
+			<p class="description">{$brand.brand_desc|nl2br}</p>
+			<p class="cat_list"><strong>{$lang.brand_category}</strong>{foreach from=$brand_cat_list item=cat}<a href="{$cat.url}"{if $cat.cat_id eq $category} class="current"{/if}>{$cat.cat_name|escape:html}{if $cat.goods_count}<span>{$cat.goods_count}</span>{/if}</a>{/foreach}</p>
+		</div>
+	</div>
+
+	<!-- #BeginLibraryItem "/library/brand_goods_list.lbi" --><!-- #EndLibraryItem -->
+	{$render.after_main}
+</section>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

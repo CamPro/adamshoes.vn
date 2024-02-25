@@ -1,0 +1,37 @@
+{include file='library/html_header.lbi'}
+<!-- TemplateBeginEditable name="Top" -->
+<!-- TemplateEndEditable -->
+{include file='library/page_header.lbi'}
+<section>
+	{$render.before_main}
+	<div class="wrap_bnhome {if $homenew} wrapnew {/if}clearfix">
+	<aside class="bannerhome ">
+	{include file='library/index_ad.lbi'}
+	</aside>
+	<aside class="homeright">
+		{include file='library/new_articles.lbi'}
+        {siy:home_banner}
+	</aside>
+	</div>
+    <!-- Begin Mobile -->
+
+        {siy:home_group}
+
+    {siy:statics_home}
+     
+
+	<!-- TemplateBeginEditable name="Bottom" -->
+<!-- TemplateEndEditable -->
+	{$render.after_main}
+</section>
+{if $searchkeywords}
+<div class="keyword"><em>{$lang.hot_search}</em>
+        {foreach from=$searchkeywords item=val}
+        <a title="{$val}" href="tim-kiem?keywords={$val|escape:url}">• {$val}</a>
+        {/foreach}
+</div>
+{/if}
+<!-- TemplateBeginEditable name="Stick-Global" -->
+<!-- TemplateEndEditable -->
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

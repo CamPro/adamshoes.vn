@@ -1,0 +1,14 @@
+<header id="hvieclam">
+    <div class="wrap-main">
+        <a style="margin-top: 10px" href="{$hu}" id="logo" title="{$shop_name}"><i class="iconbkit-logo"></i></a>
+        <span class="nav_top">
+             <a class="current" href="thong-tin/gioi-thieu-5.html" target="_blank">Giới thiệu</a>
+             <a class="current" href="{if $jmod neq ''}viec-lam{/if}">Tuyển dụng</a>
+            <a class="current" href="viec-lam/quy-trinh">Quy trình</a>
+            <a class="current" href="viec-lam/ung-tuyen">Ứng tuyển</a>
+        </span>
+    </div>
+</header>
+<div class="wrap-main">
+   <div class="welcome1">Chào mừng đến với chuyên trang việc làm của Bách Khoa Shop</div>
+</div>

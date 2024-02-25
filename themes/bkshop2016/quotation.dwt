@@ -1,0 +1,21 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="quotation box full_box">
+		<div class="hd"><h3>{$lang.print_quotation}</h3><div class="extra"></div></div>
+		<div class="bd">
+			<form action="quotation.php" method="post">
+				<select name="cat_id"><option value="0">{$lang.all_category}</option>{$cat_list}</select>
+				<select name="brand_id"><option value="0">{$lang.all_brand}</option>{html_options options=$brand_list}</select>
+				{$lang.keywords} <input type="text" name="keyword"/>
+				<input type="submit" id="print_quotation" value="{$lang.print_quotation}">
+				<input name="act" type="hidden" value="print_quotation">
+			</form>
+		</div>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

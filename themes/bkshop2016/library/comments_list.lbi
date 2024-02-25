@@ -1,0 +1,42 @@
+<form action="javascript:;" onsubmit="submitComment(this)" method="post" class="form clearfix">
+	<textarea name="content" id="cmcontent" rows="2" cols="20" required min-lenght="4" max-lenght="500" placeholder="Mời bạn bạn thảo luận, vui lòng nhập tiếng Việt có dấu, ít nhất 6 ký tự"></textarea>
+	<div id="action-comment">
+		<div class="col-input">
+		<input type="text" name="user_name" class="input-text" value="{if $smarty.session.user_name}{$username}{/if}" autocomplete="on" required placeholder="Tên của bạn">
+		<input type="tel" name="telephone" class="input-text" value="{$smarty.session.telephone|escape}" autocomplete="on"  placeholder="Số điện thoại của bạn (tùy chọn)">
+		{if $enabled_captcha}
+		<input type="text" name="captcha" required autocomplete="off">
+		<img src="{$option.static_path}captcha.php?{$rand}" alt="{$lang.comment_captcha}" class="captcha tip" title="{$lang.captcha_tip}" onClick="this.src='{$option.static_path}captcha.php?'+Math.random()"/>
+		{/if}
+		</div>
+		<div class="col-submit">
+		<input type="submit" class="button" value="{$lang.submit_comment}">
+		<input type="hidden" name="cmt_type" value="{$comment_type}">
+		<input type="hidden" name="id" value="{$id}">
+		<input type="hidden" name="comment_rank" value="5">
+		</div>
+		<div class="clear"></div>
+	</div>
+</form>
+<div class="clearfix"></div>
+{if $comments}
+<ul class="comment_list clearfix">
+	{foreach from=$comments item=comment name=comments}
+	<li class="{cycle values="odd,even"}{if $smarty.foreach.comments.first} first{/if}">
+			<span class="iconcom-user">{$comment.username|truncate:1:"":true}</span><span class="name">{if $comment.username}{$comment.username|escape:html}{else}{$lang.anonymous}{/if}</span>
+		<div class="talk">
+			<p class="text">{$comment.content}</p>
+			<span class="time">{$comment.add_time}</span>
+			{if $comment.re_content}
+			<blockquote class="reply"><span class="iconcom-user">{$comment.re_username|truncate:1:"":true}</span> <span class="name">{$comment.re_username}  <font>{$lang.re_name}</font></span>
+			<p>{$comment.re_content}</p><span class="time">{$comment.re_add_time}</span>
+			</blockquote>
+			{/if}
+		</div>
+	</li>
+	{/foreach}
+</ul>
+{include file='library/pages.lbi'}
+{else}
+<p class="empty">{$lang.no_comments}</p>
+{/if}

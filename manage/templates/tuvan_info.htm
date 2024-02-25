@@ -1,0 +1,64 @@
+<!-- $Id: msg_info.htm 16854 2009-12-07 06:20:09Z sxc_shop $ -->
+{include file="pageheader.htm"}
+<div class="list-div" id="listDiv">
+
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>Tên KH</th>
+    <th>Số ĐT</th>
+    <th>Tỉnh/TP</th>
+    <th>Sản phẩm</th>
+    <th>Thời gian</th>
+    <th>Trạng thái</th>
+    <th>Ghi chú</th>
+  </tr>
+  {foreach from =$msg item=msg}
+  <tr>
+    <td align="left">{$msg.cname}</td>
+    <td align="left">{$msg.cmobile}</td>
+    <td align="left">{$msg.region_name}</td>
+    <td align="left">{$msg.product}</td>
+    <td align="center"  nowrap="nowrap">{$msg.add_time}</td>
+    <td align="center">{$msg.status}</td>
+    <td align="center">{$msg.note}</td>
+  </tr>
+  {foreachelse}
+  <tr><td class="no-records" colspan="7">{$lang.no_records}</td></tr>
+  {/foreach}
+</table>
+</div>
+
+<div class="main-div">
+<form method="post" action="tuvan.php?act=action" name="theForm"  onsubmit="return validate()">
+<table border="0" width="98%">
+<tr>
+    <td>Ghi chú:</td>
+    <td ><textarea name="msg_content" cols="50" rows="4" id="msg_content">{$msg.reply_content}</textarea></td>
+    <td>
+    <input type="hidden" name="tuvan_id" value="{$msg.tuvan_id}">
+      <input name="Submit" value="{$lang.button_submit}" type="submit" class="button">
+      <input type="reset" value="{$lang.button_reset}" class="button">
+      </td>
+  </tr>
+</table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+<script language="JavaScript">
+<!--
+{literal}
+document.forms['theForm'].elements['msg_content'].focus();
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+    validator = new Validator("theForm");
+    validator.required("msg_content",  no_reply_content);
+    return validator.passed();
+}
+
+//-->
+{/literal}
+</script>
+{include file="pagefooter.htm"}

@@ -1,0 +1,187 @@
+{include file='library/html_header.lbi'}
+<div class="hbot">
+    <div class="wrapper">
+        <nav class="mininav">
+        <a class="logo-bggreen" href="./"><img src="{$option.static_path}/static/img/giasoc/bks-white.png"></a>
+        {siy:nav type='middle'}
+        </nav>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div id="main">
+        <form action="dat-hang-thanh-cong" method="post" id="purchase_form">
+            <div class="header-cart">Giỏ hàng của bạn </div>
+            <div class="col_main">
+                <div class="wrap_checkout">
+                    <div class="detail_cart">
+                        {if $goods_list}
+                        <ul class="listorder">
+                             {foreach from=$goods_list item=goods name=list}
+                            <li>
+                                <input type="hidden" name="Cart[{$smarty.foreach.list.index}][ProductId]" value="{$goods.goods_id}">
+                                <input type="hidden" name="Cart[{$smarty.foreach.list.index}][ProductCode]" value="{$goods.goods_sn}">
+                                <input type="hidden" name="Cart[{$smarty.foreach.list.index}][ProductPrice]" value="{$goods.shop_price}">
+                                <input type="hidden" name="Cart[{$smarty.foreach.list.index}][ProductName]" value="{$goods.goods_name|escape:html}">
+                                <input type="hidden" name="Cart[{$smarty.foreach.list.index}][urlClient]" value="{$goods.url}">
+                                <img height="80" src="{$option.static_path}/{$goods.thumb}">
+                                <h3>{$goods.goods_name}</h3>
+                                <strong>{if $goods.promote_price_f} {$goods.promote_price_f} {else} {$goods.shop_price_f} {/if}</strong>
+                                <div class="promotion"> {$goods.gift} </div>
+                                <div class="action">
+                                    <select  class="number" name="Cart[{$smarty.foreach.list.index}][Quantity]">
+                                            <option value="1" {if $goods.soluong eq 1} selected="" {/if}>Số lượng: 1</option>
+                                            <option value="2" {if $goods.soluong eq 2} selected="" {/if}>Số lượng: 2</option>
+                                            <option value="3" {if $goods.soluong > 2} selected="" {/if}>Số lượng: 3</option>
+                                    </select>
+
+                                    {if $goods.specification}
+                                    <span class="properties clearfix">
+                                        {foreach from=$goods.specification item=spec key=spec_key name=specification}
+                                        <span {if $spec.attr_type eq 2} title="{$lang.multi_choice}"{/if}>
+                                            {if $spec.attr_type eq 1}
+                                            <span class="radio">
+                                                {foreach from=$spec.values item=value key=key}
+                                                <label for="spec_value_{$value.id}" title="{if $value.price gt 0}{$lang.plus}{$value.format_price|abs}{elseif $value.price lt 0}{$lang.minus}{$value.format_price|abs}{/if}">
+                                                    <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" data="{$value.price}" data-attr="{$value.label}" {if $key eq 0} checked="checked"{/if} />{$value.label|escape:html}</label>
+                                                {/foreach}
+                                            </span>
+                                            {else}
+
+                                            {/if}
+                                        </span>
+                                        <input type="hidden" name="spec_list" value="{$key}" />
+                                        {/foreach}
+                                    </span>
+                                    {/if}
+                                </div>
+                                <em class="delete" id="delitem" data-id="{$goods.goods_id}">Xóa</em>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        <div class="total">
+                            <b>Tổng tiền </b>
+                            <strong>{$total}</strong>
+                        </div>
+                        {else}
+                        <p class="empty">Giỏ hàng trống !</p>
+                        {/if}
+                    </div>
+                </div>
+            </div><!-- en col main -->
+            <div class="col_sub">
+                <div class="order-consegine">
+            <p class="lable">1. Thông tin người mua:</p>
+            <p><label for="male"> <input type="radio" name="Consegine[sex]" value="1" checked id="male"> Anh</label>
+             <label for="female"><input type="radio" name="Consegine[sex]" value="0" id="female"> Chị</label>
+            </p>
+            <input type="text" maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="Consegine[name]" >
+            <input type="text" style="margin-top: 6px;"  minlength="10" maxlength="11"  placeholder="Số di động (Bắt buộc)" name="Consegine[mobile]" >
+             <p class="lable">2. Chọn phương thức nhận hàng</p>
+             <p>
+                <input type="radio" name="Consegine[shipmethod]" checked value="1" id="ship1"> <label for="ship1">Nhận hàng tại Shop</label>
+                <input type="radio" name="Consegine[shipmethod]" {if $steporder eq 2} disabled {/if} value="2" id="ship2"> <label for="ship2">Giao tận nơi</label>
+            </p>
+            <div class="group clearfix" >
+                   <select name="province">
+                       {html_options options=$region_list selected=60}
+                   </select>
+                   <input type="text" style="margin-top: 6px;" id ="caddress" name="Consegine[address]" value="" placeholder="Số nhà và đường phố" class="hidden">
+                   <div id="buildshop"></div>
+            </div>
+            <p>
+                <textarea name="Consegine[OrderNote]" cols="" rows="2" placeholder="Ghi chú nếu có" style="width: 222px;"></textarea>
+            </p>
+            <p style="margin-top: 6px;" >
+                <button type="submit" name="btnorder" class="btn btn-round btn-buy">Đặt hàng </button>
+            </p>
+            <p style="margin-top: 6px;">
+                <a href="./" class="btn btn-round">‹ Tiếp tục mua sắm</a>
+            </p>
+        </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="{$option.static_path}/static/asset_mobile/js/jquery.min.1.8.3.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.{$option.lang}.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+
+<script type="text/javascript">
+
+
+    loadAgency();
+    $("#province").change(function(){
+     loadAgency();
+    });
+
+    function loadAgency(){
+        var region_id = $("#province").val();
+        if(region_id > 0 ){
+            $.get(
+                'shop.php',
+                'region_id='+ region_id,
+                function(response){
+                    var data = $.evalJSON(response);
+                    console.log(data);
+                    if(data.length > 0){
+                        html = '<select name="Consegine[shop]" id="shop">';
+                        $(data).each(function(i, val){
+                           html += '<option value="'+val.agency_desc+'">'+val.agency_desc+'</option>';
+                        });
+                        html += '</select>';
+                        $('#buildshop').html(html);
+                    }else{
+                       $('#buildshop').html('<p style="color:red">Chưa có Shop tại tỉnh/TP đã chọn</p>');
+                    }
+
+                },
+                'text'
+            );
+        }//end if
+    }
+
+    ///
+
+     $('input[name="Consegine[shipmethod]"').change(function() {
+        var method = $(this).val();
+        var method1 = $('#caddress');
+        var method2 = $('#shop');
+        $('#buildshop').html('');
+        if(method == 2){
+            method1.removeClass('hidden');
+            method2.addClass('hidden');
+        }else{
+            method1.addClass('hidden');
+            method2.removeClass('hidden');
+        }
+    });
+
+    $('.properties').Formiy();
+    $('.properties dl').tipsy({gravity: 'e',fade: true,html:true});
+    $('.properties label').tipsy({gravity: 's',fade: true,html:true});
+
+    $('em.delete').click(function() {
+
+        var goods = new Object();
+        goods.goods_id = $(this).attr('data-id');
+        console.log(goods.goods_id);
+        $.post(
+        'cart.php?step=del_item',
+        {goods: $.toJSON(goods)},
+        function(data){
+            var res = $.evalJSON(data);
+            if(res.error == 0){
+                window.location.reload();
+            }
+        },
+        'text'
+        );
+    });
+
+
+
+</script>

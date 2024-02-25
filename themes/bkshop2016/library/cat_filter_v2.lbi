@@ -1,0 +1,115 @@
+{if $brands.1 || $price_grade.1 || $filter_attr_list || $show_sub eq 1}
+<ul class="filterv1">
+    <!-- Brand name -->
+	<li>
+        <h1>{if $cat_root_id eq 1}Laptop{/if}{if $cat_root_id eq 2}Điện thoại{/if}{if $cat_root_id eq 3}Máy tính bảng{/if}:</h1>
+        {if $cat_root_id eq 1}
+            <a title="Latop Asus" href="/laptop-asus.html">Asus</a>
+            <a title="Latop Asus" href="/laptop-dell.html">Dell</a>
+            <a title="Latop Acer" href="/laptop-acer.html">Acer</a>
+            <a title="Latop HP" href="/laptop-hp.html">HP</a>
+        {/if}
+        {if $cat_root_id eq 2}
+            <a title="Điện thoại Samsung" href="/dien-thoai-samsung.html">Samsung</a>
+            <a title="Điện Thoại Xiaomi" href="/dien-thoai-xiaomi.html">Xiaomi</a>
+            <a title="Điện thoại Oppo" href="/dien-thoai-oppo.html">OPPO</a>
+        {/if}
+        {if $cat_root_id eq 3}
+            <a title="Máy tính bảng iPad" href="/may-tinh-bang-ipad-apple.html">iPad (Apple)</a>
+            <a title="Máy tính bảng Asus" href="/may-tinh-bang-asus.html">Asus</a>
+            <a title="Máy tính bảng Samsung" href="/may-tinh-bang-samsung.html">Samsung</a>
+        {/if}
+        {if $show_sub eq 1}
+            <span class="criteria"><em>Hãng khác {foreach from=$list_sub_cat item=catsub}{if $catsub.selected eq 1}: <trong>{$catsub.cat_name}</strong>{/if}{/foreach}</em>
+            <div class="morebrand   {if $cat_root_id eq 1}onecolumn{/if}">
+                {foreach from=$list_sub_cat key=i item=catsub}
+                    <a title="{$catsub.cat_name}" href="{$catsub.cat_url_seo}" class="{if $i eq 0} all {/if} {if $catsub.selected eq 1 } current {/if}"><i></i>{$catsub.cat_name}</a>
+                {/foreach}
+            </div>
+            </span>
+        {else}
+            {if $brands.1}
+                <span class="criteria"><em>Hãng khác </em>
+                    <div class="morebrand">
+                        {foreach from=$brands  item=brand name=brands}
+                       <a href="{$brand.url}" class=" {if $brand.selected || $smarty.foreach.brands.first } current {/if}">{$brand.brand_name}</a>
+                       {/foreach}
+                    </div>
+                </span>
+            {/if}
+        {/if}
+
+    </li>
+    <!-- Price -->
+    <li>
+        {if $cat_root_id eq 1}
+            <a title="Dưới 8 triệu" href="{$cat_url}?gia=0&den=8000000">Dưới 8 triệu</a>
+            <a title="8 đến 10 triệu" href="{$cat_url}?gia=8000000&den=10000000">Từ 8-10 triệu</a>
+            <a title="10 đến 20 triệu" href="{$cat_url}?gia=10000000&den=20000000">Từ 10-20 triệu</a>
+        {/if}
+        {if $cat_root_id eq 2}
+            <a title="Dưới 1 triệu" href="{$cat_url}?gia=0&den=999000">Dưới 1 triệu</a>
+            <a title="Từ 1-3 triệu" href="{$cat_url}?gia=1000000&den=2999000">Từ 1-3 triệu</a>
+            <a title="Từ 3-7 triệu" href="{$cat_url}?gia=3000000&den=7000000">Từ 3-7 triệu</a>
+        {/if}
+        {if $cat_root_id eq 3}
+          <a title="Dưới 3 triệu" href="{$cat_url}?gia=0&den=2999000">Dưới 3 triệu</a>
+          <a title="Từ 3-8 triệu" href="{$cat_url}?gia=3000000&den=7999000">Từ 3-8 triệu</a>
+          <a title="Từ 8-12 triệu" href="{$cat_url}?gia=8000000&den=12000000">Từ 8-12 triệu</a>
+        {/if}
+        {if $price_grade.1}
+        <span class="criteria"><em>Giá khác </em>
+            <div class="moreprice">
+                {foreach from=$price_grade key=i item=grade name=price_grade}
+               <a href="{$grade.url}" class=" {if $i eq 0}all {/if} {if $grade.selected} current{/if}">{$grade.price_range}</a>
+               {/foreach}
+            </div>
+        </span>
+        {/if}
+    </li>
+    {if $filter_attr_list}
+    <!--<li>
+        <span class="criteria"><em>Tính năng </em>
+            <div class="morefeature">
+                    {foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+                    <aside>
+                        <span class="gproperty">{$filter_attr.filter_attr_name|escape:html}</span>
+                        {foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+                            <a href="{$attr.url}" {if $attr.selected || $smarty.foreach.filter_attr.first} class="current" {/if}><i></i>{$attr.attr_value}</a>
+                        {/foreach}
+                    </aside>
+                    {/foreach}
+            </div>
+        </span>
+    </li>-->
+     {foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+        <li>
+            <span class="criteria">
+                <em>{$filter_attr.filter_attr_name|escape:html}</em>
+                <div class="listmorefeatured">
+                    {foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+                            <a href="{$attr.url}" {if $attr.selected } class="current" {/if}><i></i>{$attr.attr_value}</a>
+                        {/foreach}
+                </div>
+            </span>
+        </li>
+     {/foreach}
+    {/if}
+    {if $cat_root_id eq 2 || $cat_root_id eq 3}
+    <li>
+        <a class="installment0 {if $is_installment eq 1}installment0_active{/if}" href="{$cat_url}?s=tra-gop-0-phan-tram"><i></i><label>Trả góp lãi suất 0%</label></a>
+    </li>
+    {/if}
+    <li class="last-child">
+       <span class="criteria">Sắp xếp theo: </span>
+        {if $pager.sort eq 'shop_price'}
+        <a href="{if $pager.order eq 'DESC'}{siy:build_uri app='category' cid=$current_cat_id bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='ASC'}{else}{siy:build_uri app='category' cid=$current_cat_id bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='DESC'}{/if}" class="current">{$lang.order_by_price}{if $pager.order eq 'ASC'}<em class="arrow_up">&uarr;</em>{else}<em class="arrow_down">&darr;</em>{/if}</a>
+        {else}
+        <a href="{siy:build_uri app='category' cid=$current_cat_id bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='DESC'}">{$lang.order_by_price}</a>
+        {/if}
+    </li>
+
+
+</ul>
+
+{/if}

@@ -1,0 +1,12 @@
+{if $full_page}
+{include file="pageheader.htm"}
+<div class="form-div">
+	<form method="post" action="map_stock.php">
+		<input type="radio" name="sync" value="1">Đồng bộ
+		<input type="radio" name="sync" value="0" checked="true">Close<br><br>
+		<input type="hidden" name="act" value="run_sync" />
+		<input type="submit" value="Submit" class="button" name="submit">
+	</form>
+</div>
+{include file="pagefooter.htm"}
+{/if}

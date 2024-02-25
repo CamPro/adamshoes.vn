@@ -1,0 +1,8 @@
+<div id="box_statics_homepage">
+	<a href="{$mydomain}khuyen-mai/xa-hang.html" title="Khuyến mãi tháng {$month}">Khuyến mãi tháng {$month}</a>
+	<a href="{$url_dienthoai}" title="{$dienthoai} điện thoại">{$dienthoai} điện thoại</a>
+	<a href="{$url_laptop}" title="{$laptop} Laptop">{$laptop} Laptop</a>
+	<a href="{$url_mtb}" title="{$mtb} Máy tính bảng">{$mtb} Máy tính bảng</a>
+	<a href="{$url_phukien}" title="{$phukien} Phụ kiện">{$phukien} Phụ kiện</a>
+
+</div>

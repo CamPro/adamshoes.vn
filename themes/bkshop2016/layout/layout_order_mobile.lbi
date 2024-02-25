@@ -1,0 +1,127 @@
+<ul class="step">
+    <li class="activestep"><div><i class="iconcart-step"></i><span>1</span></div> <label>Đặt mua </label> <b>›</b> </li>
+    <li class="two"><div><i class="iconcart-step"></i><span>2</span></div> <label>Thanh toán</label> <b>›</b> </li>
+</ul>
+<aside class="cart-mobile">
+    <div class="mcartlist">
+        <img width="120" alt="{$goods.goods_name|escape:html}" title="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" id="gthumb">
+        <h3 id="gdsname">{$goods.goods_name|escape:html}</h3>
+        <div class="pricediv"> {if $steporder eq 3} Giá dự kiến: {/if}
+            {if $goods.is_promote and $goods.gmt_end_time}
+             <span itemprop="price" class="pricesell" fprice="{$price_final}" id="gdsprice">{$goods.promote_price}</span>
+            {else}
+            <span itemprop="price" class="pricesell" fprice="{$price_final}" id="gdsprice">{$goods.shop_price_formated}</span>
+            {/if}
+        </div>
+
+        <div class="promodiv" id="gdsgift">
+        {$goods.goods_gift}
+        <!-- tragop va uu dai khac -->
+        {if $catid eq 1 || $catid eq 2 || $catid eq 3 || $catid eq 49 || $catid eq 50}
+            <br/>
+             <!-- qua tang more -->
+             {if $catid eq 1 and $goods.goods_brand eq 'Dell'}
+             - Tặng thẻ vào Mobifone 300.000 khi mua Laptop Dell Win 8.1/10 bản quyền (đến 25/11, tại Đà Nẵng)<br/>
+             {/if}
+             {if $catid eq 1 and $goods.goods_brand eq 'Lenovo'}
+                - Tặng ngay bộ quà 900.000 mua Laptop Lenovo Core i3-i7 (chỉ tại Đà Nẵng, đến 30/11) <br/>
+             {/if}
+             {if $catid eq 1}
+             - Tặng Voucher 100.000 cho Sinh viên mua Laptop(*) <br/>
+             - Mua Office 365 bản quyền với giá chỉ 199.000đ cho sinh viên <a target="_blank" href="/phan-mem-office/phan-mem-office-365-personal">Chi tiết</a><br/>
+            {/if}
+             <!-- tra gop more -->
+            {if viettin || $sacom || $acs || $hc || $fe || $hd}
+
+                {if $catid eq 1 and $goods.shop_price > 2000000 and $goods.shop_price < 7000000}
+                - Trả góp trả trước 0đ với HDSS đến 31/10.<br/>
+                {/if}
+                {if $acs} - Trả góp {$acs.laisuat}% lãi suất với ACS (đến {$acs.endday}) <br/>{/if}
+                {if $hc} - Trả góp {$hc.laisuat}% lãi suất với HomeCredit (đến {$hc.endday}) <br/> {/if}
+                {if $hd} - Trả góp {$hd.laisuat}% lãi suất với HD Saison (đến {$hd.endday}) <br/> {/if}
+                {if $fe} - Trả góp {$fe.laisuat}% lãi suất với FECredit (đến {$fe.endday}) <br/>{/if}
+                {if $sacom eq 1 || $viettin eq 1}
+                - Trả góp 0% lãi suất với thẻ VISA {if $viettin eq 1}Viettin{/if}{if $sacom eq 1} / Sacombank{/if} (đến 31/12) <br/>
+                {/if}
+            {/if}
+        {/if}
+        </div>
+
+    </div>
+   <form action="javascript:;" onsubmit="sendorder({$steporder})" method="post" id="purchase_form">
+     <div id="step1">
+         <div class="mform-order">
+            <div class="choisesex"> <span class="stepname">1. Thông tin người mua:</span> <input type="radio" name="sex" value="1" checked id="male"> <label for="male">Anh</label> <input type="radio" name="sex" value="0" id="female"> <label for="female">Chị</label> </div>
+            <div class="input_form">
+                <input type="text" maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="fullname" />
+                <input type="text" minlength="10" maxlength="11"  placeholder="Số di động (Bắt buộc)" name="mobile" />
+            </div>
+            {if $specification}
+            <div class="properties clearfix">
+                {foreach from=$specification item=spec key=spec_key name=specification}
+                <dl{if $spec.attr_type eq 2} title="{$lang.multi_choice}"{/if}>
+                    <dt></dt>
+                    {if $spec.attr_type eq 1}
+                    <dd class="radio">
+                        {foreach from=$spec.values item=value key=key}
+                        <label for="spec_value_{$value.id}" title="{if $value.price gt 0}{$lang.plus}{$value.format_price|abs}{elseif $value.price lt 0}{$lang.minus}{$value.format_price|abs}{/if}">
+                            <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" data="{$value.price}" data-attr="{$value.label}" {if $key eq 0} checked="checked"{/if} />
+                        {$value.label}</label>
+                        {/foreach}
+                    </dd>
+                    {else}
+                    <dd class="checkbox">
+                        {foreach from=$spec.values item=value key=key}
+                        <label for="spec_value_{$value.id}" title="{if $value.price gt 0}{$lang.plus}{$value.format_price|abs}{elseif $value.price lt 0}{$lang.minus}{$value.format_price|abs}{/if}">
+                            <input type="checkbox" data="{$value.price}" name="spec_{$spec_key}" value="{$value.id}" data-attr="{$value.label}" id="spec_value_{$value.id}" />
+                        {$value.label}</label>
+                        {/foreach}
+                    </dd>
+                    {/if}
+                </dl>
+                <input type="hidden" name="spec_list" value="{$key}" />
+                {/foreach}
+            </div>
+            {/if}
+            <div class="stepname">2. Chọn phương thức nhận hàng</div>
+            <div class="input_inline clr">
+                     <input type="radio" name="shipmethod" checked value="1" id="ship1"> <label for="ship1">Nhận hàng tại Shop</label>
+            </div>
+           <div class="input_inline clr">
+               <input type="radio" name="shipmethod" {if $steporder eq 2} disabled {/if} value="2" id="ship2"> <label for="ship2">Giao tận nơi</label>
+           </div>
+            <div class="input_form">
+                <select name="province" id="province">
+                    {html_options options=$region_list selected=60}
+                </select>
+               <input type="text" name="address" placeholder="Số nhà và đường phố" id="caddress"  class="hide" />
+               <div id="buildshop"></div>
+             </div>
+             <div id="cerror"></div>
+              <button id="nextstep" type="button" class="btnfinal">Thanh toán</button>
+         </div>
+     </div><!-- end Step 1-->
+     <div id="step2" class="hide">
+        <div class="mform-order">
+                <p>Người đặt: <em id="customer_info"></em> <a id="pre_step1" class="fr">(Sửa thông tin)</a></p>
+                 <p class="pricediv">
+                     Tổng tiền: <em class="pricesell" id="vtt_price"></em>
+                 </p>
+                <div class="stepname" style="margin-top: 1em;">3. Chọn phương thức thanh toán</div>
+                <div class="input_inline clr">
+                    <input type="radio" name="paymethod" checked value="1" id="pay1"> <label for="pay1">Thanh toán tại Shop</label>
+                </div>
+               <div class="input_inline clr">
+                   <input type="radio" name="paymethod" value="2" id="pay2"> <label for="pay2">Chuyển khoản</label>
+               </div>
+            <div class="input_form">
+                 <input type="text" maxlength="100" placeholder="Bạn có yêu cầu khác ?" name="order_note">
+           </div>
+            <input type="hidden" name="goods_id" value="{$goods_id}">
+            <input type="hidden" name="goods_sn" value="{$goods.goods_sn}">
+           <button id="done" type="submit" class="btnfinal">Hoàn tất</button>
+        </div>
+     </div><!-- end Step 2-->
+
+    </form>
+</aside>

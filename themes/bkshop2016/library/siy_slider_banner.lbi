@@ -1,0 +1,22 @@
+{if $banner}
+<div class="customNavigation">
+  <div class="owl-buttons"><div class="owl-prev">‹</div><div class="owl-next">›</div></div>
+</div>
+<div id="sync1" class="owl-carousel owl-theme">
+    {foreach from=$banner  item=banner name=banner}
+    {if $smarty.foreach.banner.index < 5}
+    <div class="item"><a href="{$banner.url}" ><img src="{$banner.src}" alt="{$banner.text|escape:html}" ></a></div>
+    {/if}
+    {/foreach}
+</div>
+
+<div id="sync2" class="owl-carousel owl-theme">
+    {foreach from=$banner item=banner name=banner}
+    {if $smarty.foreach.banner.index < 5}
+    <div class="item"><h3>{$banner.text|trancte:20}</h3></div>
+     {/if}
+    {/foreach}
+</div>
+{/if}
+
+

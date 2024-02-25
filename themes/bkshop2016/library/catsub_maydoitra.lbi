@@ -1,0 +1,6 @@
+<div id="list_child_cat_used">
+<span>Máy đã sử dụng:</span>
+    <a title="Điện thoại - Smartphone" href="dien-thoai-cu.html" {if $category eq 49}class="active"{/if}>Điện thoại - Smartphone</a>
+    <a href="may-tinh-bang-cu.html" title="Máy tính bảng" {if $category eq 50}class="active"{/if}>Máy tính bảng</a>
+    <a href="laptop-cu.html" title="Laptop" {if $category eq 131}class="active"{/if}>Laptop</a>
+</div>

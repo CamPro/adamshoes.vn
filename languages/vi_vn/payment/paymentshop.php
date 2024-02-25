@@ -1,0 +1,1 @@
+<?phpglobal $_LANG;$_LANG['paymentshop']      = 'Thanh toán tại Shop';$_LANG['paymentshop_desc'] = 'Áp dụng cho KH đặt giữ hàng tại Shop, nhận hàng và thanh toán tại Shop.';?>

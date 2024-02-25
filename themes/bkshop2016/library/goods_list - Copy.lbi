@@ -1,0 +1,54 @@
+{if $goods_list}
+<ul class="cate {if $category eq 1 || $category eq 100}filter-cate laptop{/if}">
+   {foreach from=$goods_list item=goods name=goods_list}
+   {if $goods.goods_id}
+    <li {if $goods.is_special eq 1}class="feature"{/if}>
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">
+            {if $goods.is_special eq 1}
+                {$goods.goods_thumb2col}
+            {else}
+            <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+            {/if}
+            <h3>{$goods.goods_style_name}</h3>
+            <strong>{if $goods.promote_price}{$goods.promote_price}<del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</strong>
+
+            {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                <label class="tagss cmsoon">Đặt trước</label>
+            {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                <label class="tagss outstock">Tạm hết hàng</label>
+            {else}
+                {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                <label class="tagss installment">Trả góp 0%</label>
+                {else}
+                    {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                    {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Hot</label>{/if}
+                {/if}
+            {/if}
+            <div class="promotion">
+               {if $goods.text_status}<span>{$goods.text_status}</span> {/if}
+            </div>
+            {if $category eq 1 || $category eq 100} <!-- hien thi cho laptop -->
+            <figure class="bginfo">
+                {$goods.short_desc}
+            </figure>
+            {else}
+            <figure class="bginfo">
+                <span class="name">{$goods.goods_style_name}</span>
+                {if $goods.zero_price eq 0}
+                <p>Mới ra mắt</p>
+                {else}
+                <strong>{if $goods.promote_price}{$goods.promote_price}<del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</strong>
+                {/if}
+                {$goods.short_desc}
+                <label class="compr" onClick="compare.add({$goods.goods_id},'{$goods.goods_name|truncate:'30'|escape:'html'}','{$goods.type}','{$goods.url}','{$goods.goods_thumb}', '{$goods.shop_price}')">So sánh với</label>
+            </figure>
+            {/if}
+        </a>
+    </li>
+     {/if}
+    {/foreach}
+</ul>
+{include file='library/pages.lbi'}
+{else}
+<p class="empty">{$lang.goods_empty}</p>
+{/if}

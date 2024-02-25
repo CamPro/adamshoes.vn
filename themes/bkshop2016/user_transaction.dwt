@@ -1,0 +1,27 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper user_cp">
+	<div class="col_sub fl">
+	{$render.before_col_sub}
+		<!-- TemplateBeginEditable name="Top Sub" --><!-- TemplateEndEditable -->
+		{include file='library/user_nav.lbi'}
+		<!-- TemplateBeginEditable name="Bot Sub" --><!-- TemplateEndEditable -->
+	{$render.after_col_sub}
+	</div>
+	<div class="col_main fr">
+	{$render.before_main}
+		<!-- TemplateBeginEditable name="Top Main" --><!-- TemplateEndEditable -->
+		{if $action eq 'profile'}{include file='library/user_profile.lbi'}{/if}
+		{if $action eq 'bonus'}{include file='library/user_bonus.lbi'}{/if}
+		{if $action eq 'order_list'}{include file='library/user_order_list.lbi'}{/if}
+		{if $action eq 'track_packages'}{include file='library/user_track_packages.lbi'}{/if}
+		{if $action eq 'order_detail'}{include file='library/user_order_detail.lbi'}{/if}
+		{if $action eq "account_raply" || $action eq "account_log" || $action eq "act_account" || $action eq "account_deposit" || $action eq "account_detail"}{include file='library/user_account.lbi'}{/if}
+		{if $action eq 'address_list'}{include file='library/user_address_list.lbi'}{/if}
+		{if $action eq 'transform_points'}{include file='library/user_transform_points.lbi'}{/if}
+		<!-- TemplateBeginEditable name="Bottom Main" --><!-- TemplateEndEditable -->
+	{$render.after_main}
+	</div>
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

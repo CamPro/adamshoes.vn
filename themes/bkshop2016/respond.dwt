@@ -1,0 +1,30 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	{$render.before_main}
+	<dl class="message_wrapper message_info">
+		<dt>{$lang.pay_online}</dt>
+		<dd>{$message}</dd>
+		{if $virtual_card}
+		<dd>
+			<ul class="virtual_card clearfix">
+				{foreach from=$virtual_card item=vgoods name=virtual_card}
+				{foreach from=$vgoods.info item=card name=vgoods_info}
+				<li>
+					<span class="type">{$vgoods.goods_name}</span>
+					{if $card.card_sn}<span class="id"><strong>{$lang.card_sn}{$lang.colon}</strong>{$card.card_sn}</em></span>{/if}
+					{if $card.card_password}<span class="serial_code"><strong>{$lang.card_password}{$lang.colon}</strong><em>{$card.card_password}</em></span>{/if}
+					{if $card.end_date}<span class="expire_date"><strong>{$lang.end_date}{$lang.colon}</strong><em>{$card.end_date}</em></span>{/if}
+				</li>
+				{/foreach}
+				{/foreach}
+			</ul>
+		</dd>
+		{/if}
+		<dd><p>{$order_submit_back}</p></dd>
+	</dl>
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

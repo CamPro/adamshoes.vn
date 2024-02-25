@@ -1,0 +1,73 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	{$render.before_main}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	{if $snatch_goods}
+	<div class="product_details box">
+		<div class="bd">
+			<div class="details">
+				<h1>{$snatch_goods.snatch_name}</h1>
+				{if $snatch_goods.desc}<p class="intro">{$snatch_goods.desc|escape:html|nl2br}</p>{/if}
+				<div class="price_and_no">
+					<p class="price">{$lang.shop_price}{$lang.colon}<strong>{$snatch_goods.formated_shop_price}</strong></p>
+					{if $cfg.show_goodssn}<p class="no">{$lang.goods_sn}{$lang.colon}{$goods.goods_sn}</p>{/if}
+				</div>
+				{if $goods.is_promote and $goods.gmt_end_time}
+				<div class="end_time_wrapper">
+					<strong class="label">{$lang.end_time}{$lang.colon}</strong>
+					<span class="end_time" title="{siy:date_format date=$snatch_goods.gmt_end_time format='Y-m-d-G-i-s'}">{siy:date_format date=$snatch_goods.gmt_end_time}</span>
+				</div>
+				{/if}
+				<div id="snatch_wrapper">
+					{include file='library/snatch.lbi'}
+				</div>
+			</div>
+			<div class="extra_details">
+				<div class="gallery">
+					<a href="{$snatch_goods.url}" class="cover"><img src="{$option.static_path}{siy:goods_info id=$snatch_goods.goods_id type='goods_img'}" alt="{$snatch_goods.goods_name|escape:html}"/></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box">
+		<div class="hd"><h3>{$lang.snatch_desc}</h3></div>
+		<div class="bd">
+			<div class="product_description">
+				<p class="time">{$snatch_goods.snatch_time}</p>
+				<p>{$lang.price_extent}<em class="price">{$snatch_goods.formated_start_price}</em> - <em class="price">{$snatch_goods.formated_end_price}</em></p>
+				<p>{$lang.user_to_use_up}<em class="price">{$snatch_goods.cost_points}</em>{$points_name}</p>
+				<p>{$lang.snatch_victory_desc}</p>
+				<p>{if $snatch_goods.max_price neq 0}
+				{$lang.price_less_victory}{$snatch_goods.formated_max_price}，{$lang.price_than_victory}{$snatch_goods.formated_max_price}，{$lang.or_can}{$snatch_goods.formated_max_price}{$lang.shopping_product}。
+				{else}
+				{$lang.victory_price_product}
+				{/if}</p>
+			</div>
+		</div>
+	</div>
+	<div class="box">
+		<div class="hd"><h3>{$lang.snatch_price}</h3></div>
+		<div class="bd">
+			<div id="price_list">
+				{include file='library/snatch_price.lbi'}
+			</div>
+		</div>
+	</div>
+	{/if}
+	<div class="snatch_list box">
+		<div class="hd"><h3>{$lang.snatch_list}</h3></div>
+		<div class="bd">
+			<ul class="text_list">
+				{foreach from=$snatch_list item=item name=snatch_list}
+				<li class="{if $item.overtime}end{else}active{/if}{if $smarty.foreach.snatch_list.first} first{/if}"><a href="{$item.url}">{$item.snatch_name}</a></li>
+				{/foreach}
+			</ul>
+		</div>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

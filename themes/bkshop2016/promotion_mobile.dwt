@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+<meta name="keywords" content="{$keywords}" />
+<meta name="description" content="{$description}" />
+<meta content="INDEX,FOLLOW" name="robots" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="copyright" content="{$shop_name}" />
+<meta name="author" content="{$shop_name}" />
+<meta http-equiv="audience" content="General" />
+<meta name="resource-type" content="Document" />
+<meta name="distribution" content="Global" />
+<meta name="revisit-after" content="1 days" />
+<meta name="GENERATOR" content="{$shop_name}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="publisher" href="" />
+<link rel="author" href="" />
+<meta property="og:site_name" content="bkitmart.vn" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="vi_VN" />
+<meta property="fb:app_id" content="" />
+<meta name="theme-color" content="#fdd504">
+<meta name="msapplication-TileColor" content="#fdd504">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$option.static_path}static/asset_mobile/ico/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$option.static_path}static/asset_mobile/ico/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$option.static_path}static/asset_mobile/ico/apple-touch-icon-72-precomposed.png" />
+              <link rel="apple-touch-icon-precomposed" href="{$option.static_path}static/asset_mobile/ico/apple-touch-icon-57-precomposed.png" />
+                             <link rel="shortcut icon" href="{$option.static_path}static/asset_mobile/ico/favicon.png" />
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+ <ul class="subcatacc ">
+ 	{foreach from=$promotion item=cat name=cat_list}
+ 	 <li><span class="namesub"><a href="{$option.static_path}khuyen-mai#{$cat.slug}">{$cat.cat_name}</span></a></li>
+ 	{/foreach}
+ </ul>
+ {foreach from=$promotion item=cat name=cat_list}
+ <h2><a name="{$cat.slug}"></a>{$cat.cat_name}</h2>
+ <div class="clr"></div>
+ 	{if $cat.cat_id}
+ 		<ul class="products">
+	    {foreach from=$cat.cat_id item=goods name=goods_list}
+	    {if $goods.id}
+	   	<li>
+			 {if $goods.is_os eq 3} <label  class="tagmoi tragop">Trả góp 0%</label >{/if}
+			  {if $goods.is_new}<label  class="tagmoi">Mới</label >{/if}
+			  {if $goods.is_best}<label  class="tagmoi hot">Hot</label >{/if}
+	   		<a href="{$goods.url}">
+	   		<img width="120" height="120" alt="{$goods.name|escape:html}" src="{$goods.thumb}">
+	   		<h3>{$goods.name|truncate:50:"":true}</h3><h4>{if $goods.promote_price}{$goods.promote_price} <del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</h4>
+	   		<div>{$goods.sellnote}</div>
+	   	    </a>
+	   		<figure class="showdescription bginfo"><h3>iPhone 6 Plus 64GB</h3><strong>22.190.000₫</strong><span>Màn hình: Retina HD, 5.5 inches</span><span>HĐH: iOS 8</span><span>CPU: A8 64 bit,</span><span>Camera: 8.0MP, 1 SIM</span><span>Pin: 2915mAh</span>
+	   		</figure>
+	   	</li>
+		{/if}
+	   	{/foreach}
+	   </ul>
+    {else}
+	<p class="empty">Danh mục này không có khuyến mãi</p>
+	{/if}
+{/foreach}
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+    

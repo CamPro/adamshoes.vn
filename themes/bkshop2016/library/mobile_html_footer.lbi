@@ -1,0 +1,39 @@
+{if $pname neq 'goods'}
+<script src="{$option.static_path}static/asset_mobile/js/jquery.min.1.8.3.js"></script>
+{else}
+<script type="text/javascript" src="{$option.static_path}static/js/jquery.js"></script>
+{/if}
+<script type="text/javascript" src="{$option.static_path}static/asset_mobile/js/custom.js"></script>
+<script>
+    $(document).ready(function() {
+        {literal}
+        $("header .menu").click(function(e){
+            $("nav.subnav").toggleClass('show');
+            $(this).toggleClass('actmenu');
+             e.preventDefault();
+        });
+        // Cuộn trang lên với scrollTop
+        $('.gototop').click(function(){
+            $('body,html').animate({scrollTop:0},300);
+            return false;
+        })
+        {/literal}
+    });
+
+</script>
+ {if $pname eq 'article' or $pname eq 'article_cat'}
+<script>
+    $(document).ready(function() {
+
+        $("header .catenews").click(function(){
+            $("#subcatenews").toggleClass('show');
+            $(this).toggleClass('actcat');
+            return false;
+        });
+
+    });
+</script>
+{/if}
+ {if $pname eq 'jobs'}
+ <script type="text/javascript" src="{$option.static_path}static/js/tab.js"></script>
+ {/if}

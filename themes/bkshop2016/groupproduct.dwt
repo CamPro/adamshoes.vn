@@ -1,0 +1,68 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<section>
+{include file='library/ur_here.lbi'}
+	<ul class="cate filter-cate laptop	gridgroupproduct">
+		{if $goods_list}
+ 
+ 
+
+    {foreach from=$goods_list item=goods name=goods_list}
+   {if $goods.goods_id}
+        
+                
+                
+
+                 
+           
+                <li class="igoods iproduct itemgoods">
+                     <a href="{$goods.url}" title="{$goods.goods_name|escape:html}">
+                        <div class="gimage">   
+                         
+                        <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+                      
+                       
+                        </div> 
+
+                        <h3>{$goods.goods_name}</h3>
+                        <div class="price_box">
+                        <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+
+
+                        {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                            <label class="tagss cmsoon">Đặt trước</label>
+                        {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                            <label class="tagss outstock">Tạm hết hàng</label>
+                        {else}
+                            {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                            <label class="tagss installment">Trả góp 0%</label>
+                            {else}
+                                {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagstatus tagss new">Mới</label>{/if}
+                                {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagstatus tagss hot">Bán chạy</label>{/if}
+                            {/if}
+                        {/if}
+                        </div>
+                        
+                        
+                     
+                        
+                        <figure class="bginfo">  <div class="desc">
+                            {$goods.goods_desc_short}</div>
+                        </figure>
+                   
+                        </a>
+                         <div class="good_tool">
+            <a   href="{$goods.url}" class="quick_buy">Mua</a>
+            <a   href="{$goods.url}/tra-gop" title="Mua trả góp {$goods.goods_name}" class="installment_buy">Mua trả góp</a>
+            </div>
+                </li>
+                 
+     
+     {/if}
+    {/foreach}
+ 
+{/if}
+	</ul>
+</section>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

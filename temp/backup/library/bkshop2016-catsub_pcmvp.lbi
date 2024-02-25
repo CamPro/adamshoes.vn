@@ -1,0 +1,8 @@
+<ul class="subcatacc">
+	<li {if $category eq 29}class="active"{/if}><a href="may-in.html">Máy in</a></li>
+	<li {if $category eq 30}class="active"{/if}><a href="may-fax.html">Máy Fax</a></li>
+	<li {if $category eq 32}class="active"{/if}><a href="may-chieu.html">Máy chiếu</a></li>
+	<li {if $category eq 70}class="active"{/if}><a href="may-scan.html">Máy Scan</a></li>
+	<li {if $category eq 4}class="active"{/if}><a href="may-bo-pc.html">Máy bộ PC</a></li>
+	<li {if $category eq 71}class="active"{/if}><a href="man-hinh-lcd.html">Màn hình LCD</a></li>
+</ul>

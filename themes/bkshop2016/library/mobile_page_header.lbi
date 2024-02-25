@@ -1,0 +1,49 @@
+ <header>
+ <div class="top_bar"></div>
+ <span class="area-cart"><a href="/gio-hang"><i class="iconmobile-cart"></i> {insert name='cart_info'}</a></span>
+<span class="menu"><i class="iconmobile-menu"></i></span>
+ <a class="logo" title="Trang chủ" href="/"><i class="iconmobile-logo">{$shop_name}</i></a>
+   {if $pname eq 'article' or $pname eq 'article_cat'}
+ <form action="/tin-tuc/tin-cong-nghe/9" name="search_form" method="post" id="search-site">
+        <input name="keywords" type="text" tabindex="1" value="{$search_value}" class="topinput" placeholder="Tìm kiếm tin tức..." />
+        <input name="id" type="hidden" value="{$cat_id}" />
+        <input name="cur_url" id="cur_url" type="hidden" value="" />
+</form>
+{else}
+<form autocomplete="off" method="get" action="tim-kiem" id="search-site">
+    <input type="text" autocomplete="off" placeholder="Bạn tìm gì..." name="keywords" tabindex="1" class="topinput" value="{$search_keywords|escape}">
+</form>
+{/if}
+
+<nav class="subnav">
+    {if $pname eq 'article' or $pname eq 'article_cat'}
+    <ul id="subcatenews">
+         <li> <a href="/tin-tuc/tin-cong-nghe/9">Tin Công Nghệ</a></li>
+        <li> <a href="/tin-tuc/thi-truong/30">Thị trường</a></li>
+        <li> <a href="/tin-tuc/danh-gia/31">Đánh giá</a></li>
+        <li> <a href="/tin-tuc/meo-hay/12">Mẹo hay</a></li>
+        <li> <a href="/tin-tuc/tin-khuyen-mai/10">Tin Khuyến Mãi</a></li>
+        <li> <a href="/tin-tuc/ho-tro-ky-thuat/15">Hỗ trợ kỹ thuật</a></li>
+    </ul>
+    {else}
+    <ul>
+        <li><a href="/dtdd.html"><i class="iconmobile-phone"></i>Điện thoại</a></li>
+        <li><a href="/may-tinh-bang.html"><i class="iconmobile-tablet"></i>Tablet</a></li>
+        <li><a href="/laptop.html"><i class="iconmobile-laptop"></i>Laptop</a></li>
+        <li><a href="/phu-kien.html"><i class="iconmobile-phukien"></i>Phụ kiện</a></li>
+        <li><a href="/may-cu.html"><i class="iconmobile-maydoitra"></i>Máy đổi trả</a></li>
+        <li><a href="/pc-may-van-phong.html"><i class="iconmobile-pcmvp"></i>Máy Văn Phòng</a></li>
+        <li><a href="/thiet-bi-mang.html"><i class="iconmobile-net"></i>Thiết bị mạng</a></li>
+        <li><a href="/khuyen-mai/laptop.html"><i class="iconmobile-promo"></i>Khuyến mãi</a></li>
+        <li><a href="/khuyen-mai/tra-gop.html"><i class="iconmobile-tgop"></i>Trả góp 0%</a></li>
+         <li><a href="/tin-tuc"><i class="iconmobile-news"></i>Tin Công nghệ</a></li>
+    </ul>
+    {/if}
+    <div class="linkother">
+        <a href="/he-thong-sieu-thi"><i class="fa fa-map-marker"></i>Xem hệ thống siêu thị</a>
+         <!--   <a title="Phiên bản desktop" href="javascript:window.location.href='{$swich_mobile}client=full'" rel="nofollow"><i class="iconmobile-desktop-blue"></i>Xem bản desktop</a>-->
+        <a href="tel:1900636472"><i class="fa fa-phone"></i>Gọi mua hàng <b>1900.636.472</b></a>
+
+    </div>
+</nav>
+</header>

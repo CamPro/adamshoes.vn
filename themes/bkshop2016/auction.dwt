@@ -1,0 +1,29 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	{$render.before_main}
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+		{include file='library/auction_goods_detail.lbi'}
+		<div class="goods_desc box">
+			<div class="hd"><h3>{$lang.bid_record}</h3><div class="extra"></div></div>
+			<div class="bd">
+				{if $auction_log}
+				<dl class="table col4">
+					<dt class="head">{$lang.au_bid_user}</dt>
+					<dd class="head"><span class="col">{$lang.au_bid_price}</span><span class="col">{$lang.au_bid_time}</span><span class="col">{$lang.au_bid_status}</span></dd>
+					{foreach from=$auction_log item=log name=fe_bid_log}
+					<dt>{$log.user_name}</dt>
+					<dd class="{cycle values="odd,even"}"><span class="col price">{$log.formated_bid_price}</span><span class="col">{$log.bid_time}</span><span class="col">{if $smarty.foreach.fe_bid_log.first} {$lang.au_bid_ok}{else}&nbsp;{/if}</span></dd>
+					{/foreach}
+				</dl>
+				{else}
+				<div class="empty"><p>{$lang.no_bid_log}</p></div>
+				{/if}
+			</div>
+		</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

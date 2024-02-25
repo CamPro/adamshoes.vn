@@ -1,0 +1,64 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{$render.before_main}
+	{if $promotion}
+	
+	<div class="promotion_page">
+		<div class="promo-header clearfix">
+				<!-- TemplateBeginEditable name="Top Header" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+		</div>
+		<div class="jumnva">
+			 {foreach from=$promotion item=cat name=cat_list}<a href="{$option.static_path}khuyen-mai#{$cat.slug}">{$cat.cat_name}</a>{/foreach}
+		</div>
+	 {foreach from=$promotion item=cat name=cat_list}
+	 <h2><a name="{$cat.slug}"></a>{$cat.cat_name}</h2>
+	 	{if $cat.cat_id}
+	 		<div class="listproduct" id="listproduct">
+	 		 {foreach from=$cat.cat_id item=goods name=goods_list}
+	 	 		 {if $goods.id}
+	 	 		 	<a class="{if $goods.is_special eq 1}double-col{/if}" alt="{$goods.goods_name|escape:html}" href="{$goods.url}">
+					<figure>
+					 {if $goods.is_os eq 1}
+					 <span class="os"></span>
+					 {elseif $goods.is_os eq 2}
+					 <span class="os-office"></span>
+					 {elseif $goods.is_os eq 3}
+					 <span class="tagmoi tagkmlon">Trả góp 0%</span>
+					 {/if}
+					 {if $goods.is_new}<span class="tagmoi">Mới</span>{/if}
+					    {if $goods.is_best}<span class="tagmoi hot">Hot</span>{/if}
+					<img width="120" height="120" alt="{$goods.url}" src="{$option.static_path}{$goods.thumb}">
+					<span class="textkm">{$goods.text_status}</span>
+					<h4>{if $goods.promote_price}{$goods.promote_price} <del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</h4>
+					<h3>{$goods.short_style_name}</h3>
+					{if $goods.short_desc}
+					<p {if $goods.is_special eq 1}class="bg-double-col"{else}class="bginfo"{/if}><span class="desc">{$goods.short_desc}</span>
+					
+					</p>
+					{/if}
+					</figure>
+				</a>
+	 	 		 {/if}
+	 	 	{/foreach}
+	 		 </div>
+	 	{else}
+		<p class="empty">Danh mục này không có khuyến mãi</p>
+		 {/if}
+	 {/foreach}
+	 </div>
+	 {else}
+	<p class="empty">{$lang.goods_empty}</p>
+	 {/if}
+	<!-- TemplateBeginEditable name="Bottom" -->
+<!-- TemplateEndEditable -->
+	
+	{$render.after_main}
+
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

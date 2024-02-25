@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/owl.carousel.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+<div class="navhome">
+    <a href="dtdd.html"><h3>Điện thoại</h3></a>
+    <a href="may-tinh-bang.html"><h3>Tablet</h3></a>
+    <a href="laptop.html"> <h3>Laptop</h3> </a>
+    <a href="phu-kien.html"> <h3>Phụ kiện</h3> </a>
+    <a href="may-cu.html"> <h4>Máy cũ<br> giá rẻ</h4> </a>
+    <a href="pc-may-van-phong"> <h4>PC<br> Máy VP</h4> </a>
+    <a href="khuyen-mai/tra-gop.html"> <h4>Mua<br> Trả góp 0%</h4> </a>
+    <a href="khuyen-mai/laptop.html"> <h4>K.Mãi<br> Tháng {$month}</h4> </a>
+</div>
+<!-- Slider banner -->
+ {if $ads_mobile}
+  <div id="bannerslider" class="owl-carousel owl-home">
+   {foreach from=$ads_mobile item=ads name=default}
+ <div class="item"><a href="{$ads.url}"><img class="lazyOwl" data-src="{$option.static_path}{$ads.content}" alt="{$ads.ad_name|escape:html}" width="100%" height="auto"></a></div>
+    {/foreach}
+</div>
+{/if}
+
+<!-- Ads Hot -->
+
+<!-- <div class="ads_home clr">
+    <a href="/khuyen-mai/gia-soc-cuoi-tuan.html"><img src="{$option.static_path}/images/giasoc-mobile.gif" alt=""></a>
+</div> -->
+
+{siy:home_group}
+
+<!--
+<div class="cat-header">Phụ kiện giá rẻ</div>
+<div class="navhome navacc">
+    <a href="usb.html"><h3>USB</h3></a>
+    <a href="the-nho.html"><h3>Thẻ nhớ</h3></a>
+    <a href="pin-du-phong.html"><h3>Pin dự phòng</h3> </a>
+    <a href="chuot-may-tinh.html"><h3>Chuột</h3> </a>
+    <a href="tai-nghe.html"><h3>Tai nghe</h3> </a>
+    <a href="ban-phim.html"><h3>Bàn phím</h3> </a>
+    <a href="loa-bluetooth.html"><h3>Loa Bluetooth</h3> </a>
+    <a href="loa-nghe-nhac.html"><h3>Loa máy tính</h3> </a>
+    <a href="o-cung.html"><h3>Ổ cứng</h3> </a>
+    <a href="do-choi-doc-la.html"><h3>Độc lạ</h3> </a>
+    <a href="thiet-bi-mang.html"><h3>T.bị mạng</h3> </a>
+    <a href="ky-thuat-so.html"><h3>Kỹ thuật số</h3> </a>
+</div>
+-->
+<ul class="news">
+    <div class="cat-header">Tin công nghệ</div>
+    {if $new_articles}
+        {foreach from=$new_articles item=article name=new_articles}
+            {if $smarty.foreach.new_articles.iteration < 6}
+            <li>
+            <a title="" href="{$article.url}"><img width="100px" height="70px" alt="{$article.title|escape:html}" src="{$option.static_path}{$article.thumb}">
+            <h3>{$article.title|escape:html}</h3>
+            <div><span>• {$article.add_time}</span></div>
+              </a>
+            </li>
+            {/if}
+        {/foreach}
+    {/if}
+    <a class="viewmore" href="/tin-tuc/tin-tuc/9">Xem tin khác</a>
+</ul>
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+
+<script src="{$option.static_path}static/asset_mobile/js/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#bannerslider").owlCarousel({
+            autoPlay : false,
+            stopOnHover : false,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true,
+            lazyLoad : true
+        });
+
+    });
+
+    </script>
+</body>
+</html>
+
+

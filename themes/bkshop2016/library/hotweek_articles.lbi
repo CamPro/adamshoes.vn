@@ -1,0 +1,22 @@
+<div class="hotweek">
+<h4>Quan tâm nhiều nhất</h4>
+	<ul>
+		{foreach from=$best_view item=article name=article_list}
+		<li><a href="{$article.url}"><strong>{$smarty.foreach.article_list.iteration}</strong><h3>{$article.title|escape:html} <span>• {$article.viewed} lượt xem</span></h3></a></li>
+		 {/foreach}
+	</ul>
+</div>
+
+<div class="linkss">
+    <h4>Kết nối với BK iTMart để không bỏ lỡ...</h4>
+    <a href="https://www.facebook.com/Bachkhoashop">
+        <h3>Tin công nghệ, Khuyến mãi</h3>
+        <i class="iconbkit-facebig"></i>
+        <span id="idFaceFanCount">Hơn 28,253 fan</span>
+    </a>
+    <a href="#">
+        <h3>Các video sp mới nhất</h3>
+        <i class="iconbkit-youtubebig"></i>
+        <span id="idYoutubeFanCount">0 fan</span>
+    </a>
+</div>

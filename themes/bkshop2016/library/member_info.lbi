@@ -1,0 +1,7 @@
+{if $user_info}
+<a href="/thanh-vien" class="gotouser">{$user_info.username|truncate:15} </a>
+<a href="/dang-xuat" class="logout"> {$lang.user_logout}</a>
+{else}
+<a href="/dang-ky" class="btn_register">{$lang.btn_register}</a>
+<a href="/login"> {$lang.btn_login} </a>
+{/if}

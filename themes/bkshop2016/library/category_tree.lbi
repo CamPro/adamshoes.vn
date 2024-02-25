@@ -1,0 +1,28 @@
+<div class="category_list box">
+	<div class="hd"><h3>{$lang.goods_category}</h3><div class="extra"></div></div>
+	<div class="bd">
+		<ul class="categories">
+			{foreach from=get_categories_tree() item='cat' name='categories'}
+			<li>
+				<a href="{$cat.url}"{if $cat.cat_id} class="has_sub"{/if}>{$cat.name}</a>
+				{if $cat.cat_id}
+				<ul class="sub_cat">
+					{foreach from=$cat.cat_id item='child' name='child_cat'}
+					<li>
+						<a href="{$child.url}"{if $child.cat_id} class="has_sub"{/if}>{$child.name}</a>
+						{if $child.cat_id}
+						<ul class="sub_cat">
+							{foreach from=$child.cat_id item='childer' name='childer_cat'}
+							<li><a href="{$childer.url}">{$childer.name}</a></li>
+							{/foreach}
+						</ul>
+						{/if}
+					</li>
+					{/foreach}
+				</ul>
+				{/if}
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>

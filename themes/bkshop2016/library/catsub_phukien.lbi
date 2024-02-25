@@ -1,0 +1,108 @@
+<div id="list_child_cat_acc">
+
+
+
+<ul class="listsubcatacc clearfix">
+     <li><strong>Phụ kiện:</strong></li>
+    <li><a href="pin-sac-du-phong.html" {if $category eq 35 || $cat_root_id eq 35}class="active"{/if}>Pin, sạc dự phòng</a>
+       
+    </li>
+    <li><a href="the-nho.html" {if $category eq 36 || $cat_root_id eq 36}class="active"{/if}>Thẻ nhớ</a>
+       
+    </li>
+    <li><a href="usb.html" {if $category eq 38 || $cat_root_id eq 38}class="active"{/if}>USB</a>
+         
+    </li>
+    <li><a href="chuot-may-tinh.html" {if $category eq 39  || $cat_root_id eq 39}class="active"{/if}>Chuột máy tính</a>
+        
+    </li>
+    <li><a href="ban-phim-may-tinh.html" {if $category eq 45 || $cat_root_id eq 45}class="active"{/if}>Bàn phím</a>
+        
+    </li>
+    <li><a href="tai-nghe.html" {if $category eq 37 || $cat_root_id eq 37 }class="active"{/if}>Tai nghe</a>
+         
+    </li>
+    <li>
+    <span>Xem tất cả <i class="fa fa-caret-down"></i></span>
+        <ul>
+        <li  class=" all "><a title="Tất cả" href="phu-kien.html"><i></i>Tất cả</a></li>
+            <li><a href="pin-sac-du-phong.html" {if $category eq 35 || $cat_root_id eq 35}class="active"{/if}><i></i> Pin, sạc dự phòng</a>
+       
+    </li>
+    <li><a href="the-nho.html" {if $category eq 36 || $cat_root_id eq 36}class="active"{/if}><i></i> Thẻ nhớ</a>
+       
+    </li>
+    <li><a href="usb.html" {if $category eq 38 || $cat_root_id eq 38}class="active"{/if}><i></i> USB</a>
+         
+    </li>
+    <li><a href="chuot-may-tinh.html" {if $category eq 39  || $cat_root_id eq 39}class="active"{/if}><i></i> Chuột máy tính</a>
+        
+    </li>
+    <li><a href="ban-phim-may-tinh.html" {if $category eq 45 || $cat_root_id eq 45}class="active"{/if}><i></i> Bàn phím</a>
+        
+    </li>
+    <li><a href="tai-nghe.html" {if $category eq 37 || $cat_root_id eq 37 }class="active"{/if}><i></i> Tai nghe</a>
+         
+    </li>
+
+     <li><a href="phan-mem.html" {if $category eq 66 || $cat_root_id eq 66}class="active"{/if}><i></i> Phần mềm</a>
+         
+    </li>
+    <li><a href="op-lung-dien-thoai.html" {if $category eq 43 || $cat_root_id eq 43}class="active"{/if}><i></i> Ốp lựng điện thoại</a>
+       
+    </li>
+     <li><a href="loa-nghe-nhac.html" {if $category eq 40 || $cat_root_id eq 40}class="active"{/if}><i></i> Loa Laptop</a>
+        
+    </li>
+    <li><a href="loa-bluetooth.html" {if $category eq 41 || $cat_root_id eq 41}class="active"{/if}><i></i> Loa Bluetooth</a>
+       
+    </li>
+    <li><a href="day-cap-sac.html" {if $category eq 42 || $cat_root_id eq 42}class="active"{/if}><i></i> Sạc dây, cáp các loại</a>
+       
+    </li>
+    <li><a href="o-cung.html" {if $category eq 46 || $cat_root_id eq 46}class="active"{/if}><i></i> Ổ cứng</a>
+      
+    </li>
+    <li><a href="ram-may-tinh.html" {if $category eq 95 || $cat_root_id eq 95}class="active"{/if}><i></i> RAM máy tính</a>
+        
+    </li>
+    <li><a href="de-tan-nhiet-laptop.html" {if $category eq 90 || $cat_root_id eq 90}class="active"{/if}><i></i> Đế tản nhiệt</a>
+        
+    </li>
+    <li><a href="do-choi-doc-la.html" {if $category eq 52 || $cat_root_id eq 52}class="active"{/if}><i></i> Phụ kiện độc</a>
+         
+    </li>
+
+    </ul>
+    </li>
+
+{if $brands.1}
+    <li>
+    <span>Thương hiệu <i class="fa fa-caret-down"></i></span>
+    <ul>
+          {foreach from=$brands item=brand name=brands}
+                      <li> <a href="{$brand.url}" {if $brand.selected  } class="current" {/if}>{$brand.brand_name}</a></li>
+                       {/foreach}
+        
+    </ul>
+    </li>
+    {/if}
+     {if $filter_attr_list}
+   
+        
+           
+                    {foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+                    <li><span>{$filter_attr.filter_attr_name|escape:html} <i class="fa fa-caret-down"></i> </span>
+                       <ul>
+                        {foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+                           <li> <a href="{$attr.url}" {if $attr.selected } class="current" {/if}>{$attr.attr_value}</a></li>
+                        {/foreach} </ul>
+                   </li>
+                    {/foreach}
+           
+         
+    
+    {/if}
+</ul>
+  {include file='library/icon_phukien.lbi'}
+</div>

@@ -1,0 +1,44 @@
+
+<div   id="list_child_cat_acc">
+<ul class="listsubcatacc clearfix">
+<li><strong>Thiết bị mạng:</strong></li>
+  <li>   <a href="adsl-wireless-router.html" {if $category eq 57}class="active"{/if}><h4>ADSL Wireless Router</h4></a></li>
+   <li>  <a href="access-point.html" {if $category eq 58}class="active"{/if}><h4>Access Point</h4></a></li>
+   <li>  <a href="card-mang.html" {if $category eq 59}class="active"{/if}><h4>Card mạng</h4></a></li>
+    <li> <a href="switch-hub.html" {if $category eq 60}class="active"{/if}><h4>Switch Hub</h4></a></li>
+    <li> <a href="3g-wireless.html" {if $category eq 61}class="active"{/if}><h4>3G/4G Wireless</h4></a></li>
+    <li> <a href="usb-3g.html" {if $category eq 62}class="active"{/if}><h4>USB 3G</h4></a></li>
+    <li> <a href="usb-wireless.html" {if $category eq 63}class="active"{/if}><h4>USB phát Wifi</h4></a></li>
+    {if $brands.1 || $filter_attr_list}
+    <li>Lọc theo:</li>
+    {/if}
+ {if $brands.1}
+    <li>
+    <span>Thương hiệu <i class="fa fa-caret-down"></i></span>
+    <ul>
+          {foreach from=$brands item=brand name=brands}
+                      <li> <a href="{$brand.url}" {if $brand.selected  } class="current" {/if}>{$brand.brand_name}</a></li>
+                       {/foreach}
+
+    </ul>
+    </li>
+    {/if}
+     {if $filter_attr_list}
+
+
+
+                    {foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+                    <li><span>{$filter_attr.filter_attr_name|escape:html} <i class="fa fa-caret-down"></i> </span>
+                       <ul>
+                        {foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+                           <li> <a href="{$attr.url}" {if $attr.selected} class="current" {/if}>{$attr.attr_value}</a></li>
+                        {/foreach} </ul>
+                   </li>
+                    {/foreach}
+
+
+
+    {/if}
+
+</ul>
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section class="wrapper10">
+<p>Chuyên trang việc làm Bach Khoa Shop</p>
+{if $jmod eq 'quy-trinh'}
+     {include file='jobs/quytrinh_mobile.lbi'}
+{elseif $jmod eq 'ung-tuyen'}
+    {include file='jobs/ungtuyen_mobile.lbi'}
+{else}
+    {include file='jobs/tuyendung.lbi'}
+{/if}
+
+<div class="article_category">
+    <h4>Bạn cần biết</h4>
+    <a href="{if $jmod neq ''}viec-lam{/if}">• Tuyển dụng</a>
+    <a href="viec-lam/quy-trinh">• Quy trình</a>
+    <a href="viec-lam/ung-tuyen">• Ứng tuyển</a>
+</div>
+<a target="_blank" href="https://www.dropbox.com/s/m6lknjoftqpp6cq/Phieu-Ho-So-Ung-Vien.doc?dl=0" class="dowloads-file ">Tải mẩu Hồ sơ ứng tuyển</a>
+<p class="pl10" style="padding-top: 10px;text-align: center">Nên sử dụng Laptop/PC để tải file này</p>
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+</body>
+</html>

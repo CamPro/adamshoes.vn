@@ -1,0 +1,87 @@
+{if $mobile_used}
+<div class="box_used">
+<div class="clearfix"></div>
+<h2 class="heading_cat">Tìm thấy {$total_mobile_used} điện thoại cũ <span><a title="Điện thoại cũ giá rẻ" href="/dien-thoai-may-doi-tra.html">(Xem tất cả)</a></span></h2>
+<ul class="cate">
+   {foreach from=$mobile_used key=i item=goods name=goods_list}
+   {if $goods.id && $i < 6}
+        <li>
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">
+         <aside class="left">
+            <img width="170" height="170" alt="{$goods.name|escape:html}" src="{$option.static_path}{$goods.thumb}">
+        </aside>    
+            
+
+          <aside class="right">
+             <h3>{$goods.name}</h3>
+            <div class="price-box"><strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong></div>
+            <div class="price-new">Máy mới: <font>{$goods.market_price}</font></div>
+            
+             </aside> 
+        </a>
+    </li>
+     {/if}
+    {/foreach}
+</ul>
+</div>
+{else}
+<p class="empty">{$lang.goods_empty}</p>
+{/if}
+{if $tablet_used}
+<div class="box_used">
+<div class="clearfix"></div>
+<h2 class="heading_cat">Tìm thấy {$total_tablet_used} máy tính bảng <span><a title="Máy tính bảng giá rẻ" href="/may-tinh-bang-doi-tra.html">(Xem tất cả)</a></span></h2>
+<ul class="cate">
+   {foreach from=$tablet_used key=i item=goods name=goods_list}
+   {if $goods.id && $i < 6}
+    <li>
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">
+         <aside class="left">
+            <img width="170" height="170" alt="{$goods.name|escape:html}" src="{$option.static_path}{$goods.thumb}">
+        </aside>    
+            
+
+          <aside class="right">
+             <h3>{$goods.name}</h3>
+            <div class="price-box"><strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong></div>
+            <div class="price-new">Máy mới: <font>{$goods.market_price}</font></div>
+            
+             </aside> 
+        </a>
+    </li>
+     {/if}
+    {/foreach}
+</ul>
+</div>
+{else}
+<p class="empty">{$lang.goods_empty}</p>
+{/if}
+{if $laptop_used}
+<div class="box_used">
+<div class="clearfix"></div>
+<h2 class="heading_cat">Tìm thấy {$total_laptop_used} laptop cũ <span><a title="Laptop cũ giá  rẻ" href="laptop-cu.html">(Xem tất cả)</a></span></h2>
+<ul class="cate">
+   {foreach from=$laptop_used item=goods key=i name=goods_list}
+   {if $goods.id && $i < 6}
+    <li>
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">
+         <aside class="left">
+            <img width="170" height="170" alt="{$goods.name|escape:html}" src="{$option.static_path}{$goods.thumb}">
+        </aside>    
+            
+
+          <aside class="right">
+             <h3>{$goods.name}</h3>
+            <div class="price-box"><strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong></div>
+            <div class="price-new">Máy mới: <font>{$goods.market_price}</font></div>
+            
+             </aside> 
+        </a>
+    </li>
+     {/if}
+    {/foreach}
+</ul>
+<div>
+{else}
+<p class="empty">{$lang.goods_empty}</p>
+{/if}

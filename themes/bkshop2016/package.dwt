@@ -1,0 +1,49 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	<!-- TemplateBeginEditable name="Main Top" --><!-- TemplateEndEditable -->
+		<h3>{$lang.package_list}</h3>
+	<div class="activity_list">
+		<div class="bd">
+			{foreach from=$list item=val name=list}
+			<div class="wraper_act clearfix">
+			 <div class="act-left">
+			 	 <h2 class="name">{$val.act_name}</h2>
+			 	 <p>{$lang.label_start_time}{$val.start_time}</p>
+			 	 <p>{$lang.label_end_time}{$val.end_time}</p>
+			 	 <p>{$lang.orgtotal}{$lang.colon}{$val.subtotal}</p>
+			 	 <p>{$lang.package_price}{$lang.colon}{$val.package_price}</p>
+			 	 <p>
+			 	 	{if $val.act_desc}{$lang.desc}{$lang.colon}{$val.act_desc}{/if}
+			 	 </p>
+			 	 <p>
+			 	 	<a href="javascript:addPackageToCart({$val.act_id})" class="button brighter_button"><span>{$lang.add_to_cart}</span></a>
+			 	 </p>
+			 </div>
+			 <div class="act-right">
+			 	<div class="product_list display_text">
+						<ul class="clearfix">
+							{foreach from=$val.goods_list item=goods name=val_goods_list}
+							<li{if $smarty.foreach.val_goods_list.first} class="first"{/if}>
+								<span class="photo">
+									<a href="{siy:build_uri app='goods' gid=$goods.goods_id append=$goods.goods_name}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$option.static_path}{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}"/></a>
+								</span>
+								<span class="info">
+									<a href="{siy:build_uri app='goods' gid=$goods.goods_id append=$goods.goods_name}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+									<em class="price">{$goods.rank_price}</em>
+								</span>
+								
+							</li>
+							{/foreach}
+						</ul>
+						</div>
+			 </div>
+			 </div>
+			{/foreach}
+		</div>
+	</div>
+	<!-- TemplateBeginEditable name="Main Bot" --><!-- TemplateEndEditable -->
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

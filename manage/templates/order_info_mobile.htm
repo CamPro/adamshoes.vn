@@ -1,0 +1,62 @@
+{include file="pageheader_mobile.htm"}
+{insert_scripts files="../js/utils.js,listtable.js,selectzone.js,../js/common.js"}
+<div class="container">
+   <form action="order.php?act=comfirm" method="post" name="theForm" class="formadmin">
+      <h3 class="text-center" style="margin-bottom: 15px;">PHIẾU ĐẶT HÀNG</h3>
+      <p><strong>Đơn hàng số:</strong> {$order.order_code}</p>
+      <p>Loại đơn hàng: <strong>{$order.order_type}</strong></p>
+      <p><strong>Ngày đặt hàng:</strong> {$order.add_time}</p>
+      <p><strong>Trạng thái:</strong> {$order.order_status}</p>
+      <p><strong>Ghi chú đơn hàng:</strong> {$order.order_note}</p>
+      <p><strong>Khách hàng:</strong> {$order.customer_name} - Điện thoại: {$order.customer_mobile}</p>
+      <p><strong>Địa chỉ:</strong> {$order.customer_address} - {$order.region_name}</p>
+      <p><strong>Sản phẩm đặt mua:</strong></p>
+      <ul class="ulist">
+         {foreach from=$goods_list item=goods}
+          <li>
+              <p> <a target="_blank" href="{$goods.product_url}" class="llink">{$goods.product_name}</a></p>
+              <p>Giá: <span class="price">{$goods.product_price}</span> - Số lượng: {$goods.product_number}</p>
+              <p>Thuộc tính: {$goods.product_attr|nl2br}</p>
+              <p>Quà tặng:</p>
+              <p>{$goods.product_gift|nl2br}</p>
+          </li>
+           {/foreach}
+      </ul>
+      <div class="form_action">
+        <p>Ghi chú</p>
+        <textarea name="admin_note" cols="40" rows="3"></textarea>
+        <div>
+                <select name="new_order_status">
+                 <option value="0">{$lang.select_please}</option>
+                 {if $order.order_status_num neq 2 && $order.order_status_num neq 3}
+                 <option value="2">Đã xác nhận</option>
+                 {/if}
+                 {if $order.order_status_num neq 3}
+                 <option value="3">Hoàn thành</option>
+                 {/if}
+                 {if $order.order_status_num neq 4}
+                 <option value="4">Hủy đơn hàng</option>
+                 {/if}
+                </select>
+                <input name="confirm" type="submit" value="Xác nhận" class="button" />
+                <input name="order_id" type="hidden" value="{$smarty.request.order_id}">
+                {if $order.order_status_num neq 1}
+                <input name="customer_mobile" type="hidden" value="{$order.customer_mobile}">
+                <input name="order_code" type="hidden" value="{$order.order_code}">
+                <input name="order_status" type="hidden" value="{$order.order_status_num}">
+                <input name="sendsms" type="submit" value="Gửi SMS" class="button" />
+                {/if}
+
+        </div>
+         {if $action}
+           <div class="history">
+                 <p><strong>Lịch sử xác nhận</strong>: </p>
+                {foreach from=$action item=actions}
+                <p><strong>{$actions.action_user}</strong> : {$actions.order_status} -> {$actions.action_note} - Lúc: {$actions.add_time}</p>
+                 {/foreach}
+           </div>
+           {/if}
+      </div>
+   </form>
+</div>
+{include file="pagefooter_mobile.htm"}

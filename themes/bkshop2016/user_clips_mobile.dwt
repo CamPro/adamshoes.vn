@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{if $pname neq 'respond' and $message.back_url}<meta http-equiv="refresh" content="3;url={$message.back_url}">{/if}
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section class="user_cp">
+<div class="clearfix"></div>
+<div class="user_cover">
+	<span class="avatar">	
+	</span>
+	<span class="name">
+		<strong>{$info.username} </strong><br>
+		{$rank_name}
+	</span>
+</div>
+<div class="user_info">
+	<span class="log">{$lang.last_time}<em>{$info.last_time}</em></span>
+    {if $info.is_validate eq 0}<span class="email_valid">{$lang.not_validated}<a href="javascript:sendHashMail()">{$lang.resend_hash_mail}</a></span>{/if}
+</div>
+<ul id="user_nav">
+	<li><a href="thanh-vien">{$lang.dashboard}</a></li>
+	<li><a href="user.php?act=profile">{$lang.profile}</a></li>
+	<li><a href="user.php?act=order_list">{$lang.label_order}</a></li>
+	{if $affiliate.on eq 1}
+	<li><a href="user.php?act=affiliate">{$lang.label_affiliate}</a></li>{/if}
+	<li><a href="user.php?act=booking_list">{$lang.collections_and_booking}</a></li>
+	{if $option.tags_enabled}
+	<li><a href="user.php?act=tag_list">{$lang.label_tag}</a></li>{/if}
+	<li><a href="user.php?act=message_list">{$lang.messages_and_comments}</a></li>
+	{if $show_transform_points}
+	<li><a href="user.php?act=transform_points">{$lang.label_transform_points}</a></li>{/if}
+	<li><a href="user.php?act=bonus">{$lang.account_and_bonus}</a></li>
+	<li><a href="dang-xuat">{$lang.btn_logout}</a></li>
+</ul>
+
+{if $action eq 'default'}
+<h3>{$lang.recent_orders} <small><a href="user.php?act=order_list">{$lang.more}</a></small></h3>
+<div class="ubox">
+	{siy:user_orders number='5'}
+</div>
+{/if}
+{if $action eq 'message_list'}
+<p class="tabs">
+	<a href="user.php?act=message_list" id="tab_message_list" class="active"><span>{$lang.label_message}</span></a>
+	<a href="user.php?act=comment_list" id="tab_comment_list"><span>{$lang.label_comment}</span></a>
+</p>
+{if $message_list}
+	<ul class="comment_list clearfix">
+		{foreach from=$message_list item=message key=key name=message_list}
+		<li class="{cycle values="odd,even"}{if $smarty.foreach.message_list.first} first{/if}">
+			<div class="info">
+				<span class="name">{$message.msg_time}</span>
+				<a href="user.php?act=del_msg&amp;id={$key}&amp;order_id={$message.order_id}" onclick="if (!confirm('{$lang.confirm_remove_msg}')) return false;" class="drop">{$lang.drop}</a>
+			</div>
+			<div class="talk">
+				<p class="title"><span class="type">[{$message.msg_type}]</span>{$message.msg_title}</p>
+				<p class="text">{$message.msg_content}{if $message.message_img}<a href="data/feedbackimg/{$message.message_img}" target="_bank">{$lang.view_upload_file}</a>{/if}</p>
+				{if $message.re_msg_content}
+				<blockquote class="reply"><span class="name">{$lang.shopman_reply}</span><span class="text">{$message.re_msg_content}</span><span class="time">{$message.re_msg_time}</span></blockquote>
+				{/if}
+			</div>
+		</li>
+		{/foreach}
+	</ul>
+	{include file='library/pages.lbi'}
+	{else}
+	<p class="empty">{$lang.message_list_empty}</p>
+	{/if}
+{/if}
+{if $action eq 'comment_list'}
+<p class="tabs">
+	<a href="user.php?act=message_list" id="tab_message_list"><span>{$lang.label_message}</span></a>
+	<a href="user.php?act=comment_list" id="tab_comment_list"  class="active"><span>{$lang.label_comment}</span></a>
+</p>
+<ul class="comment_list clearfix">
+			{foreach from=$comment_list item=comment name=comment_list}
+			<li class="{cycle values="odd,even"}{if $smarty.foreach.comment_list.first} first{/if}">
+				<div class="info">
+					<span class="name">{$comment.formated_add_time}</span>
+					<a href="user.php?act=del_cmt&amp;id={$comment.comment_id}" title="{$lang.drop}" onclick="if (!confirm('{$lang.confirm_remove_msg}')) return false;" class="drop">{$lang.drop}</a>
+				</div>
+				<div class="talk">
+					<p class="title"><span class="type">[{if $comment.comment_type eq '0'}{$lang.goods_comment}{else}{$lang.article_comment}{/if}]</span>{$comment.cmt_name}</p>
+					<p class="text">{$comment.content|escape}</p>
+					{if $comment.reply_content}
+					<blockquote class="reply"><span class="name">{$lang.re_name}</span><span class="text">{$comment.reply_content}</span><span class="time">{$message.re_msg_time}</span></blockquote>
+					{/if}
+				</div>
+			</li>
+			{/foreach}
+		</ul>
+		{if !$comment_list}<p class="empty">{$lang.no_comments}</p>{/if}
+		{if $comment_list}{include file='library/pages.lbi'}{/if}
+{/if}
+{if $action eq 'tag_list'}
+<h3>{$lang.label_tag}</h3>
+{if $tags}
+		<p class="tags">
+		{foreach from=$tags item=tag}
+		<span class="item_wrapper">
+		<a href="tim-kiem?keywords={$tag.tag_words|escape:url}" class="item">{$tag.tag_words|escape:html}<em>{$tag.tag_count}</em></a>
+		<a href="user.php?act=act_del_tag&amp;tag_words={$tag.tag_words|escape:url}" onclick="if (!confirm('{$lang.confirm_drop_tag}')) return false;" title="{$lang.drop}" class="drop">{$lang.drop}</a>
+		</span>
+		{/foreach}
+		</p>
+		{else}
+		<p class="empty">{$lang.no_tag}</p>
+		{/if}
+{/if}
+{if $action eq 'collection_list'}
+<p class="tabs">
+		<a href="user.php?act=collection_list" id="tab_collection_list" class="active"><span>{$lang.label_collection}</span></a>
+		<a href="user.php?act=booking_list" id="tab_booking_list" ><span>{$lang.label_booking}</span></a>
+</p>
+<div class="clr"></div>
+{if $goods_list}
+   <ul class="products">
+    {foreach from=$goods_list item=goods name=goods_list}
+    {if $goods.goods_id}
+   	<li class="{cycle values="clr,"}">
+		 {if $goods.stock eq 0}
+	    <label  class="tagmoi dattruoc">Đặt trước</label >
+	    {else}
+	        {if $goods.is_os eq 3} <label  class="tagmoi tragop">Trả góp 0%</label >{/if}
+		    {if $goods.is_new}<label  class="tagmoi">Mới</label >{/if}
+		    {if $goods.is_best}<label  class="tagmoi hot">Hot</label >{/if}
+		    {if $goods.is_promote}<label  class="tagmoi tagkmlon">KM Lớn</label >{/if}
+		{/if}
+   		<a href="{$goods.url}">
+   		<img width="120" height="120" alt="{$goods.goods_name|escape:html}" src="{$goods.goods_thumb}">
+   		<h3>{$goods.goods_name|truncate:50:"":true}</h3><h4>{if $goods.promote_price}{$goods.promote_price} <del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</h4>
+   		<div>{$goods.sellnote}</div>
+   	    </a>
+   		
+   	</li>
+    {/if}
+   	{/foreach}
+   </ul>
+   {include file='library/pages.lbi'}
+   {else}
+	<p class="empty">{$lang.collection_empty}</p>
+    {/if}
+
+{/if}
+{if $action eq 'booking_list'}
+	<p class="tabs">
+		<a href="user.php?act=collection_list" id="tab_collection_list"><span>{$lang.label_collection}</span></a>
+		<a href="user.php?act=booking_list" id="tab_booking_list" class="active"><span>{$lang.label_booking}</span></a>
+	</p>
+	{if $booking_list}
+		<table class="data_table">
+			<thead>
+				<tr>
+					<th>{$lang.goods_name}</th>
+					<th>{$lang.booking_amount}</th>
+					<th>{$lang.booking_time}</th>
+					<th class="last">{$lang.handle}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$booking_list item=item name=booking_list}
+				<tr class="{cycle values="odd,even"}{if $smarty.foreach.booking_list.last} last{/if}">
+					<td>
+						<a href="{$item.url}" class="name" target="_blank">{$item.goods_name}{if $item.dispose_note neq 'N/A'}<em class="icon_info tip" title="{$item.dispose_note|nl2br|escape:html}">{$lang.process_desc}</em>{/if}</a>
+					</td>
+					<td>{$item.goods_number}</td>
+					<td>{$item.booking_time}</td>
+					<td class="last">
+						<a href="user.php?act=act_del_booking&id={$item.rec_id}" class="button"><span>{$lang.drop}</span></a>
+					</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+		{else}
+		<p class="empty">{$lang.booking_empty}</p>
+		{/if}
+		{if $booking_list}{include file='library/pages.lbi'}{/if}
+{/if}
+{if $action eq 'add_booking'}
+<script type="text/javascript">
+{foreach from=$lang.booking_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>
+<form action="user.php" method="post" name="formBooking" onsubmit="return addBooking();" class="form">
+			<div class="req"><b>*</b>{$lang.required_indicates}</div>
+			<fieldset>
+				<h4>{$lang.booking_form_title}</h4>
+				<p class="label"><b>{$lang.booking_goods_name}{$lang.colon}</b>
+					<em>{$info.goods_name}</em>
+				</p>
+				<label for="number"><b><span class="req">*</span>{$lang.booking_amount}{$lang.colon}</b>
+					<input type="text" name="number" tabindex="1" value="{$info.goods_number}" id="number"/>
+				</label>
+				<label for="desc"><b><span class="req">*</span>{$lang.describe}{$lang.colon}</b>
+					<textarea name="desc" rows="6" cols="20" tabindex="7" id="desc">{$goods_attr}{$info.goods_desc|escape}</textarea>
+				</label>
+				<label for="linkman"><b><span class="req">*</span>{$lang.contact_username}{$lang.colon}</b>
+					<input type="text" name="linkman" tabindex="1" value="{$info.consignee|escape}" id="linkman"/>
+				</label>
+				<label for="email"><b><span class="req">*</span>{$lang.email_address}{$lang.colon}</b>
+					<input type="text" name="email" tabindex="1" value="{$info.email|escape}" id="email"/>
+				</label>
+				<label for="tel"><b><span class="req">*</span>{$lang.contact_phone}{$lang.colon}</b>
+					<input type="text" name="tel" tabindex="1" value="{$info.tel|escape}" id="tel"/>
+				</label>
+				<div class="submit_wrap">
+					<input type="submit" name="submit" value="{$lang.submit_booking_goods}" tabindex="6" class="submit btn_s4_b"/>
+					<input type="hidden" name="act" value="act_add_booking"/>
+					<input type="hidden" name="id" value="{$info.id}"/>
+					<input type="hidden" name="rec_id" value="{$info.rec_id}"/>
+				</div>
+			</fieldset>
+		</form>
+{/if}
+{if $affiliate.on eq 1}{if $action eq 'affiliate'}
+Tính năng nay chưa được hỗ trợ
+{/if}{/if}
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+  

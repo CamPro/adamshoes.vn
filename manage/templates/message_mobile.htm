@@ -1,0 +1,50 @@
+{include file="pageheader_mobile.htm"}
+<div class="container">
+    <div class="msg_{$msg_type}">
+            <p>{$msg_detail}</p>
+            <div id="redirectionMsg">
+              {if $auto_redirect}{$lang.auto_redirection}{/if}
+            </div>
+          <ul style="margin:0; padding:0 10px" class="msg-link">
+            {foreach from=$links item=link}
+            <li><a href="{$link.href}" {if $link.target}target="{$link.target}"{/if}>{$link.text}</a></li>
+            {/foreach}
+          </ul>
+    </div>
+
+</div>
+{if $auto_redirect}
+<script language="JavaScript">
+<!--
+var seconds = 3;
+var defaultUrl = "{$default_url}";
+{literal}
+onload = function()
+{
+  if (defaultUrl == 'javascript:history.go(-1)' && window.history.length == 0)
+  {
+    document.getElementById('redirectionMsg').innerHTML = '';
+    return;
+  }
+  window.setInterval(redirection, 1000);
+}
+function redirection()
+{
+  if (seconds <= 0)
+  {
+    window.clearInterval();
+    return;
+  }
+  seconds --;
+  document.getElementById('spanSeconds').innerHTML = seconds;
+  if (seconds == 0)
+  {
+    window.clearInterval();
+    location.href = defaultUrl;
+  }
+}
+//-->
+</script>
+{/literal}
+{/if}
+{include file="pagefooter_mobile.htm"}

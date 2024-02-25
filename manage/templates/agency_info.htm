@@ -1,0 +1,72 @@
+<!-- $Id: agency_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+{insert_scripts files="validator.js,../js/transport.js"}
+<div class="main-div">
+<form method="post" action="agency.php" name="theForm" enctype="multipart/form-data" onsubmit="return validate()">
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">{$lang.label_agency_name}</td>
+    <td><input type="text" name="agency_name" maxlength="60" value="{$agency.agency_name}" />{$lang.require_field}</td>
+  </tr>
+  <tr>
+    <td class="label">Địa chỉ</td>
+    <td><input type="text" name="agency_desc" value="{$agency.agency_desc}" /></td>
+  </tr>
+  <tr>
+    <td class="label">Hotline</td>
+    <td><input type="text" name="agency_hotline"  value="{$agency.agency_hotline}" />{$lang.require_field}</td>
+  </tr>
+   <tr>
+    <td class="label">ID Kho hàng [makho-TP1]</td>
+    <td><textarea name="storeid" cols="80" rows="3">{$agency.storeid}</textarea>{$lang.require_field} <br/>
+    <span class="notice-span">Dùng để tra tồn kho HTS ở ngoài sản phẩm. Nếu nhiều ID (TP1), thì cách nhau bằng dấu phẩy và khoảng trắng ,_</span>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">Tọa độ Google Map</td>
+    <td><input type="text" name="agency_googlemap" value="{$agency.agency_googlemap}" />{$lang.require_field}</td>
+  </tr>
+
+  <tr>
+    <td class="label">{$lang.label_regions}</td>
+    <td>
+    <select name="region_id">
+        <option value="0">Chọn tỉnh thành</option>
+         {html_options options=$region_list selected=$agency.region_id}
+    </select>
+      </td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td colspan="2" align="center">
+      <input type="submit" class="button" value="{$lang.button_submit}" />
+      <input type="reset" class="button" value="{$lang.button_reset}" />
+      <input type="hidden" name="act" value="{$form_action}" />
+      <input type="hidden" name="id" value="{$agency.agency_id}" />
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{insert_scripts files="../js/utils.js,validator.js"}
+{literal}
+<script language="JavaScript">
+<!--
+region.isAdmin = true;
+
+/**
+ * 检查表单输入的数据
+ */
+function validate()
+{
+    validator = new Validator("theForm");
+    validator.required("agency_name",  no_agencyname);
+    return validator.passed();
+}
+
+//-->
+</script>
+{/literal}
+{include file="pagefooter.htm"}

@@ -1,0 +1,247 @@
+<div class="bgheading clearfix">
+<div class="wrap-content">
+    <!-- Header J2 prime-->
+
+    <div class="gdsname clearfix">
+	   <h1 id="gdsname">{$goods.goods_name}</h1>
+        {if $cfg.show_goodssn}<span class="no">{$lang.goods_sn}{$lang.colon}{$goods.goods_sn}</span>{/if}
+        {siy:efom_comment_count id=$id type=$type}
+        
+        <div class="area-social">
+            <div class="fb-like" data-href="{$option.static_path}{$request_uri}" data-layout="button_count" data-action="like" data-show-faces="false"> </div>
+            <div class="fb-share-button" data-href="{$option.static_path}{$request_uri}" data-layout="button_count" mobile_iframe="false"></div>
+        </div>
+    </div>
+   <!--  <ul class="stickybar">
+	    <li id="liSpec"><a><i class="iconbkit-spec"></i>Thông số</a></li>
+	    <li id="liTip"><a><i class="iconbkit-tip"></i>Nổi bật</a></li>
+	    <li id="liAcc"><a><i class="iconbkit-accs"></i>Phụ kiện</a></li>
+	    <li id="liCpr"><a><i class="iconbkit-desc"></i>Đánh giá</a></li>
+	    <li id="liCmt"><a><i class="iconbkit-comment2"></i>Bình luận<label>{siy:comment_count id=$id type=$type}</label></a></li>
+    </ul>   -->
+    <div class=" boxtable_goods">
+    <aside class="picture ">
+    	{if $goods.laisuat neq 1 and $goods.laisuat neq NULL and $goods.onsale eq 1} <label class="installment">Trả góp 0%</label> {/if}
+        <img src="{$option.static_path}{$goods.goods_img}" id="gthumb" data-thumb="{$option.static_path}{$goods.goods_thumb}" alt="{$goods.goods_name|escaple:html}">
+    </aside>
+    <aside class="box_goods_price{if $goods.on_sale  eq 0}  box_goods_price_off{/if} price_sale">
+    	{include file='layout/goods/info.lbi'}
+    </aside>
+
+    {if $goods.on_sale  eq 1   }
+        <aside class="choosemarket ">
+            <!-- luot mua -->
+            <style type="text/css">
+                .bought{margin-bottom: 10px;}
+                .bought >strong{font-size: 24px;color: #EB0000;}
+                .wrap-preorder{padding: 6px;background: #fafafa;font-size: 12px;overflow-y: scroll;max-height: 200px;margin-top: 10px;}
+                .wrap-preorder li{border-top: 1px solid #f1f1f1;}
+                .wrap-preorder li:first-child{border-top: none;}
+            </style>
+
+            {if ($goods.is_preoder eq 1 and $goods.on_sale eq 1  and $goods.label_status eq 3) ||   $show_preorder}
+               <!-- <div class="bought">
+                Đã có <strong>{$totalc}</strong> lượt đặt trước
+                    {if $customer}
+                    <div class="wrap-preorder">
+                        <ul>
+                            {foreach from=$customer item=customers}
+                            <li>{$customers.customer_name}  <span class="fr">{$customers.customer_mobile}</span></li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                     {/if}
+               </div>-->
+            {/if}
+             
+           {if (($goods.goods_number eq '0') and ($option.use_storage eq '1')) || $show_preorder}
+                {if $goods.on_sale eq 1}
+                <form action="javascript:;" onsubmit="preorder(3)" method="post" id="preorder_form">
+                <div class="right_cart">
+                 <div class="heading_online">Mời anh chị đặt hàng nhanh</div>
+                   <div class="choisesex">
+                     <span>Thông tin người mua:</span>
+                      <input type="radio" name="sex" value="1" checked id="male">
+                      <label for="male">Anh</label>
+                       <input type="radio" name="sex" value="0" id="female">
+                     <label for="female">Chị</label>
+                    </div>
+                    <div class="input_form">
+                        <input type="text" maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="fullname" required>
+                        <input type="text" minlength="10" maxlength="11"  placeholder="Số di động (Bắt buộc)" name="mobile" required>
+                        <input type="email"   placeholder="Email (Không Bắt buộc)" name="email" >
+                        <div id="resorder"></div>
+                        <button id="nextstep" type="submit" class="btnfinal">Đặt hàng ngay
+<p>Giao tận nơi hoặc đến s.thị xem hàng</p>
+                        </button>
+                        <div class="tos">
+                            <p>Xem hướng dẫn thanh toán <a href="thong-tin/giao-hang-thanh-toan-14.html" target="_blank">tại đây</a></p>
+                            {if $totalc neq 0}
+                               <p> Có <strong>{$totalc}</strong> khách hàng đặt hàng</p>
+                                {if $customer}
+                    <div class="wrap-preorder">
+                        <ul>
+                            {foreach from=$customer item=customers}
+                            <li>{$customers.customer_name}  <span class="fr">{$customers.customer_mobile}</span></li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                     {/if}
+                            {/if}    
+                        </div>
+                         
+                    </div>
+                </div><!-- end step 1-->
+                </form>
+                {/if}
+           {else}
+
+                {if $goods.on_sale eq 1}
+                <div class="getstock">
+                    <strong>Kiểm tra có hàng tại nơi bạn ở không?</strong>
+                    <form action="javascript:;"  method="post" id="getstock_form">
+                        <input type="hidden" name="codehts" id="_codehts" value="{$goods.goods_sn}">
+                        <input type="hidden" name="store" id="store" value="{$goods.goods_number}">
+                        <select name="province" id="_province" onchange="loadData(this)">
+                            <option value="0">Đang ở tỉnh/TP ?</option>
+                            {html_options options=$province_list selected=60}
+                        </select>
+                       <select name="city" id="_city" onchange="getStock()">
+                            <option value="0">Quận/Huyện ?</option>
+                       </select>
+                       <div class="list-shop" id="buidsshop">
+                       </div>
+                    </form>
+                </div>
+               <!--  <div class="phonehelp">
+                        <div class="call"><i class="iconcart-phone"></i>Gọi đặt hàng: <a href="tel:1900636472">1900.63.64.72</a>, <a href="tel:0905418111">0905.418.111</a></div>
+                        <div class="time">Từ 8h00 - 21h30 (Thứ 2 - CN hàng tuần)</div>
+                </div>-->
+                {/if}
+           {/if}
+           
+{include file='layout/goods/requestcall.lbi'}
+        </aside>
+    {/if}
+
+</div>
+</ul>
+</div>
+</div>
+<div class="clr"></div>
+<div class="">
+	
+    <aside class="characteristics">
+        <h2>Đặc điểm nổi bật của <strong>{$goods.goods_name|ecscaple:html}</strong></h2>
+		{if $pictures}<div id="galleryowl" class="owl-carousel owl-theme">
+		{foreach from=$pictures item=picture name=pictures}
+		 <div class="item"><img src="{$option.static_path}{$picture.img_url}" alt="{$goods.goods_name|ecscaple:html}">
+		 	{if $picture.img_desc}
+		 	<p>{$picture.img_desc}</p>
+		 	{/if}
+		 </div>
+		{/foreach}
+		</div> {/if}
+        {if $goods.goods_desc}
+        <div class="boxarticel clearfix" id="description">
+             
+                <div class="product_description short_view">{$goods.goods_desc}
+                </div>
+                <div class="view-more">
+                        <p id="btn-viewmore"><span id="view1">Đọc thêm <i class="fa fa-caret-down"></i></span>
+
+                        <!--<span id="view2" class="hidden">Thu gọn  <i class="fa fa-caret-up"></i></span>--> </p>
+                </div>
+        </div>
+        {/if}
+
+        {if $related_goods}
+         <div id="related_goods" class="vlist">
+            <h2>{$lang.related_goods}</h2>
+            <ul>
+            {foreach from=$related_goods item=releated_goods_data name=related_goods}
+            <li><a title="{$releated_goods_data.goods_name|escape:html}" href="{$releated_goods_data.url}">
+                <img width="140" height="140" src="{$option.static_path}{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name|escape:html}">
+                <h3>{$releated_goods_data.short_name}</h3>
+                {if $releated_goods_data.raw_price eq 0 and $releated_goods_data.goods_number eq 0}
+                <span>Mới ra mắt</span>
+                {else}
+                <span>{if $releated_goods_data.promote_price}{$releated_goods_data.formated_promote_price} {else}{$releated_goods_data.shop_price}{/if}</span>
+                {/if}
+               </a>
+           </li>
+           {/foreach}
+           </ul>
+         </div>
+        {/if}
+         {if $option.comment_enabled}{include file='library/comments.lbi'}{/if}
+    </aside>
+    {if $goods.on_sale eq 1}
+    <aside class="tableparameter" data-sticky_parent>
+    <div class="box_cauhinh">
+    {if $goods.goods_cauhinh and $goods.goods_cauhinh neq ''}
+   
+        <h2>Thông số kỹ thuật</h2>
+        <ul class="parameter">
+           {foreach from=$goods.goods_cauhinh key=k item=v}
+	       <li><span>{$k}:</span><div>{$v}</div></li>
+           {/foreach}
+        </ul>
+        {if $properties}
+        <a class="closebtn" href="#"><i class="fa  fa-remove"></i></a>
+        <button id="detail-spec" class="viewparameterfull" type="button">Xem đầy đủ thông số kỹ thuật sản phẩm</button>
+
+             <div class="boxcauhinh fullparameter" id="properties">
+                <div class="scroll">
+                <h4>Thông số kỹ thuật {$goods.goods_name|truncate:30:"":true}</h4>
+                <div class="bd">
+                    <dl class="property_list">
+                        {foreach from=$properties item=property_group key=key}
+                        <dt>{$key|escape}</dt>
+                        {foreach from=$property_group item=property}
+                        <dd><strong>{$property.name|escape:html}</strong><span>{$property.value}</span></dd>
+                        {/foreach}
+                        {/foreach}
+                    </dl>
+                </div>
+            </div>
+            </div>
+
+        {/if}
+
+   
+     {/if}
+     </div>
+<div class="mainfixright">
+<div class="fixright" >
+        
+{include file='layout/goods/info.lbi'}
+ </div>
+</div>
+     </aside>
+     {/if}
+ </div>
+ <div class=" ">
+ 	<aside class="col_left">
+		
+		{if $properties}
+		<div class="boxcauhinh" id="properties">
+			<h4>Thông số kỹ thuật {$goods.goods_name|truncate:30:"":true}</h4>
+			<div class="bd">
+				<dl class="property_list">
+					{foreach from=$properties item=property_group key=key}
+					<dt>{$key|escape}</dt>
+					{foreach from=$property_group item=property}
+					<dd><strong>{$property.name|escape:html}</strong><span>{$property.value}</span></dd>
+					{/foreach}
+					{/foreach}
+				</dl>
+			</div>
+		</div>
+		{/if}
+        
+
+ 	</aside>
+ 
+ </div>
+

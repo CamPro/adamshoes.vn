@@ -1,0 +1,213 @@
+{include file="pageheader.htm"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+{if $warning}
+<ul style="padding:0; margin: 0; list-style-type:none; color: #CC0000;">
+  <li style="border: 1px solid #CC0000; background: #FFFFCC; padding: 10px; margin-bottom: 5px;" >{$warning}</li>
+</ul>
+{/if}
+<div class="main-div">
+	<form name="theForm" method="post" action="installment.php">
+  <table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+  	<td>
+  		 <p>Tên chương trình</p>
+  		<input type="text" name="tragop_name" size="40" />
+  	</td>
+  </tr>
+  <tr>
+    <td>
+      <p>Nhà tài chính</p>
+      <label><input name="nhataichinh" id="acs" type="radio" value="ACS" checked >ACS</label>
+      <label><input name="nhataichinh" id="hd" type="radio" value="HD">HD SaiSon</label>
+      <label><input name="nhataichinh" id="fe" type="radio" value="FE">FE Credit</label>
+      <label><input name="nhataichinh" id="hc" type="radio" value="HC">Home Credit</label>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+  		Lãi suất <input type="text" name="laisuat" size="5" value="0" /> % Trả trước:  <input type="text" name="tratruoc" size="10" value="0" />  <label><input name="is_money" type="checkbox" value="1" >Chọn nếu trả trước với số tiền cụ thể</label>
+  	</td>
+  </tr>
+  <tr>
+    <td>
+      <p>Kỳ hạn vay</p>
+      <label><input name="kyhanvay" type="radio" value="3">3 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="4">4 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="6" checked>6 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="9">9 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="12">12 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="15">15 Tháng</label>
+      <label><input name="kyhanvay" type="radio" value="18">18 Tháng</label>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Thủ tục</p>
+      <label><input name="thutuc" type="radio" value="0" checked>CMND và Hộ Khẩu</label>
+      <label><input name="thutuc" type="radio" value="1">CMND và Giấy phép lái xe</label>
+      <label><input name="thutuc" type="radio" value="2">CMND, Hộ khẩu/Giấy phép lái xe và Chứng minh thu nhập (Lãi suất thấp)</label>
+      <label><input name="thutuc" type="radio" value="3">CMND, Hộ khẩu, Thẻ SV (Sinh viên)</label>
+    </td>
+  </tr>
+  <tr>
+  	<td>
+  		 <p>Thông tin thủ tục, điều kiện</p>
+  		<textarea name="thutuc_info" rows="3" cols="80"></textarea>
+  	</td>
+  </tr>
+  <tr>
+  	<td>Thời hạn kết thúc <input name="endday" type="text" id="endday" size="12" value='{$tragop.endday}' readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="return showCalendar('endday', '%Y-%m-%d', false, false, 'selbtn1');" value="{$lang.btn_select}" class="button"/>
+  	</td>
+  </tr>
+  <tr>
+    <td id="cat_3">
+     <p id="cat_2">Danh mục sản phẩm</p>
+      <select name="cat" id="cat" onchange="getGoods()">
+      <option value="0" selected>{$lang.select_please}</option>{$cat_list}
+    </select> Hãng <select name="brand" id="brand" onchange="getGoods()">
+      <option value="0" selected>{$lang.select_please}</option>
+      {html_options options=$brand_list}
+    </select></td>
+  </tr>
+
+  <tr id="cat_4">
+    <td valign="middle" id="cat_6">
+      <table  border="0" cellspacing="1" cellpadding="3">
+      <tr>
+        <td>{$lang.src_list}</td>
+        <td align="center" valign="middle">&nbsp;</td>
+        <td>{$lang.dest_list}</td>
+      </tr>
+      <tr>
+        <td width="45%">
+          <select name="srcList" size="10" multiple id="srcList" style="width: 100%" ondblclick="addGoods()"></select>
+        </td>
+        <td align="center" valign="middle"><input name="add" type="button" class="button" id="add" value="&gt;&gt;" onclick="addGoods()" /><br />
+          <input name="del" class="button" type="button" id="del" value="&lt;&lt;" onclick="delGoods()" /></td>
+        <td width="45%">
+          <select name="destList[]" size="10" multiple id="destList" style="width: 100%" ondblclick="delGoods()"></select>
+        </td>
+      </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td><input type="submit" name="submit" value="Xác nhận" class="button" />
+      <input type="hidden" name="tragop_id" value="" />
+      <input type="hidden" name="goods_id" id="goods_id" value="" />
+      <input type="hidden" name="act" value="{$act}" />
+  </td>
+  </tr>
+  </table>
+  </form>
+</div>
+{literal}
+<script language="JavaScript">
+  var ele = document.forms['theForm'].elements;
+  /**
+   * 取得商品
+   */
+  function getGoods()
+  {
+      var catId   = ele['cat'].value;
+      var brandId = ele['brand'].value;
+      if (catId > 0 || brandId > 0)
+      {
+          Ajax.call('installment.php?is_ajax=1&act=get_goods', "cat_id="+catId+"&brand_id="+brandId, getGoodsResponse, "GET", "JSON");
+      }
+      else
+      {
+          ele['srcList'].options.length = 0;
+      }
+  }
+  function getGoodsResponse(result)
+  {
+    if (result.error == 0)
+    {
+      ele['srcList'].options.length = 0;
+      for (var i = 0; i < result.content.length; i++)
+      {
+        var opt = document.createElement('OPTION');
+        opt.value = result.content[i].goods_id;
+        opt.text = result.content[i].goods_name;
+        ele['srcList'].options.add(opt);
+      }
+    }
+  }
+  /**
+   * 添加商品
+   */
+  function addGoods()
+  {
+      var src = document.getElementById('srcList');
+      var dest = document.getElementById('destList');
+      for (var i = 0; i < src.options.length; i++)
+      {
+          if (src.options[i].selected)
+          {
+              var exist = false;
+              for (var j = 0; j < dest.options.length; j++)
+              {
+                  if (dest.options[j].value == src.options[i].value)
+                  {
+                      exist = true;
+                      break;
+                  }
+              }
+              if (!exist)
+              {
+                  var opt = document.createElement('OPTION');
+                  opt.value = src.options[i].value;
+                  opt.text = src.options[i].text;
+                  dest.options.add(opt);
+              }
+          }
+      }
+      getGoodsIDs(); // lay id tra ve cho input name goods_id
+  }
+  /**
+   * 删除商品
+   */
+  function delGoods()
+  {
+      var dest = document.getElementById('destList');
+      for (var i = dest.options.length - 1; i >= 0 ; i--)
+      {
+          if (dest.options[i].selected)
+          {
+          	  var gId = dest.options[i].value;
+          	  // khoi tao lenh xoa trong database
+          	  Ajax.call('installment.php?is_ajax=1&act=del_goods', "goods_id="+gId, callback, "GET", "JSON");
+          	  // xoa khoi xanh sach hien thi
+              dest.options[i] = null;
+
+          }
+      }
+  }
+  function callback(){}
+
+  function getGoodsIDs()
+  {
+      	var idArr = new Array();
+	    var dest = document.getElementById('destList');
+	    for (var i = 0; i < dest.options.length; i++)
+	      {
+	          idArr.push(dest.options[i].value);
+	      }
+	    if (idArr.length <= 0)
+	      {
+	          alert(please_select_goods);
+	          return false;
+	      }
+	    else
+	      {
+	          document.forms['theForm'].elements['goods_id'].value = idArr.join(',');
+	          return true;
+	      }
+  }
+
+</script>
+{/literal}
+{include file="pagefooter.htm"}

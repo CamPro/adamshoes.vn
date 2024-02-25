@@ -1,0 +1,8 @@
+{if $goods_list}
+<ul class="cate  {if $category eq 1 || $category eq 100	|| $cat_root_id eq 1}filter-cate laptop{/if}">
+    {include file='library/goods_list_item.lbi'}
+</ul>
+{include file='library/pages_ajax.lbi'}
+{else}
+<p class="empty">Hiện tại, chưa có sản phẩm nào.</p>
+{/if}

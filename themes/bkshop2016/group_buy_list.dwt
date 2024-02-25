@@ -1,0 +1,12 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	{$render.before_main}
+	<!-- TemplateBeginEditable name="Top" --><!-- TemplateEndEditable -->
+	<!-- #BeginLibraryItem "/library/group_buy_list.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="Bottom" --><!-- TemplateEndEditable -->
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

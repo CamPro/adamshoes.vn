@@ -1,0 +1,119 @@
+<div class="head-agency" style="margin-top: 30px;"><h3>Hệ thống Shop tại Miền Trung & Tây Nguyên</h3></div>
+<div class="wrap_address">
+    <div class="agency"  >
+    <h3 class="name">TP Đà Nẵng <span class="badge">03 Shop</span></h3>
+        <ul class="disc">
+            <li id="113hamnghi" onclick="initialize(16.0617829,108.2108503, '<strong>Bách Khoa IT Mart</strong><br>113-117 Hàm Nghi, TP Đà Nẵng')">
+                Địa chỉ: 113-117 Hàm Nghi, Q.Thanh Khê, TP Đà Nẵng <br/>
+                Hotline: 0905.300.500
+            </li>
+            <li id="lotledn" onclick="initialize(16.0352814,108.2290406, '<strong>Bách Khoa IT Mart</strong><br>Tầng trệt Lotte Mart, TP Đà Nẵng')">
+                Địa chỉ: Tầng trệt Lotte Mart, 6 Nại Nam, Hòa Cường Nam,TP Đà Nẵng <br/>
+                Hotline: 0945.221.881
+            </li>
+            <li id="bigcdn" onclick="initialize(16.0669702,108.2138407, '<strong>Bách Khoa IT Mart</strong><br>Tầng 3 BigC Đà Nẵng,Vĩnh Trung Plaza')">
+                Địa chỉ: Tầng 3 BigC, Vĩnh Trung Plaza,TP Đà Nẵng <br/>
+                Hotline: 0905.300.500
+            </li>
+
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Hà Tĩnh <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(18.3385018,105.8997863, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart BMC Hà Tĩnh')">
+                Địa chỉ:  Tầng 1 CoopMart, 02 Phan Đình Phùng, TP Hà Tĩnh <br/>
+                Hotline: 0935.682.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Quảng bình <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="quangbinh" onclick="initialize(17.4616094,106.6154048, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quảng bình')">
+                Địa chỉ:  Tầng 1 CoopMart, TP Đồng Hới, Quảng Bình <br/>
+                Hotline: 1900 63.64.72
+            </li>
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Quảng Trị <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(16.8218674,107.0984364, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Đông Hà')">
+                Địa chỉ: Tầng 1 CoopMart, 02 Trần Hưng Đạo, TP Đông Hà <br/>
+                Hotline: 0935.542.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Huế <span class="badge">03 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(16.466572,107.5914551, '<strong>Bách Khoa IT Mart</strong><br>03 Hùng Vương, TP Huế')">
+                Địa chỉ: 03 Hùng Vương, TP Huế <br/>
+                Hotline: 0934.749.444
+            </li>
+            <li id="hanoi" onclick="initialize(16.459775,107.5993317, '<strong>Bách Khoa IT Mart</strong><br>Tầng 3 BigC Huế, TP Huế ')">
+                Địa chỉ: Tầng 3 BigC, TP Huế <br/>
+                Hotline: 0905.704.111
+            </li>
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Quảng Nam <span class="badge">02 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(15.5727478,108.4837085, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Tam Kỳ')">
+                Địa chỉ: BK Shop - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+                Hotline: 0905.207.444
+            </li>
+            <li id="hanoi" onclick="initialize(15.5727478,108.4837085, '<strong>Bách Khoa Luxury</strong><br>Bên ngoài tiền sảnh CoopMart Tam Kỳ')">
+                Địa chỉ: BK Luxury - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+                Hotline: 0935.032.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency" >
+        <h3 class="name">Quảng Ngãi <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(15.1209369,108.8065984, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quảng Ngãi')">
+                Địa chỉ: Tầng 1 CoopMart, 242 Nguyễn Nghiêm, TP Quảng Ngãi <br/>
+                Hotline: 0935.998.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency">
+        <h3 class="name">Bình Định <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(13.767501,109.221986, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quy Nhơn')">
+                Địa chỉ: Tầng 1 CoopMart, 7 Lê Duẩn, TP Quy Nhơn<br/>
+                Hotline: 0905.073.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency">
+        <h3 class="name">Phú Yên <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(13.0886153,109.3098154, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Phú Yên')">
+                Địa chỉ: Tầng 1 CoopMart, Lương Văn Chánh, Tuy Hoà, Phú Yên<br/>
+                Hotline: 0905.609.444
+            </li>
+        </ul>
+    </div>
+    <div class="agency">
+        <h3 class="name">Gia Lai <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(13.9874397,108.008187, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Pleiku')">
+                Địa chỉ: Tầng 1 CoopMart Pleiku, Hoa Lư, TP Pleiku<br/>
+                Hotline: 0934.764.000
+            </li>
+        </ul>
+    </div>
+    <div class="agency">
+        <h3 class="name">Đắk Lắk <span class="badge">01 Shop</span></h3>
+        <ul>
+            <li id="hanoi" onclick="initialize(12.6923936,108.0617184, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Buôn Ma Thuột')">
+                Địa chỉ: Tầng 1 CoopMart, 71 Nguyễn Tất Thành, TP Buôn Ma Thuột<br/>
+                Hotline: 0934.773.444
+            </li>
+        </ul>
+    </div>
+</div>

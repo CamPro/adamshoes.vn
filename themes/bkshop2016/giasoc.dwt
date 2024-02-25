@@ -1,0 +1,70 @@
+{include file='library/html_header.lbi'}
+<div class="hbot">
+    <div class="wrapper">
+        <nav class="mininav">
+        <a class="logo-bggreen" href="./"><img src="{$option.static_path}/static/img/giasoc/bks-white.png"></a>
+        {siy:nav type='middle'}
+        </nav>
+    </div>
+</div>
+<div id="main">
+   <div class="wrapper">
+        {if $giasoc.img_link}
+        <img src="{$giasoc.img_link}" alt="{$giasoc.title|escaple:html}"> {/if}
+         {foreach from=$sort_goods_arr item=sort key=sort_name name=sorts}
+            {if $sort}
+            <ul class="product-item grid-2">
+                {foreach from=$sort item=goods name=sort}
+                    {if $goods.goods_id}
+                    <li>
+                        <a  class="pi-img" href="{$goods.url}" title="{$goods.goods_style_name|escape:html}">
+                             <img src="{$option.static_path}{$goods.goods_thumb}" alt="{$goods.goods_style_name|escape:html}">
+                        </a>
+                        <div class="pi-info">
+                            <a  href="{$goods.url}">{$goods.goods_style_name|truncate:50}</a>
+                            <p class="price">
+                            {if $goods.promote_price}{$goods.promote_price} <del class="hisprice">{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}
+                           </p>
+                           <p>Mua Online giảm còn: <span class="price">{$goods.online_price}</span></p>
+                           <a class="btt blue" href="{$goods.url}/dat-hang-gia-soc"><span>Đặt mua</span></a></a>
+                        </div>
+                        <div class="stats">{$goods.text_status}</div>
+                    </li>
+                    {/if}
+                {/foreach}
+            </ul>
+            {/if}
+        {foreachelse}
+        <p class="empty" style="min-height: 358px;">Chương trình đã kết thúc, hoặc không tồn tại</p>
+        {/foreach}
+
+        <div class="col_main" style="width:600px;">
+           <div class="giasoc_content clearfix">{$giasoc.giasoc_note}</div>
+        </div>
+        <div class="col_sub" style="width:580px;">
+                <h3 class="customer_title">{$total_customer} Khách hàng tham gia</h3>
+                <ul class="customer_list">
+                    {foreach from=$customer item=list name=kh}
+                    <li class="clearfix">
+                        <ul>
+                            <li>
+                                <label>{$list.customer_name}</label>
+                                <span class="tel">{$list.customer_mobile}</span>
+                            </li>
+                            <li>{$list.goods_name}</li>
+                            <li>{$list.add_time}</li>
+                        </ul>
+                    </li>
+
+                   {/foreach}
+                </ul>
+        </div>
+
+    <div class="wrapper">
+
+        <div class="giasoc-footer">Copyright © 2016 by bachkhoashop.com</div>
+   </div>
+
+</div>
+
+{include file='library/html_footer.lbi'}

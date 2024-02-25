@@ -1,0 +1,28 @@
+{if $hot_goods}
+    {if $cat_rec_sign neq 1}
+    <ul class="homeproduct_new">
+    {/if}
+    {foreach from=$hot_goods item=goods name=hot_goods}
+        <li>
+            <a href="{$goods.url}">
+                   {$goods.goods_thumb2col}    
+                    <h3>{$goods.name|escape:html}</h3>
+                    <strong>{if $goods.promote_price}{$goods.promote_price}<span>{$goods.shop_price}</span>{else}{$goods.shop_price}{/if}</strong>
+                    <div class="clearfix"></div>
+                    <div>{$goods.text_status}</div>
+                    <button type="button">Mua ngay</button>
+                    <label></label>
+            </a>
+            <figure class="bginfo">
+                <h3>{$goods.name|truncate:25:true}</h3>
+                <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+                <div>
+                </div>
+               {$goods.short_desc}
+            </figure>
+        </li>
+    {/foreach}
+    {if $cat_rec_sign neq 1}
+        </ul>
+    {/if}
+{/if}

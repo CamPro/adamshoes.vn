@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+<style>
+	.agency a{display: block;line-height: 18px;border: 1px solid #f1f1f1;margin-bottom: 5px;padding: 10px;cursor: pointer;width: 96%;color: #444}
+	.agency a.active, .agency a:hover{background: #fafafa;}
+	.agency h3{padding: 10px 0;font-weight: 600;}
+	.agency h3 .badge{background: #fafafa;color: #1f7bd9;border:1px solid #ddd;border-radius: 15px;padding: 3px 8px;font-size: 10px }
+	.head-agency{padding: 10px;border-left: 3px solid #55980A;margin-bottom: 10px;background: #fafafa;font-weight: 600;}
+	.wrapper10{padding: 0 10px;}
+	.msg_danger {padding: 10px; background: #f9f0f0; color: #a94442;}
+</style>
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section class="wrapper10">
+{include file='library/ur_here.lbi'}
+<div class="head-agency">Hệ Thống Siêu thị Bách Khoa IT Mart - Khu vực Miền Trung & Tây Nguyên</div>
+<p class="msg_danger">Lưu ý: Chạm vào ô thông tin để thực hiện cuộc gọi đến số Hotline</p>
+	<div class="agency"  >
+	<h3 class="name">TP Đà Nẵng <span class="badge">03 Shop</span></h3>
+			<a href="tel:0905300500">
+				Địa chỉ: 113-117 Hàm Nghi, Q.Thanh Khê, TP Đà Nẵng <br/>
+				Hotline: 0905.300.500
+			</a>
+			<a href="tel:0905300500">
+				Địa chỉ: Tầng trệt Lotte Mart, 6 Nại Nam, Hòa Cường Nam,TP Đà Nẵng <br/>
+				Hotline: 0905.547.695
+			</a>
+			<a href="tel:0905300500">
+				Địa chỉ: Tầng 3 BigC, Vĩnh Trung Plaza,TP Đà Nẵng <br/>
+				Hotline: 0905.300.500
+			</a>
+	</div>
+	<div class="agency" >
+		<h3 class="name">Hà Tĩnh <span class="badge">01 Shop</span></h3>
+			<a href="tel:0935682444">
+				Địa chỉ:  Tầng 1 CoopMart, 02 Phan Đình Phùng, TP Hà Tĩnh <br/>
+				Hotline: 0914.511.124
+			</a>
+	</div>
+    <div class="agency" >
+        <h3 class="name">Quảng Bình <span class="badge">01 Shop</span></h3>
+            <a href="tel:0935542444">
+                Địa chỉ:  Tầng 1 CoopMart, TP Đồng Hới, Quảng Bình <br/>
+                Hotline: 0935.542.444
+            </a>
+    </div>
+	<div class="agency" >
+		<h3 class="name">Quảng Trị <span class="badge">01 Shop</span></h3>
+			<a href="tel:0935542444">
+				Địa chỉ: Tầng 1 CoopMart, 02 Trần Hưng Đạo, TP Đông Hà <br/>
+				Hotline: 0935.542.444
+			</a>
+	</div>
+	<div class="agency" >
+		<h3 class="name">Huế <span class="badge">03 Shop</span></h3>
+			<a href="tel:0935682444">
+				Địa chỉ: 03 Hùng Vương, TP Huế <br/>
+				Hotline: 0914.511.124
+			</a>
+			<a href="tel:0935682444">
+				Địa chỉ: Tầng 3 BigC, TP Huế <br/>
+				Hotline: 0914.511.124
+			</a>
+	</div>
+	<div class="agency" >
+		<h3 class="name">Quảng Nam <span class="badge">02 Shop</span></h3>
+			<a href="tel:0905207444">
+				Địa chỉ: BK Shop - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+				Hotline: 0905.207.444
+			</a>
+			<a href="tel:0935032444">
+				Địa chỉ: BK Luxury - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+				Hotline: 0935.032.444
+			</a>
+	</div>
+	<div class="agency" >
+		<h3 class="name">Quảng Ngãi <span class="badge">01 Shop</span></h3>
+		<a href="tel:0935998444">
+			Địa chỉ: Tầng 1 CoopMart, 242 Nguyễn Nghiêm, TP Quảng Ngãi <br/>
+			Hotline: 0935.998.444
+		</a>
+	</div>
+	<div class="agency">
+		<h3 class="name">Bình Định <span class="badge">01 Shop</span></h3>
+		<a href="tel:0905073444">
+			Địa chỉ: Tầng 1 CoopMart, 7 Lê Duẩn, TP Quy Nhơn<br/>
+			Hotline: 0905.073.444
+		</a>
+	</div>
+	<div class="agency">
+		<h3 class="name">Phú Yên <span class="badge">01 Shop</span></h3>
+		<a href="tel:0905609444">
+			Địa chỉ: Tầng 1 CoopMart, Lương Văn Chánh, Tuy Hoà, Phú Yên<br/>
+			Hotline: 0905.609.444
+		</a>
+	</div>
+	<div class="agency">
+		<h3 class="name">Gia Lai <span class="badge">01 Shop</span></h3>
+			<a href="tel:0934764000">
+				Địa chỉ: Tầng 1 CoopMart Pleiku, Hoa Lư, TP Pleiku<br/>
+				Hotline: 0934.764.000
+			</a>
+	</div>
+	<div class="agency">
+		<h3 class="name">Đắk Lắk <span class="badge">01 Shop</span></h3>
+		<a href="tel:0934773444">
+			Địa chỉ: Tầng 1 CoopMart, 71 Nguyễn Tất Thành, TP Buôn Ma Thuột<br/>
+			Hotline: 0934.773.444
+		</a>
+	</div>
+
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+</body>
+</html>
+
+

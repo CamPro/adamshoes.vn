@@ -1,0 +1,23 @@
+ {if $gb_list}
+<ul class="product-item grid-2">
+    {foreach from=$gb_list item=group_buy name=gb_list}
+    <li>
+        <i class="iconbkit-stick st-red">- {$group_buy.salerate}</i>
+        <a  class="pi-img" href="{$group_buy.url}" title="{$group_buy.goods_name|escape:html}">
+             <img src="{$option.static_path}{$group_buy.goods_thumb}" alt="{$group_buy.goods_name|escape:html}">
+        </a>
+        <div class="pi-info">
+            <a  href="{$group_buy.url}">{$group_buy.goods_name|escape:html}</a>
+            <span class="price">{$group_buy.price_group_buy} <del class="hisprice">{$group_buy.shop_price}</del> <span class="hisprice">(Tiết kiệm: {$group_buy.savemoney})</span></span>
+            {if $group_buy.gift} <p>Khuyến mãi</p><div class="gift"> {$group_buy.gift} </div> {/if}
+            <span class="end_time_wrapper">Thời gian còn: <span class="end_time" title="{siy:date_format date=$group_buy.end_date format='Y-m-d-G-i-s'}">{siy:date_format date=$group_buy.end_date}</span></span>
+            <p><a href="{$group_buy.url}" class="button"><span>{$lang.btn_detail}</span></a></p>
+            <p class="stats">Lượt xem: {$group_buy.click_count} - Đã mua: {$group_buy.cur_amount} </p>
+        </div>
+    </li>
+    {/foreach}
+</ul>
+ {include file='library/pages.lbi'}
+{else}
+ <div class="empty">{$lang.group_goods_empty}</div>
+{/if}

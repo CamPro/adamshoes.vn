@@ -1,0 +1,76 @@
+
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<section>
+
+	<!-- TemplateBeginEditable name="主栏上方" --><!-- TemplateEndEditable -->
+	<div class="compare_wrapper">
+		<div class="hd"><h3>So sánh sản phẩm</h3><div class="extra"></div></div>
+		<div class="bd">
+			<table>
+
+				<tbody>
+					<tr>
+						<th>{$lang.goods_name}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} name">{$goods.goods_name}</td>
+						{/foreach}
+					</tr>
+					<tr>
+						<th>&nbsp;</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} center"><a href="{$goods.url}"><img src="{$option.static_path}{$goods.goods_thumb}" alt="{$goods.goods_name}"/></a></td>
+						{/foreach}
+					</tr>
+					{if $smarty.foreach.goods_list.total gt 2}
+					<tr>
+						<th>&nbsp;</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} center"><a href="compare.php?{$goods.ids}" onclick="return compareRemove({$goods.goods_id});" class="button"><span>{$lang.compare_remove}</span></a></td>
+						{/foreach}
+					</tr>
+					{/if}
+					<tr>
+						<th>{$lang.shop_price}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if} price">{$goods.shop_price}</td>
+						{/foreach}
+					</tr>
+					{if $option.show_goodsweight}
+					<tr>
+						<th>{$lang.brand}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">{$goods.brand_name}</td>
+						{/foreach}
+					</tr>
+					{/if}
+					{if $option.show_goodsweight}
+					<tr>
+						<th>{$lang.goods_weight}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">{$goods.goods_weight}</td>
+						{/foreach}
+					</tr>
+					{/if}
+					{foreach key=key from=$attribute item=val}
+					<tr class="bline">
+						<th>{$val}{$lang.colon}</th>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<td class="{if $smarty.foreach.goods_list.index %2==0}odd{else}even{/if}{if $smarty.foreach.goods_list.last} last{/if}">
+						{foreach from=$goods.properties item=property key=k}
+						{if $k eq $key}{$property.value}{/if}
+						{/foreach}
+						</td>
+						{/foreach}
+					</tr>
+					{/foreach}
+
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- TemplateBeginEditable name="主栏下方" --><!-- TemplateEndEditable -->
+</section>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

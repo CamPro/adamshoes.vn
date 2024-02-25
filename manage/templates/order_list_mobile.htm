@@ -1,0 +1,66 @@
+{if $full_page}
+{include file="pageheader_mobile.htm"}
+{insert_scripts files="../js/utils.js,listtable.js"}
+<script type="text/javascript" src="../js/calendar.php?lang={$cfg_lang}"></script>
+<link href="../js/calendar/calendar.css" rel="stylesheet" type="text/css" />
+<div class="container">
+    <form method="post" action="order.php?act=operate" name="listForm" onsubmit="return check()">
+      <div class="list-div" id="listDiv">
+{/if}
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>
+      <input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" /><a href="javascript:listTable.sort('order_sn', 'DESC'); ">{$lang.order_sn}</a>{$sort_order_sn}
+    </th>
+    <th width="150">Customer</th>
+    <th width="250">Sản phẩm</th>
+    <th><a href="javascript:listTable.sort('order_type', 'DESC'); ">Loại</a>{$sort_order_type}</th>
+    <th><a href="javascript:listTable.sort('add_time', 'DESC'); ">{$lang.order_time}</a>{$sort_order_time}</th>
+    <th>{$lang.handler}</th>
+  </tr>
+  {foreach from=$order_list item=order key=okey}
+  <tr>
+    <td valign="top" nowrap="nowrap"><input type="checkbox" name="checkboxes[]" value="{$order.order_id}" />{$order.order_code}</td>
+    <td valign="top" nowrap="nowrap"><strong>{$order.customer_name}</strong><br/>
+    {$order.customer_mobile}<br/>
+    {$order.region_name}
+    </td>
+    <td valign="top" nowrap="nowrap">
+        {foreach from=$order.order_goods item=goods}
+            {$goods.product_name|truncate:30}<br/>
+        {/foreach}
+    </td>
+    <td align="center" valign="top" nowrap="nowrap"> <span class="type_{$order.otype}">{$order.order_type}</span></td>
+    <td align="center" valign="top" nowrap="nowrap">{$order.add_time}<br/>
+    <span class="status_{$order.ostatus}">{$order.order_status}</span>
+    </td>
+    <td align="center" valign="top"  nowrap="nowrap">
+     <a href="order.php?act=info&order_id={$order.order_id}" class="btn_action btn_view">{$lang.detail}</a>
+     <a href="order.php?act=operate&order_id={$order.order_id}"class="btn_action btn_del"  onclick="return confirm('Chắc chắn muốn xóa ?')">{$lang.remove}</a>
+    </td>
+  </tr>
+  {/foreach}
+</table>
+
+<div id="page-table" > {include file="page_mobile.htm"} </div>
+{if $full_page}
+      </div>
+      <div class="form_action">
+        <input name="remove" type="submit" id="btnSubmit3" value="{$lang.remove}" class="button" />
+        <input name="merge" type="submit" id="btnSubmit4" value="{$lang.merge}" class="button" />
+        <input name="batch" type="hidden" value="1" />
+        <input name="order_id" type="hidden" value="" />
+      </div>
+    </form>
+</div>
+<script language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+
+</script>
+
+{include file="pagefooter_mobile.htm"}
+{/if}

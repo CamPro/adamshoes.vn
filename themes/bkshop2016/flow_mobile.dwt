@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{if $pname neq 'respond' and $message.back_url}<meta http-equiv="refresh" content="3;url={$message.back_url}">{/if}
+<base href="{$domain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+{if $step eq 'cart'}
+    <a href="./" class="buymore">Mua thêm sản phẩm khác</a>
+   <div class="clr"></div>
+	<form action="gio-hang" method="post">
+    {if $goods_list}
+    <ul class="listorder">
+        {foreach from=$goods_list item=goods name=goods_list}
+        <li class="justadded">
+            <div class="colimg">
+                <a href="{siy:goods_info id=$goods.goods_id type='url'}" target="_blank">
+                    <img src="{$option.static_path}{$goods.goods_thumb}" width="55" height="55"></a>
+                <a href="gio-hang?step=drop_goods&amp;id={$goods.rec_id}" class="delete"><span></span> {$lang.drop}</a>
+            </div>
+            <div class="colinfo">
+                <strong>{$goods.goods_price}</strong>
+                <a href="{siy:goods_info id=$goods.goods_id type='url'}" target="_blank">{$goods.goods_name|truncate:100}</a>
+                <div class="promotion">
+                    {if $goods.goods_attr}<span>{$goods.goods_attr}</span>{/if}
+                    {if $goods.is_shipping}<span>{$lang.carriage_free}</span>{/if}
+                </div>
+                <div class="choosenumber">
+                   Số lượng:
+                    {if $goods.goods_id gt 0 and $goods.is_gift eq 0 and $goods.parent_id eq 0}
+                    <input type="number" min="1" max="10" step="1" name="goods_number[{$goods.rec_id}]" value="{$goods.goods_number}" title="{$lang.goods_number_tip}"/>
+                    {else}
+                    {$goods.goods_number}
+                    {/if}
+                </div>
+                <div class="clr"></div>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+     <div class="area_total">
+       <div class="total"><b>Thành tiền:</b><strong>{$total.subtotal}</strong></div>
+    </div>
+    {if $total.shipping_fee > 0}
+    <div class="area_total">
+       <div class="total"><b>Phí vận chuyển:</b><strong>{$total.shipping_fee}</strong></div>
+    </div>
+    {else}
+    <div class="area_total">
+       <div class="total"><b>Phí vận chuyển:</b><strong>Miễn phí</strong></div>
+    </div>
+    {/if}
+   <div class="area_total">
+       <div class="total"><b>Tổng tiền:</b><strong>{$shopping_money}</strong></div>
+    </div>
+    {else}
+    <p class="empty">Giỏ hàng trống.</p>
+    {/if}
+  </form>
+  <form action="gio-hang" method="post" id="submitOrder">
+    <div class="customer-info">
+           <div class="choisesex">
+             <span>1. Thông tin người mua:</span>
+              <label for="male"><input name="sex" value="1" checked="" id="male" type="radio"> Anh</label>
+              <label for="female"><input name="sex" value="0" id="female" type="radio"> Chị</label>
+            </div>
+            <div class="input_form">
+                <input maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="fullname" type="text" required>
+                <input minlength="10" maxlength="11" placeholder="Số di động (Bắt buộc)" name="mobile" type="text" required>
+                <input  placeholder="Email (Không bắt buộc)" name="email" type="email">
+                <span>2. Chọn phương thức nhận hàng</span>
+                <div class="group">
+                   <label for="ship1"><input name="shipmethod" checked="" value="1" id="ship1" type="radio">  Nhận hàng tại Shop</label>
+                   <label for="ship2"><input name="shipmethod" value="2" id="ship2" type="radio">  Giao tận nơi</label>
+                </div>
+               <div class="group">
+                    <select name="province" id="selProvinces" onchange="regionChanged(this, 2, 'selCities')">
+                        <option value="0">Chọn {$name_of_region[1]}</option>
+                        {foreach from=$shop_province_list item=province}
+                        <option value="{$province.region_id}"{if $consignee.province eq $province.region_id} selected="selected"{/if}>{$province.region_name}</option>
+                        {/foreach}
+                    </select>
+                    <select name="city" id="selCities" onchange="loadShop()">
+                        <option value="0">Chọn {$name_of_region[2]}</option>
+                    </select>
+               </div>
+            </div>
+             <div class="input_form">
+                <div class="group option-shop" id="buildshop">
+                </div>
+                <input minlength="6" maxlength="150" placeholder="Địa chỉ nhận hàng (Bắt buộc)" name="address" id="address" type="text">
+                <span>3. Chọn phương thức thanh toán</span>
+                <div class="group">
+                   <label for="pay1"><input type="radio" name="paymethod" checked value="1" id="pay1">  Thanh toán tại Shop</label>
+                   <label for="pay2"><input type="radio" name="paymethod" value="2" id="pay2"> Thẻ ATM có Internet Banking</label>
+                   <label for="pay3"><input type="radio" name="paymethod" value="3" id="pay3"> Thẻ VISA, Master</label>
+                </div>
+                <div class="showerror" id="showerror"></div>
+                <textarea rows="1" placeholder="Bạn có yêu cầu khác ?" maxlength="225" name="order_note"></textarea>
+             </div>
+            <div class="clearfix">
+                <input type="submit" class="button btn-checkout" value="Đặt mua" name="submit">
+                <input type="hidden" name="step" value="finished">
+            </div>
+    </div>
+    </form>
+    <div class="clr"></div>
+   <a href="./" class="buymore">Mua thêm sản phẩm khác</a>
+
+{/if}
+{if $step eq 'finished'}
+    <div class="flow_done">
+        <div class="success_box"><h2>Đặt hàng thành công !</h2></div>
+        <p style="line-height: 22px">Cảm ơn <strong>{$customer.sex} {$customer.name}</strong> đã cho Bách Khoa Shop cơ hội được phục vụ. Nhân viên sẽ liên hệ lại với chị qua số điện thoại <strong>{$customer.mobile}</strong> để xác nhận thông tin đặt hàng.</p>
+        <div class="titlebill">Thông tin đặt hàng:</div>
+        <div class="infoorder">
+            <div>{$customer.shipmethod}: <b>{$customer.address},{$customer.city},{$customer.province}</b></div>
+            <div>Thanh toán: <b>{$customer.paymethod}</b></div>
+            <div>Thành tiền: <strong>{$total.subtotal}</strong></div>
+            {if $total.shipping_fee_origion neq 0}
+            <div>Phí vận chuyển: <strong>{$total.shipping_fee}</strong></div>
+            {/if}
+            <div>Tổng tiền: <strong>{$shopping_money}</strong></div>
+        </div>
+        <div class="titlebill">Sản phẩm đã mua:</div>
+        <ul class="listorder">
+            {foreach from=$goods_list item=goods name=goods_list}
+            <li>
+                <div class="colimg">
+                   <a href="{siy:goods_info id=$goods.goods_id type='url'}" target="_blank">
+                        <img src="{$option.static_path}{$goods.goods_thumb}" width="55" height="55">
+                    </a>
+                </div>
+                <div class="colinfo">
+                    <strong>{$goods.goods_price}</strong>
+                     <a href="{siy:goods_info id=$goods.goods_id type='url'}" target="_blank">{$goods.goods_name|trancate:100}</a>
+                    <div class="onecolor">
+                         {if $goods.goods_attr}<span>{$goods.goods_attr}</span>{/if}
+                        {if $goods.is_shipping}<span>{$lang.carriage_free}</span>{/if}
+                    </div>
+                    <div class="quan">
+                        <span>Số lượng:</span> {$goods.goods_number}
+                    </div>
+                    <div class="clr"></div>
+                </div>
+            </li>
+            {/foreach}
+        </ul>
+        <a href="./" class="buyother">Mua thêm sản phẩm khác</a>
+    </div>
+{/if}
+<div class="clr"></div>
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.vi_vn.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.mobile.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/flow.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('input[name^="goods_number"]').tipsy({trigger:'manual',gravity:'sw',fade: true});
+	$('input[name^="goods_number"]').keypress(function(){
+		$(this).tipsy('show');
+	});
+	$('input[name^="goods_number"]').focusout(function(){
+		$(this).tipsy('hide');}
+	);
+
+});
+</script>
+</body>
+</html>
+
+

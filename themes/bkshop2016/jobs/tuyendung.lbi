@@ -1,0 +1,29 @@
+<div class="container" style="margin-top:20px;">
+    <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">Đang hoạt động (4 tin)</li>
+        <li class="tab-link" data-tab="tab-2">Khối hành chính (0)</li>
+    </ul>
+
+    <div id="tab-1" class="tab-content current">
+       <ul class="jobs-list">
+            <li>
+                <a href="viec-lam/ung-tuyen#camera"><h3> 04 Nhân viên KD Camera</h3></a>
+                • Hạn nhận hồ sơ: <span class="date">30/04/2017</span> • Khu vực: <span class="location">Huế, Quảng Nam</span>
+            </li>
+            <li>
+                <a href="viec-lam/ung-tuyen#ktdien"><h3>02 NV Kỹ thuật điện nhẹ</h3></a>
+                • Hạn nhận hồ sơ: <span class="date">30/04/2017</span> • Khu vực: <span class="location">Đà Nẵng</span>
+            </li>
+
+        </ul>
+    </div>
+    <div id="tab-2" class="tab-content">
+        <ul class="jobs-list">
+             <li>
+             Chưa có tin nào.
+            </li>
+
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+<div   id="list_child_cat_acc">
+<ul class="listsubcatacc clearfix">
+<li><strong>Sửa chữa thay thế:</strong></li>
+{foreach from=$list_sub_cat key=i item=catsub}
+    {if $i<=5 && $i > 0}
+   <li> <a href="{$catsub.cat_url_seo}" title="{$catsub.cat_name}" {if $category eq $catsub.cat_id}class="active"{/if}><h4>{$catsub.cat_name}</h4></a></li>
+   {/if}
+ {/foreach}  
+     
+    <li>
+    <span>Xem tất cả <i class="fa fa-caret-down"></i></span>
+    <ul class="onecolumnlarge">
+        {foreach from=$list_sub_cat key=i item=catsub}
+        <li> <a href="{$catsub.cat_url_seo}" title="{$catsub.cat_name}" {if $category eq $catsub.cat_id}class="active"{/if}><i></i>{$catsub.cat_name}</a></li>
+       {/foreach}  
+    </ul>
+    </li>
+    
+</ul>    
+</div>

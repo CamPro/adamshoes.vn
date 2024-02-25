@@ -1,0 +1,33 @@
+<ul class="cate" id="cate-{$goods_cat.id}">
+    {foreach from=$cat_goods item=goods name=cat_goods}
+    {if $goods.id}
+    <li>
+        <a href="{$goods.url}" title="{$goods.name|escape:html}">
+            <img src="{$option.static_path}{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="170">
+            <h3>{$goods.short_name}</h3>
+            <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+            {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                <label class="tagss cmsoon">Đặt trước</label>
+            {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                <label class="tagss outstock">Tạm hết hàng</label>
+            {else}
+                {if $goods.laisuat eq 3}
+                <label class="tagss installment">Trả góp 0%</label>
+                {else}
+                    {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                    {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Hot</label>{/if}
+                {/if}
+            {/if}
+            <div class="promotion">
+               {if $goods.text_status}<span>{$goods.text_status}</span> {/if}
+            </div>
+            <figure class="bginfo">
+                <span class="name">{$goods.short_name}</span>
+                <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+                <span class="desc">{$goods.short_desc}</span>
+            </figure>
+        </a>
+    </li>
+    {/if}
+    {/foreach}
+</ul>

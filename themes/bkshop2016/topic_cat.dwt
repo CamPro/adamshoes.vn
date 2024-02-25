@@ -1,0 +1,12 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{include file='library/ur_here.lbi'}
+	{$render.before_main}
+			{foreach from=$topic item=promo name=topic}
+				<p>{$promo.title} - {$promo.start_time}</p>
+			{/foreach}
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

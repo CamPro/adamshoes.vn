@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{if $pname neq 'respond' and $message.back_url}<meta http-equiv="refresh" content="3;url={$message.back_url}">{/if}
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+{if $action eq 'login'}
+<div class="user_form">
+<h3>Đăng nhập thành viên</h3>
+<form action="thanh-vien" method="post" class="form">
+	<input type="text" name="username" required placeholder="{$lang.label_username}{$lang.colon}">
+	<input type="password" name="password" required placeholder="{$lang.label_password}{$lang.colon}">
+		{if $enabled_register_captcha}
+	<input type="text" name="captcha" maxlength="4" required><span><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha tip" title="{$lang.captcha_tip}" onClick="this.src='captcha.php?is_login=1&'+Math.random()"></span>
+		{/if}
+	<div class="formcheck">
+	<input type="checkbox" name="remember" value="1">{$lang.remember}</label>
+	<em class="forget"><a href="khoi-phuc-mat-khau">{$lang.forgot_password}</a></em>
+	</div>
+	<div class="submit_wrap">
+			<input type="submit" value="{$lang.btn_login}" class="button button_border"/>
+			<input type="hidden" name="act" value="act_login">
+			<input type="hidden" name="back_act" value="{$back_act}">
+	</div>
+	</form>
+</div>
+<p>Nếu chưa có tài khoản, đăng ký <a href="dang-ky">tại đây</a></p>
+{/if}
+
+{if $action eq 'register'}
+<div class="user_form">
+	{if $shop_reg_closed eq 1}
+	<span class="register_closed">{$lang.shop_register_closed}</span>
+	{else}
+	<h3>Đăng ký thành viên</h3>
+	<form action="thanh-vien" method="post" class="form user_form" id="user_form_reg">
+			<input type="text" name="username" autofocus required placeholder="{$lang.label_username}">
+			<input type="email" name="email" required placeholder="{$lang.email}">
+			<input type="password" name="password" required placeholder="{$lang.label_password}">
+			<input type="password" name="confirm_password" required placeholder="{$lang.label_confirm_password}">
+		{foreach from=$extend_info_list item=field}
+		{if $field.id eq 6}
+			<div class="formtext">{$lang.passwd_question}</div>
+			<select name="sel_question"{if $field.is_need} required{/if}>
+				{html_options options=$passwd_questions selected=$profile.passwd_question}
+			</select>
+			<input type="text" name="passwd_answer" value="{$profile.passwd_answer}" maxlength="20"{if $field.is_need} required{/if} placeholder="{$lang.passwd_answer}">
+		{else}
+			<input type="text" name="extend_field{$field.id}" value="{$field.content}"{if $field.is_need} required{/if} id="extend_field_{$field.id}" placeholder="{$field.reg_field_name}">
+		{/if}
+		{/foreach}
+		{if $enabled_captcha}
+			<input type="text" name="captcha" maxlength="4" required placehoder="Mã">
+			<span><img src="captcha.php?{$rand}" alt="{$lang.comment_captcha}" class="captcha tip" title="{$lang.captcha_tip}" onClick="this.src='captcha.php?'+Math.random()"></span>
+		{/if}
+		<div class="formcheck">
+			<input type="checkbox" name="agreement" value="1" checked="checked" required><em>{$lang.agreement}</em>
+		</div>
+		<div class="submit_wrap">
+			<input type="submit" value="{$lang.btn_register}" class="button">
+			<input type="hidden" name="act" value="act_register">
+			<input type="hidden" name="back_act" value="{$back_act}">
+		</div>
+	</form>	
+	<p>Nếu bạn có tài khoản rồi, click <a href="login">ở đây</a> để đăng nhập </p>
+	{/if}
+</div>
+{/if}<!-- end register -->
+{if $action eq 'get_password'}
+<div class="user_form">
+	<form action="thanh-vien" method="post" class="form">
+		<input type="text" name="user_name" autofocus required placeholder="{$lang.label_username}">
+		<input type="email" name="email" required placeholder="{$lang.email}">
+		<div class="submit_wrap">
+			<input type="submit" value="{$lang.submit}" class="button">
+			<input type="hidden" name="act" value="send_pwd_email">
+		</div>
+	</form>
+	<h3>{$lang.get_password_tip}</h3>
+	<p>{$lang.get_password_tip_text}</p>
+	<p><a href="cau-hoi-goi-y-mat-khau" class="button button_border"><span>{$lang.get_password_by_question}</span></a></p>
+</div>
+{/if}<!-- get pass -->
+{if $action eq 'qpassword_name'}
+<div class="user_form">
+	<h3>{$lang.get_question_username}</h3>
+	<form action="thanh-vien" method="post" class="form">
+		<input type="text" name="user_name" autofocus required placeholder="{$lang.label_username}">
+		<div class="submit_wrap">
+			<input type="submit" value="{$lang.submit}" class="button">
+			<input type="hidden" name="act" value="get_passwd_question">
+		</div>
+	</form>
+	<h3>{$lang.get_password_tip}</h3>
+	<p>{$lang.get_password_tip_text2}</p>
+	<p><a href="khoi-phuc-mat-khau" class="button button_border"><span>{$lang.get_password_by_mail}</span></a></p>
+</div>
+{/if}<!--qpassword_name -->
+{if $action eq 'get_passwd_question'}
+<div class="user_form">
+	<h3>{$lang.input_answer}</h3>
+	<form action="thanh-vien" method="post" class="user_form">
+	<p class="label">{$lang.passwd_question}{$lang.colon}
+		<em>{$passwd_question}</em>
+	</p>
+	<input type="text" name="passwd_answer" autofocus required placeholder="{$lang.passwd_answer}">
+	{if $enabled_captcha}
+		<input type="text" name="captcha" maxlength="4" required placeholder="Mã"><span><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha tip" title="{$lang.captcha_tip}" onClick="this.src='captcha.php?is_login=1&'+Math.random()"></span>
+	{/if}
+	<div class="submit_wrap">
+		<input type="submit" value="{$lang.submit}" class="button">
+		<input type="hidden" name="act" value="check_answer">
+	</div>
+</form>
+<h3>{$lang.get_password_tip}</h3>
+	<p>{$lang.get_password_tip_text2}</p>
+	<p><a href="khoi-phuc-mat-khau" class="button button_border"><span>{$lang.get_password_by_mail}</span></a></p>
+</div>
+{/if}
+{if $action eq 'reset_password'}
+<div class="user_form">
+<h3>{$lang.reset_password}</h3>
+	<form action="thanh-vien" method="post" class="form user_form">
+	<input type="password" name="new_password" autofocus required placerholder="{$lang.new_password}">
+	<input type="password" name="confirm_password" required placeholder="{$lang.confirm_password}">
+	<div class="submit_wrap">
+		<input type="submit" value="{$lang.confirm_submit}" class="button">
+		<input type="hidden" name="act" value="act_edit_password">
+		<input type="hidden" name="uid" value="{$uid}">
+		<input type="hidden" name="code" value="{$code}">
+	</div>
+</form>
+<h3>{$lang.get_password_tip}</h3>
+<p>{$lang.get_password_tip_text3}</p>
+</div>
+{/if}
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+  

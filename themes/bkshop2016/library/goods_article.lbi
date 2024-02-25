@@ -1,0 +1,19 @@
+{if $goods_article_list}
+<a name="News"></a>
+<div class="new_articles goods_news">
+	<div class="hd"><h3>{$lang.article_releate}</h3><div class="extra"></div></div>
+	<div class="bd">
+		<ul class="infoList">
+			{foreach from=$goods_article_list item=article name=goods_article_list}
+			<li>
+			<a href="{$article.url}" title="{$article.title|escape:html}">
+			<img src="{$article.article_thumb}" alt="{$article.title|escape:html}" width="100" height="60">
+			<h3>{$article.short_title|escape:html}</h3>
+			<span class="date">{$article.add_time}</span>
+			</a>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}

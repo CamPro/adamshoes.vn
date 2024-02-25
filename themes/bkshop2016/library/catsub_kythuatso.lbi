@@ -1,0 +1,8 @@
+<div   class="list_child_cat_acc">
+    <a href="may-anh-dslr.html" {if $category eq 64}class="active"{/if}><h4>Máy ảnh <br/>DSLR</h4></a>
+    <a href="may-anh-du-lich.html" {if $category eq 65}class="active"{/if}><h4>Máy ảnh <br/>du lịch</h4></a>
+    <a href="may-nghe-nhac-mp3.html" {if $category eq 53}class="active"{/if}><h4>Máy nghe nhạc <br/>MP3</h4></a>
+    <a href="may-nghi-am.html" {if $category eq 54}class="active"{/if}><h4>Máy ghi âm</h4></a>
+    <a href="android-tv-box.html" {if $category eq 56}class="active"{/if}><h4>Android TV<br/>Box</h4></a>
+    <a href="camera-hanh-trinh.html" {if $category eq 97}class="active"{/if}><h4>Camera<br/> hành trình</h4></a>
+</div>

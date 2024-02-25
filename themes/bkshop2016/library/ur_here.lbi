@@ -1,0 +1,4 @@
+<div class="breadandfilter">
+    <ul class="breadcrumbs">{$ur_here}</ul>
+</div>
+<div class="clearfix"></div>

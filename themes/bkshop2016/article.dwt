@@ -1,0 +1,74 @@
+{include file='library/html_header.lbi'}
+<!-- begin article detail -->
+{include file='library/page_header.lbi'}
+<section class="clearfix">
+    {include file='library/article_category_tree.lbi'}
+ <div class="col_main">   
+    <article class="news-detail">
+        <!-- TemplateBeginEditable name="Top" -->
+<!-- TemplateEndEditable -->
+    {$render.before_main}
+         <h1 class="titledetail">{$article.title|escape:html}</h1>
+         <div class="userdetail"><span class="first">{$article.add_time}</span> <span>{$article.viewed} lượt xem</span>
+ <span class="fb-like" data-href="{$option.static_path}{$request_uri}" data-send="true" data-layout="button_count" data-width="90" data-show-faces="false"></span>
+         </div>
+        {if $article.content}
+            <div class="article_content">
+            {$article.content}
+            {if $goods_rela}
+               {foreach from=$goods_rela item=goods name=goods_list}
+                <div class="infoprod">
+                    <div class="image">
+                        <a href="{$goods.url}"><img src="{$option.static_path}{$goods.goods_thumb}"></a>
+                    </div>
+                    <div class="infor">
+                    <a href="{$goods.url}"><h3>{$goods.goods_name}</h3></a>
+                    <strong>{if $goods.formated_promote_price}{$goods.formated_promote_price} <del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</strong>
+                    {if $goods.gift}
+                    <div class="goods-gift">
+                        {$goods.gift}
+                    </div>{/if}
+                    {if $goods.note}<div class="km">{$goods.note}</div>{/if}
+                    <a href="{$goods.url}" class="viewdetail">{if $goods.stock eq 0 and $goods.is_preoder eq 1}Đặt trước{else}Xem chi tiết{/if}</a>
+                    </div>
+                </div>
+               {/foreach}
+            {/if}
+            {if $next_article}
+             Xem thêm: <a href="{$next_article.url}" >{$next_article.title}</a>
+            {/if}
+
+            </div>
+            <div class="likewied">
+                <span class="fb-like" data-href="{$option.static_path}{$request_uri}" data-send="true" data-layout="button_count" data-width="90" data-show-faces="false"></span>
+            </div>
+        {else}
+        <p class="empty">{$lang.content_empty}</p>
+        {/if}
+        <!-- TemplateBeginEditable name="Bottom" --><!-- TemplateEndEditable -->
+        {if $article_rela}
+        <h5 class="titlerelate">Bài viết liên quan</h5>
+        <ul class="newsrelate">
+            {foreach from=$article_rela key=i item=articles name=article_list}
+            <li class="item_{$i}">
+                <a href="{$articles.url}" class="linkimg" title="{$articles.title}">
+                    <div class="tempvideo">
+                        <img alt="{$articles.title}" src="{$option.static_path}{$articles.article_thumb}" width="100">
+                    </div>
+                    <h3>{$articles.title}</h3>
+                    <span class="timepost">{$articles.add_time}</span>
+                </a>
+            </li>
+            {/foreach}
+        </ul>
+        {/if}
+         
+    {$render.after_main}
+    </article>
+    </div>
+   {include file='library/article_right.lbi'}
+
+</section>
+
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

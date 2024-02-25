@@ -1,0 +1,37 @@
+<div class="group_goods group3 acchome">
+	<div class="group_head">
+
+		<h4>{$group.group_name}</h4>
+		<a href="{$group.link}" class="viewmorelinks">(Xem tất cả)</a>
+        <div class="more_links">{$group.links}</div>
+	</div>
+	<div class="group_list ">
+       
+		<ul class="cate">
+		{foreach from=$list_goods item=goods}
+		<li class="igoods">
+
+				<a href="{$goods.url}" title="{$goods.goods_name}"> 
+            {if $goods.is_special eq 1}
+                {$goods.goods_thumb2col}
+            {else}
+            <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+            {/if}
+            <h3>{$goods.goods_name}</h3>
+            <div class="price_box">
+            <strong>{if $goods.promote_price}{$goods.promote_price}<del>{$goods.shop_price}</del>{else}{$goods.shop_price}{/if}</strong>
+
+            </div>
+
+            
+            <div class="promotion">
+               {if $goods.text_status}<span>{$goods.text_status}</span> {/if}
+            </div>
+             
+        	 </a>
+
+		</li>
+		{/foreach}
+		</ul>
+	</div>
+</div>

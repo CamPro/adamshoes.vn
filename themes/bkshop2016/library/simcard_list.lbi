@@ -1,0 +1,42 @@
+<div class="has_tab_box">
+<div class="tab_wrapper">
+	<p class="tabs">
+		<em class="label">{$lang.order_by}{$lang.colon}</em>
+		{if $pager.sort eq 'goods_id'}
+		<a href="{if $pager.order eq 'DESC'}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='goods_id' order='ASC'}{else}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='goods_id' order='DESC'}{/if}#list" class="current"><span>{$lang.order_by_time}{if $pager.order eq 'DESC'}<em class="arrow_up">&uarr;</em>{else}<em class="arrow_down">&darr;</em>{/if}</span></a>
+		{else}
+		<a href="{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='goods_id' order='DESC'}#list"><span>{$lang.order_by_time}</span></a>
+		{/if}
+		{if $pager.sort eq 'last_update'}
+		<a href="{if $pager.order eq 'DESC'}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='last_update' order='ASC'}{else}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='last_update' order='DESC'}{/if}#list" class="current"><span>{$lang.order_by_update}{if $pager.order eq 'DESC'}<em class="arrow_up">&uarr;</em>{else}<em class="arrow_down">&darr;</em>{/if}</span></a>
+		{else}
+		<a href="{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='last_update' order='DESC'}#list"><span>{$lang.order_by_update}</span></a>
+		{/if}
+		{if $pager.sort eq 'shop_price'}
+		<a href="{if $pager.order eq 'DESC'}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='ASC'}{else}{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='DESC'}{/if}#list" class="current"><span>{$lang.order_by_price}{if $pager.order eq 'ASC'}<em class="arrow_up">&uarr;</em>{else}<em class="arrow_down">&darr;</em>{/if}</span></a>
+		{else}
+		<a href="{siy:build_uri app='category' cid=$category bid=$brand_id price_min=$price_min price_max=$price_max filter_attr=$filter_attr page=$pager.page sort='shop_price' order='DESC'}#list"><span>{$lang.order_by_price}</span></a>
+		{/if}
+	</p>
+	<div class="extra">
+		{include file='library/pages.lbi'}
+	</div>
+</div>
+	{if $goods_list}
+	<ul class="listsimcard">
+	    {foreach from=$goods_list item=goods name=goods_list}
+	    {if $goods.goods_id}
+		<li>
+			<h3>{$goods.goods_style_name}</h3>
+			<h4>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</h4>
+		</li>
+		
+		
+		{/if}
+		{/foreach}
+	</ul>
+	{include file='library/pages.lbi'}
+	{else}
+	<p class="empty">{$lang.goods_empty}</p>
+	{/if}
+</div>

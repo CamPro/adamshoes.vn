@@ -1,0 +1,29 @@
+<div class="bgheading clearfix">
+<div class="wrap-content">
+    <ul class="stickybar">
+        <li id="liSpec"><a><i class="iconbkit-spec"></i>Thông số</a></li>
+        <li id="liTip"><a><i class="iconbkit-tip"></i>Nổi bật</a></li>
+        <li id="liAcc"><a><i class="iconbkit-accs"></i>Phụ kiện</a></li>
+        <li id="liCpr"><a><i class="iconbkit-desc"></i>Đánh giá</a></li>
+        <li id="liCmt"><a><i class="iconbkit-comment2"></i>Bình luận<label>{siy:comment_count id=$id type=$type}</label></a></li>
+    </ul>
+    <div class="boxright boxtable">
+        <aside class="picture ">
+        <img src="{$option.static_path}{$gb_goods.goods_img}" id="gthumb" data-thumb="{$option.static_path}{$gb_goods.goods_thumb}" alt="{$gb_goods.goods_name|escaple:html}">
+        </aside>
+        <aside class="price_sale">
+            <h1>{$gb_goods.goods_name}</h1>
+             {if $group_buy.status eq 1}
+            <span class="pricesell">{$group_buy.formated_cur_price}</span>
+            {/if}
+            <p class="no">Đã mua: {$group_buy.valid_goods}</p>
+            {if $group_buy.status eq 1}
+            <div class="end_time_wrapper">
+                <strong class="label">{$lang.end_time}{$lang.colon}</strong>
+                <span class="end_time" title="{siy:date_format date=$group_buy.gmt_end_date format='Y-m-d-G-i-s'}">{siy:date_format date=$group_buy.gmt_end_date}</span>
+            </div>
+            {/if}
+        </aside>
+    </div>
+</div>
+</div>

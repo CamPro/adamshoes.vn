@@ -1,0 +1,284 @@
+
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+
+<section>
+	{*	include file='library/article_category_tree.lbi'	*}
+	{include file='library/ur_here.lbi'}
+		<!-- TemplateBeginEditable name="Main-Top" --><!-- TemplateEndEditable -->
+		<div id="agency_maps">
+	<aside class="col_main">
+		<div id="map-canvas"></div>
+	</aside>
+	<aside class="col_sub">
+				<div class="head-agency">Tìm điểm bán gần nhất
+					<select onchange="showListMart(this)" name="province_agency">
+					<option>Chọn tỉnh/ thành phố</option>
+					</select>
+				</div>
+				<div class="wrap_address">
+					<div class="agency"  >
+					<h3 class="name">TP Đà Nẵng <span class="badge">03 Shop</span></h3>
+						<ul class="disc">
+							<li id="113hamnghi" onclick="initialize(16.0617829,108.2108503, '<strong>Bách Khoa IT Mart</strong><br>113-117 Hàm Nghi, TP Đà Nẵng')">
+								Địa chỉ: 113-117 Hàm Nghi, Q.Thanh Khê, TP Đà Nẵng <br/>
+								Hotline: 0905.300.500
+							</li>
+							<li id="lotledn" onclick="initialize(16.0352814,108.2290406, '<strong>Bách Khoa IT Mart</strong><br>Tầng trệt Lotte Mart, TP Đà Nẵng')">
+								Địa chỉ: Tầng trệt Lotte Mart, 6 Nại Nam, Hòa Cường Nam,TP Đà Nẵng <br/>
+								Hotline: 0905.547.695
+							</li>
+							<li id="bigcdn" onclick="initialize(16.0669702,108.2138407, '<strong>Bách Khoa IT Mart</strong><br>Tầng 3 BigC Đà Nẵng,Vĩnh Trung Plaza')">
+								Địa chỉ: Tầng 3 BigC, Vĩnh Trung Plaza,TP Đà Nẵng <br/>
+								Hotline: 0905.300.500
+							</li>
+
+						</ul>
+					</div>
+					<div class="agency" >
+						<h3 class="name">Hà Tĩnh <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(18.3385018,105.8997863, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart BMC Hà Tĩnh')">
+								Địa chỉ:  Tầng 1 CoopMart, 02 Phan Đình Phùng, TP Hà Tĩnh <br/>
+								Hotline: 0914.511.124
+							</li>
+						</ul>
+					</div>
+                    <div class="agency" >
+                        <h3 class="name">Quảng bình <span class="badge">01 Shop</span></h3>
+                        <ul>
+                            <li id="quangbinh" onclick="initialize(17.4616094,106.6154048, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quảng bình')">
+                                Địa chỉ:  Tầng 1 CoopMart, TP Đồng Hới, Quảng Bình <br/>
+                                Hotline: 0935.542.444
+                            </li>
+                        </ul>
+                    </div>
+					<div class="agency" >
+						<h3 class="name">Quảng Trị <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(16.8218674,107.0984364, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Đông Hà')">
+								Địa chỉ: Tầng 1 CoopMart, 02 Trần Hưng Đạo, TP Đông Hà <br/>
+								Hotline: 0935.542.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency" >
+						<h3 class="name">Huế <span class="badge">03 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(16.466572,107.5914551, '<strong>Bách Khoa IT Mart</strong><br>03 Hùng Vương, TP Huế')">
+								Địa chỉ: 03 Hùng Vương, TP Huế <br/>
+								Hotline: 0935.682.444
+							</li>
+							<li id="hanoi" onclick="initialize(16.459775,107.5993317, '<strong>Bách Khoa IT Mart</strong><br>Tầng 3 BigC Huế, TP Huế ')">
+								Địa chỉ: Tầng 3 BigC, TP Huế <br/>
+								Hotline: 0935.682.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency" >
+						<h3 class="name">Quảng Nam <span class="badge">02 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(15.5727478,108.4837085, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Tam Kỳ')">
+								Địa chỉ: BK Shop - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+								Hotline: 0905.207.444
+							</li>
+							<li id="hanoi" onclick="initialize(15.5727478,108.4837085, '<strong>Bách Khoa Luxury</strong><br>Bên ngoài tiền sảnh CoopMart Tam Kỳ')">
+								Địa chỉ: BK Luxury - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ<br/>
+								Hotline: 0935.032.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency" >
+						<h3 class="name">Quảng Ngãi <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(15.1209369,108.8065984, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quảng Ngãi')">
+								Địa chỉ: Tầng 1 CoopMart, 242 Nguyễn Nghiêm, TP Quảng Ngãi <br/>
+								Hotline: 0935.998.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency">
+						<h3 class="name">Bình Định <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(13.767501,109.221986, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Quy Nhơn')">
+								Địa chỉ: Tầng 1 CoopMart, 7 Lê Duẩn, TP Quy Nhơn<br/>
+								Hotline: 0905.073.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency">
+						<h3 class="name">Phú Yên <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(13.0886153,109.3098154, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Phú Yên')">
+								Địa chỉ: Tầng 1 CoopMart, Lương Văn Chánh, Tuy Hoà, Phú Yên<br/>
+								Hotline: 0905.609.444
+							</li>
+						</ul>
+					</div>
+					<div class="agency">
+						<h3 class="name">Gia Lai <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(13.9874397,108.008187, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Pleiku')">
+								Địa chỉ: Tầng 1 CoopMart Pleiku, Hoa Lư, TP Pleiku<br/>
+								Hotline: 0934.764.000
+							</li>
+						</ul>
+					</div>
+					<div class="agency">
+						<h3 class="name">Đắk Lắk <span class="badge">01 Shop</span></h3>
+						<ul>
+							<li id="hanoi" onclick="initialize(12.6923936,108.0617184, '<strong>Bách Khoa IT Mart</strong><br>Tầng 1 CoopMart Buôn Ma Thuột')">
+								Địa chỉ: Tầng 1 CoopMart, 71 Nguyễn Tất Thành, TP Buôn Ma Thuột<br/>
+								Hotline: 0934.773.444
+							</li>
+						</ul>
+					</div>
+
+
+				</div>
+
+	</aside><div class="clear"></div>
+	</div>
+	<!-- TemplateBeginEditable name="Main-Bottom" --><!-- TemplateEndEditable -->
+</section>
+{include file='library/page_footer.lbi'}
+<script type="text/javascript" src="{$option.static_path}static/js/jquery.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu9VQ3mrmUyf7AHXworIYiPK2ED2y7q0o&v=3.exp&language=en"></script>
+
+<script>
+// 16.0667382, 108.2201546
+var  list_agent_province = [];
+
+	list_agent_province["DN"]="TP Đà Nẵng";
+	list_agent_province["HT"]="Hà Tĩnh";
+	list_agent_province["QB"]="Quảng Bình";
+	list_agent_province["QT"]="Quảng Trị";
+	list_agent_province["H"]="Huế";
+	list_agent_province["QN"]="Quảng Nam";
+	list_agent_province["QNG"]="Quảng Ngãi";
+	list_agent_province["BD"]="Bình Định";
+	list_agent_province["PY"]="Phú Yên";
+	list_agent_province["GL"]="Gia Lai";
+	list_agent_province["DLK"]="Đắk Lắk";
+
+
+
+var list_agent = {
+	"DN":
+	[
+			{"address":"113-117 Hàm Nghi, Q.Thanh Khê, TP Đà Nẵng","telephone":"0905.300.500","location":"16.0617829,108.2108503"},
+			{"address":"Tầng trệt Lotte Mart, 6 Nại Nam, Hòa Cường Nam,TP Đà Nẵng","telephone":"0905.547.695","location":"16.0352814,108.2290406"},
+			{"address":"Tầng 3 BigC, Vĩnh Trung Plaza,TP Đà Nẵng","telephone":"0905.300.500","location":"16.0669702,108.2138407"}
+	],
+	"HT":[
+			{"address":"Tầng 1 CoopMart, 02 Phan Đình Phùng, TP Hà Tĩnh","telephone":"0914.511.124","location":"18.340091,105.898252"}
+	],
+	"QB":[
+				{"address":"Tầng 1 CoopMart, TP Đồng Hới, Quảng Bình","telephone":"0935.542.444","location":"17.4616094,106.6154048"}
+	],
+	"QT":[
+			{"address":"Tầng 1 CoopMart, 02 Trần Hưng Đạo, TP Đông Hà","telephone":"0935.542.444","location":"16.8218674,107.0984364"}
+	],
+	"H":[
+				{"address":"03 Hùng Vương, TP Huế","telephone":"0935.682.444","location":"16.466572,107.5914551"},
+				{"address":"Tầng 3 BigC, TP Huế","telephone":"0935.682.444","location":"16.459775,107.5993317"}
+	],
+	"QN":[
+
+			{"address":"BK Luxury - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ","telephone":"0935.032.444","location":"15.5727478,108.4837085"},
+            {"address":"BK Shop - Tầng 1 CoopMart Tam Kỳ, 07 Phan Chu Trinh, TP Tam kỳ","telephone":"0935.032.444","location":"15.5727478,108.4837085"}
+
+	],
+	"QNG":[
+
+			{"address":"Tầng 1 CoopMart, 242 Nguyễn Nghiêm, TP Quảng Ngãi","telephone":"0935.998.444","location":"15.1209369,108.8065984"}
+
+	],
+	"BD":[
+
+			{"address":"Tầng 1 CoopMart, 7 Lê Duẩn, TP Quy Nhơn","telephone":"0905.073.444","location":"13.767501,109.221986"}
+
+	],
+	"PY":[
+
+			{"address":"Tầng 1 CoopMart, Lương Văn Chánh, Tuy Hoà, Phú Yên","telephone":"0905.609.444","location":"13.0886153,109.3098154"}
+
+	],
+	"GL":[
+
+			{"address":"Tầng 1 CoopMart Pleiku, Hoa Lư, TP Pleiku","telephone":"0934.764.000","location":"13.9874397,108.008187"}
+
+	],
+	"DLK":[
+
+				{"address":"Tầng 1 CoopMart, 71 Nguyễn Tất Thành, TP Buôn Ma Thuột","telephone":"0934.773.444","location":"12.6923936,108.0617184"}
+
+
+	]
+
+
+};
+
+$html="<option>Chọn tỉnh/ thành phố</option>";
+ for(x in list_agent_province)
+ {
+   $html+="<option value='"+x+"'>"+list_agent_province[x]+"</option>";
+ }
+
+ $("select[name='province_agency']").html($html);
+ $html="";
+for (x in list_agent)
+{
+	$html+=showMapProvince(x);
+}
+$(".wrap_address").html($html);
+  function initialize(tx, ty, agency) {
+        var myLatlng = new google.maps.LatLng(tx, ty);
+        var mapOptions = {
+          zoom: 16,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var text;
+
+        text = agency;
+        var infowindow = new google.maps.InfoWindow(
+	        	{content: text,
+	        	 size: new google.maps.Size(70,50),
+	        	 position: myLatlng
+	        	});
+        infowindow.open(map);
+
+        var marker = new google.maps.Marker({
+        	position: myLatlng,
+        	map: map,
+        	title: "{$shop_name}"
+        	});
+        	return false;
+  }//end function
+  function showListMart(e)
+  {
+  	$(".wrap_address").html(showMapProvince($(e).val())	);;
+  }
+  function showMapProvince(x)
+  {
+  		$html='';
+  		$html+="<div class='agency'>";
+		$html+="<h3 class='name'>"+list_agent_province[x]+"<span class='badge'>"+list_agent[x].length+" shop</span></h3>";
+		$html+='<ul class="disc">';
+			for(i in list_agent[x])
+			{
+				var $address=list_agent[x][i]['address'];
+				var $address_str = "<strong>Bách Khoa IT Mart</strong><br/>"+$address+"<br/> Hotline: "+list_agent[x][i]['telephone'];
+;				$html+="<li><a onclick=\"return initialize("+list_agent[x][i]['location']+",'"+$address_str+"')\" href='#'>";
+					$html+="Địa chỉ:"+list_agent[x][i]['address']+"<br/> Hotline:"+list_agent[x][i]['telephone'];
+				$html+="</a></li>";
+			}
+		$html+='</ul>';
+	$html+='</div>';
+	return $html;
+  }
+
+</script>
+{$stats_code}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>{$cat_name} | bachkhoashop.com</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/owl.carousel.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+{if $isacc}
+<style type="text/css">
+    #page_category .navhome{display: none}
+</style>
+{/if}
+</head>
+<body id="page_{$pname}">
+ {include file='library/mobile_page_header.lbi'}
+ <section>
+{if $iskmtragop}
+   <div class="cat-tragop">TIN TỨC:
+<a href="thong-tin/tim-hieu-ve-mua-tra-gop-22.html">• Tìm hiểu về Trả Góp</a>
+<a href="tin-tuc/tra-truoc-0-dong-qua-tang-den-300-000d-cung-hd-saison-29.html">• Trả trước 0 đồng, quà tặng đến 300.000đ cùng HD SAISON</a>
+</div>
+  {/if}
+
+  {if $isnetwork}
+    {*  include file='library/catsub_network.lbi' *}
+  {/if}
+  {if $ispcmvp}
+    {*  include file='library/catsub_pcmvp.lbi'  *}
+  {/if}
+  {if $isdoitra}
+    {*  include file='library/catsub_maydoitra.lbi' *}
+  {/if}
+
+  {if $isacc}
+    <div class="cat-header baracc" id="activeacc"><i class="iconmobile-menuacc"></i> Menu Danh mục phụ kiện</div>
+    <div class="navhome navacc" id="showacc">
+        <a href="usb.html"><h3>USB</h3></a>
+        <a href="the-nho.html"><h3>Thẻ nhớ</h3></a>
+        <a href="pin-sac-du-phong.html"><h3>Pin dự phòng</h3> </a>
+        <a href="chuot-may-tinh.html"><h3>Chuột</h3> </a>
+        <a href="tai-nghe.html"><h3>Tai nghe</h3> </a>
+        <a href="ban-phim.html"><h3>Bàn phím</h3> </a>
+        <a href="loa-bluetooth.html"><h3>Loa Bluetooth</h3> </a>
+        <a href="loa-nghe-nhac.html"><h3>Loa máy tính</h3> </a>
+        <a href="o-cung.html"><h3>Ổ cứng</h3> </a>
+        <a href="do-choi-doc-la.html"><h3>Độc lạ</h3> </a>
+        <a href="thiet-bi-mang.html"><h3>T.bị mạng</h3> </a>
+        <a href="ky-thuat-so.html"><h3>Kỹ thuật số</h3> </a>
+    </div>
+    {/if}
+<ul class="filter">
+ 
+<li class="full">
+
+<h1 class="heading_cat">{$root_cat_name}</h1>
+<div id="filter_brand">
+{assign var=is_active value=0}
+{foreach from=$list_sub_cat key=i item=catsub}
+  {if $catsub.selected eq 1}  {assign var=is_active value=1} {$catsub.cat_name} {/if}
+{/foreach}
+{if $is_active eq 0}Tất cả danh mục{/if}<i class="fa fa-caret-down"></i></div>
+<div class="manufacture">
+    <div>
+    
+           {foreach from=$list_sub_cat key=i item=catsub}
+                    <a href="{$catsub.cat_url_seo}" class="{if $i eq 0}all{/if} {if $catsub.selected eq 1} current {/if}" title="{$catsub.cat_name}">
+                    <i></i>{$catsub.cat_name}</a>
+                {/foreach}
+    
+    </div>
+
+ </div>
+ 
+</li>
+ 
+ 
+</ul>
+<div class="clr"></div>
+
+{if $category eq 1  || $cat_root_id eq 1}
+    <!-- TemplateBeginEditable name="QCHeader Laptop" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+  {/if}<!-- Banner danh muc dien thoai -->
+  {if $category eq 2  || $cat_root_id eq 2}
+    <!-- TemplateBeginEditable name="QCHeader Mobile" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+     {/if}
+  {if $category eq 3 || $cat_root_id eq 3}
+    <!-- TemplateBeginEditable name="QCHeader Tablet" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+  {/if}
+{if $isacc }
+    {* liet ke menu phu kien *}
+      {if $category eq 5}
+          
+          {if $best_goods}
+        <h2 class="heading_cat">Phụ kiện nổi bật</h2>
+        <ul class="cate">
+            {foreach from=$best_goods item=goods name=best_goods}
+                <li class="one itemacc">
+            
+            <a href="{$goods.url}" title="{$goods.name}">
+
+             <aside class="left">
+            <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.thumb}" width="125" height="125">
+            </aside>
+             <aside class="right">
+            <h3>{$goods.name}</h3>
+            <div class="price-box">
+                {if $goods.promote_price}
+                <strong class="price">{$goods.promote_price}</strong>
+                {else}
+                  <strong class="price">{$goods.shop_price}</strong>
+                {/if}
+            </div>
+            
+            </aside>  
+             </a>
+        </li>
+            {/foreach}
+        </ul>
+        {/if}
+
+
+    {else}
+      {if $goods_list}
+            <div class="fb-acc">
+                <h2 class="heading_cat">Tìm thấy {$total_full} {$cat_name}</h2>
+                {* include file='library/cat_filter_phukien.lbi'  *}
+            </div>
+        <ul class="cate">
+           {foreach from=$goods_list item=goods name=goods_list}
+                {include file='library/goods_item_mobile.lbi'}
+            {/foreach}
+        </ul>
+      {include file='library/pages_ajax.lbi'}
+      {/if}
+    {/if}<!--if else cat 5 -->
+
+
+{elseif $isdoitra}
+     {if $category eq 9}
+            {include file='library/goods_maydoitra2_mobile.lbi'}
+        {else}  {* liet ke menu may doi tra *}
+        <h2 class="heading_cat">Tìm thấy {$total_full} {$cat.cat_name}</h2>
+         <ul class="cate">
+            {foreach from=$goods_list item=goods name=goods_list}
+              {include file='library/goods_item_mobile.lbi'}
+        {/foreach}
+        </ul>
+   <div class="clearfix"></div>
+   {include file='library/pages_ajax_mobile.lbi'}
+        {/if}
+      {else}  
+  <!-- #end custom ad -->
+ 	{if $goods_list}
+        <ul class="cate">
+            {foreach from=$goods_list item=goods name=goods_list}
+              {include file='library/goods_item_mobile.lbi'}
+        {/foreach}
+        </ul>
+   <div class="clearfix"></div>
+   {include file='library/pages_ajax_mobile.lbi'}
+   {else}
+	<p class="empty">{$lang.goods_empty}</p>
+    {/if}
+{/if}    
+    {if $isacc}
+   <!-- <div class="cat-header">Danh mục phụ kiện</div>
+    <div class="navhome navacc">
+        <a href="usb.html"><h3>USB</h3></a>
+        <a href="the-nho.html"><h3>Thẻ nhớ</h3></a>
+        <a href="pin-sac-du-phong.html"><h3>Pin dự phòng</h3> </a>
+        <a href="chuot-may-tinh.html"><h3>Chuột</h3> </a>
+        <a href="tai-nghe.html"><h3>Tai nghe</h3> </a>
+        <a href="ban-phim.html"><h3>Bàn phím</h3> </a>
+        <a href="loa-bluetooth.html"><h3>Loa Bluetooth</h3> </a>
+        <a href="loa-nghe-nhac.html"><h3>Loa máy tính</h3> </a>
+        <a href="o-cung.html"><h3>Ổ cứng</h3> </a>
+        <a href="do-choi-doc-la.html"><h3>Độc lạ</h3> </a>
+        <a href="thiet-bi-mang.html"><h3>T.bị mạng</h3> </a>
+        <a href="ky-thuat-so.html"><h3>Kỹ thuật số</h3> </a>
+    </div>-->
+    {/if}
+    {if $isnetwork}
+    {*  include file='library/catsub_network.lbi' *}
+  {/if}
+  {if $ispcmvp}
+    {*  include file='library/catsub_pcmvp.lbi'  *}
+  {/if}
+  {if $isdoitra}
+    {*  include file='library/catsub_maydoitra.lbi' *}
+  {/if}
+   <div class="gototop"><i></i>Về đầu trang</div>
+  </section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+
+<script src="{$option.static_path}static/asset_mobile/js/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#owl-category").owlCarousel({
+            autoPlay : false,
+            stopOnHover : false,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true,
+            lazyLoad : true
+        });
+
+    });
+
+    </script>
+<!--- Javascrip Plugin Bottom Page -->
+<script type="text/javascript">
+    $('#activeacc').click(function(){
+        $('#showacc').toggleClass('show');
+    });
+	$('.filter  div[id^="filter"]').click(function(){
+        var ishow = $(this).next('.show');
+        if(ishow.length == 0){
+          $(this).parents('.filter').find('.show').removeClass('show');
+          $(this).parents('.filter').find('.selected').removeClass('selected');
+          $(this).addClass('selected');
+          $(this).next('div').addClass('show');
+        }else{
+           $(this).removeClass('selected');
+           $(this).next('div').removeClass('show');
+        }
+
+    });
+</script>
+
+</body>
+</html>
+
+

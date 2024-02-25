@@ -1,0 +1,90 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+    <section class="clearfix">
+    {include file='library/article_category_tree.lbi'}
+    <div class="col_main">
+        {$render.before_main}
+    <!-- TemplateBeginEditable name="Top Left" -->
+<!-- TemplateEndEditable -->
+    <!-- Khong hien thi top 5 khi tra ket qua tim kiem -->
+    {if $search_value eq ''}
+    <div class="infopage">
+        <h1>Tin tức</h1><span>Tin công nghệ, đánh giá, mẹo hay đang chờ bạn</span>
+    </div>
+    <ul class="newslist latest">
+        {foreach from=$top5 item=article name=artciles_top5}
+            {if $smarty.foreach.artciles_top5.index eq 0}
+                <li>
+                    <a href="{$article.url|escape:html}" title="{$article.title|escape}">
+                        <div class="tempvideo">
+                            <img  width="100" height="70" alt="{$article.title|escape}" src="{$option.static_path}{$article.thumb}">
+                        </div>
+                        <h3>{$article.title}
+                            <span class="lesscom"> • {$article.viewed} lượt xem</span>
+                        </h3>
+                        <figure>
+                             {$article.desc|truncate:225}
+                        </figure>
+
+                    </a>
+                </li>
+            {elseif $smarty.foreach.artciles_top5.index eq 1}
+                <li>
+                    <a href="{$article.url|escape:html}" title="{$article.title|escape}">
+                        <div class="tempvideo">
+                            <img width="100" height="70" alt="{$article.title|escape}" src="{$option.static_path}{$article.thumb}">
+                        </div>
+                        <h3>{$article.title}
+                            <span class="lesscom">• {$article.viewed} lượt xem</span>
+                        </h3>
+                    </a>
+                </li>
+            {else}
+                <li>
+                    <a class="linkimg" href="{$article.url|escape:html}">
+                        <h3>{$article.title|truncate:80}
+                            <span class="lesscom">• {$article.viewed} lượt xem</span>
+                        </h3>
+                    </a>
+                </li>
+            {/if}
+        {/foreach}
+    </ul>
+    {else}
+    <p>Kết quả tìm kiếm tin tức: </p>
+    {/if}
+    <ul id="mainlist" class="newslist">
+         {foreach from=$artciles_list item=article name=artciles_list}
+            <li>
+                <a href="{$article.url|escape:html}" title="{$article.title|escape}">
+                    <div class="tempvideo">
+                        <img width="100" height="70" alt="{$article.title|escape}" src="{$option.static_path}{$article.thumb}">
+                    </div>
+                    <h3>{if $article.is_hot eq 1}<label class="hot">Hot</label>{/if} {$article.title|truncate:200}</h3>
+                    <figure>
+                        {$article.desc|truncate:225}
+                    </figure>
+                    <div class="timepost">
+                        <span>{$article.add_time}</span>
+                        <span class="namecate">{$article.author}</span>
+                        <span>• {$article.viewed} lượt xem</span>
+                    </div>
+                </a>
+            </li>
+         {/foreach}
+        <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+        </ul>
+    <!-- TemplateBeginEditable name="Bottom Left" -->
+<!-- TemplateEndEditable -->
+{$render.after_main}
+        </div>
+       {include file='library/article_right.lbi'}
+
+    </section>
+<!-- TemplateBeginEditable name="Stick-Global" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

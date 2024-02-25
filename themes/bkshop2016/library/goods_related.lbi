@@ -1,0 +1,16 @@
+{if $related_goods}
+<div class="goods_related clearfix" id="related">
+	<div class="hd"><h3>{$lang.related_goods}</h3></div>
+	<div class="bd product_list">	
+		<ul>
+			{foreach from=$related_goods item=releated_goods_data name=related_goods}
+			<li>
+				<a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name|escape:html}" class="photo"><img src="{$option.static_path}{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name|escape:html}"/></a>
+				<a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name|escape:html}" class="name">{$releated_goods_data.short_name}</a>
+				<span class="price">{if $releated_goods_data.promote_price}{$releated_goods_data.formated_promote_price} <del>{$releated_goods_data.shop_price}</del>{else}{$releated_goods_data.shop_price}{/if}</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}

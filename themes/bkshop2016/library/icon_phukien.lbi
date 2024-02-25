@@ -1,0 +1,50 @@
+<ul class="catacc catacc-icon clearfix">
+    <li><a href="phu-kien.html" {if $category eq 5 || $cat_root_id eq 5}class="active"{/if}><i class="iconaccessory-all"></i></a>
+        <label>Tất cả</label>
+    </li>
+    <li><a href="pin-sac-du-phong.html" {if $category eq 35 || $cat_root_id eq 35}class="active"{/if}><i class="iconaccessory-pdp"></i></a>
+        <label>Pin, sạc<br> dự phòng</label>
+    </li>
+    <li><a href="the-nho.html" {if $category eq 36 || $cat_root_id eq 36}class="active"{/if}><i class="iconaccessory-sd"></i></a>
+        <label>Thẻ nhớ</label>
+    </li>
+    <li><a href="usb.html" {if $category eq 38 || $cat_root_id eq 38}class="active"{/if}><i class="iconaccessory-usb"></i></a>
+        <label>USB</label>
+    </li>
+    <li><a href="chuot-may-tinh.html" {if $category eq 39  || $cat_root_id eq 39}class="active"{/if}><i class="iconaccessory-mouse"></i></a>
+        <label>Chuột máy tính</label>
+    </li>
+    <li><a href="ban-phim-may-tinh.html" {if $category eq 45 || $cat_root_id eq 45}class="active"{/if}><i class="iconaccessory-key"></i></a>
+        <label>Bàn phím</label>
+    </li>
+    <li><a href="tai-nghe.html" {if $category eq 37 || $cat_root_id eq 37 }class="active"{/if}><i class="iconaccessory-hed"></i></a>
+        <label>Tai nghe</label>
+    </li>
+     <li><a href="phan-mem.html" {if $category eq 66 || $cat_root_id eq 66}class="active"{/if}><i class="iconaccessory-soft"></i></a>
+        <label>Phần mềm</label>
+    </li>
+    <li><a href="op-lung-dien-thoai.html" {if $category eq 43 || $cat_root_id eq 43}class="active"{/if}><i class="iconaccessory-cover"></i></a>
+        <label>Ốp lựng điện thoại</label>
+    </li>
+     <li><a href="loa-nghe-nhac.html" {if $category eq 40 || $cat_root_id eq 40}class="active"{/if}><i class="iconaccessory-spk"></i></a>
+        <label>Loa Laptop</label>
+    </li>
+    <li><a href="loa-bluetooth.html" {if $category eq 41 || $cat_root_id eq 41}class="active"{/if}><i class="iconaccessory-spkb"></i></a>
+        <label>Loa Bluetooth</label>
+    </li>
+    <li><a href="day-cap-sac.html" {if $category eq 42 || $cat_root_id eq 42}class="active"{/if}><i class="iconaccessory-cap"></i></a>
+        <label>Sạc dây, cáp các loại</label>
+    </li>
+    <li><a href="o-cung.html" {if $category eq 46 || $cat_root_id eq 46}class="active"{/if}><i class="iconaccessory-hdd"></i></a>
+        <label>Ổ cứng</label>
+    </li>
+    <li><a href="ram-may-tinh.html" {if $category eq 95 || $cat_root_id eq 95}class="active"{/if}><i class="iconaccessory-ram"></i></a>
+        <label>RAM máy tính</label>
+    </li>
+    <li><a href="de-tan-nhiet-laptop.html" {if $category eq 90 || $cat_root_id eq 90}class="active"{/if}><i class="iconaccessory-fan"></i></a>
+        <label>Đế tản nhiệt</label>
+    </li>
+    <li><a href="do-choi-doc-la.html" {if $category eq 52 || $cat_root_id eq 52}class="active"{/if}><i class="iconaccessory-other"></i></a>
+        <label>Phụ kiện độc</label>
+    </li>
+</ul>

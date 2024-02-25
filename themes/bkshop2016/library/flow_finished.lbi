@@ -1,0 +1,85 @@
+<div class="flow_done">
+    <div class="success_box"><h2>Đặt hàng thành công !</h2></div>
+    <p style="line-height: 22px">Cảm ơn <strong>{$customer.sex} {$customer.name}</strong> đã cho Bách Khoa Shop cơ hội được phục vụ. Nhân viên sẽ liên hệ lại với {$customer.sex} qua số điện thoại <strong>{$customer.mobile}</strong> để xác nhận thông tin đặt hàng.</p>
+    <div class="titlebill">Thông tin đặt hàng:</div>
+    <div class="infoorder">
+        <div>{$customer.shipmethod}: <b>{$customer.address},{$customer.city},{$customer.province}</b></div>
+        <div>Thanh toán:  <b>{$customer.paymethod}</b></div>
+        <div>Tổng tiền: <strong>{$shopping_money}</strong></div>
+    </div>
+    <div class="callship">
+        Khi cần trợ giúp vui lòng gọi <a href="tel:1900636472">1900.63.64.72</a> (8h00 - 21h30)
+    </div>
+    <ul class="cart-goodslist">
+       <li class="tit">
+           <span class="name">Sản phẩm đã đặt hàng</span>
+           <span class="price">{$lang.shop_prices}</span>
+           <span class="quantity">{$lang.quantity}</span>
+           <span class="subtotal">{$lang.subtotal}</span>
+       </li>
+       {if $goods_list}
+           {foreach from=$goods_list item=goods name=goods_list}
+           <li>
+               <span class="name">
+                   <a href="{siy:goods_info id=$goods.goods_id type='url'}" class="photo" target="_blank"><img src="{$option.static_path}{$goods.goods_thumb}"/></a>
+                    <a href="{siy:goods_info id=$goods.goods_id type='url'}" class="name" target="_blank">{$goods.goods_name}</a>
+                    <span class="extra_info">
+                        {if $goods.goods_attr}<p>{$goods.goods_attr}</p>{/if}
+                        {if $goods.is_shipping}<p class="carriage_free">{$lang.carriage_free}</p>{/if}
+                        {if $goods.parent_id gt 0}<p class="accessories">{$lang.accessories}</p>{/if}
+                        {if $goods.is_gift gt 0}<p class="largess">{$lang.largess}</p>{/if}
+                    </span>
+               </span>
+               <span class="price">{$goods.goods_price}</span>
+               <span class="quantity">
+                   {$goods.goods_number}
+               </span>
+               <span class="subtotal">{$goods.subtotal}</span>
+           </li>
+            {/foreach}
+             <li>
+               <span class="name">
+                   
+                   
+               </span>
+               <span class="price"></span>
+               <span class="quantity">
+                   Thành tiền
+               </span>
+               <span class="subtotal">{$total.subtotal}</span>
+           </li>
+           {if $total.shipping_fee_origion neq 0}
+            <li>
+               <span class="name">
+                   
+                   
+               </span>
+               <span class="price"></span>
+               <span class="quantity">
+                   Phí vận chuyển
+               </span>
+               <span class="subtotal">{$total.shipping_fee}</span>
+           </li>
+           {/if}
+            <li>
+               <span class="name">
+                   
+                   
+               </span>
+               <span class="price"></span>
+               <span class="quantity">
+                   Tổng tiền
+               </span>
+               <span class="subtotal">{$total.goods_price}</span>
+           </li>
+
+
+       {else}
+       <li><p class="empty">Chưa có gì trong giỏ hàng !</p></li>
+       {/if}
+   </ul>
+
+   <div style="margin-top: 20px;text-align: center">
+    <a class="button text-link" href="/thong-tin/giao-hang-thanh-toan-14.html">Hướng dẫn thanh toán</a> <a class="button text-link" href="./">Mua thêm sản phẩm khác</a>
+   </div>
+</div>

@@ -1,0 +1,28 @@
+
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper user_cp">
+	<div class="col_sub fl">
+	{$render.before_col_sub}
+		<!-- TemplateBeginEditable name="Top Sub" --><!-- TemplateEndEditable -->
+		{include file='library/user_nav.lbi'}
+		<!-- TemplateBeginEditable name="Bot Sub" --><!-- TemplateEndEditable -->
+	{$render.after_col_sub}
+	</div>
+	<div class="col_main fr">
+	{$render.before_main}
+		<!-- TemplateBeginEditable name="Top Main" --><!-- TemplateEndEditable -->
+		{if $action eq 'default'}{include file='library/user_default.lbi'}{/if}
+		{if $action eq 'message_list'}{include file='library/user_message_list.lbi'}{/if}
+		{if $action eq 'comment_list'}{include file='library/user_comment_list.lbi'}{/if}
+		{if $action eq 'tag_list'}{include file='library/user_tag_list.lbi'}{/if}
+		{if $action eq 'collection_list'}{include file='library/user_collection_list.lbi'}{/if}
+		{if $action eq 'booking_list'}{include file='library/user_booking_list.lbi'}{/if}
+		{if $action eq 'add_booking'}{include file='library/user_add_booking.lbi'}{/if}
+		{if $affiliate.on eq 1}{if $action eq 'affiliate'}{include file='library/user_affiliate.lbi'}{/if}{/if}
+		<!-- TemplateBeginEditable name="Bot Main" --><!-- TemplateEndEditable -->
+	{$render.after_main}
+	</div>
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

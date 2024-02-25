@@ -1,0 +1,20 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<div id="main"><div class="wrapper">
+	{$render.before_main}
+	<dl class="message_wrapper message_info">
+		<dt>{$message.content}</dt>
+		<dd>
+			{if $message.url_info}
+			<p>
+			{foreach from=$message.url_info key=info item=url}
+			<a href="{$url}"><span>{$info}</span></a>
+			{/foreach}
+			</p>
+			{/if}
+		</dd>
+	</dl>
+	{$render.after_main}
+</div></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{if $pname neq 'respond' and $message.back_url}<meta http-equiv="refresh" content="3;url={$message.back_url}">{/if}
+<base href="{$domain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+<a href="javascript:window.history.go(-1)" class="buymore">Mua thêm sản phẩm khác</a>
+<div class="clr"></div>
+{if $step eq 'cart'}
+	<form action="gio-hang" method="post">
+   <ul class="cart-goodslist">
+       <li class="tit">
+           <span class="name">Tên sản phẩm</span>
+           <span class="price">{$lang.shop_prices}</span>
+           <span class="quantity">{$lang.quantity}</span>
+           <span class="handle">{$lang.handle}</span>
+       </li>
+       {if $goods_list}
+           {foreach from=$goods_list item=goods name=goods_list}
+           <li>
+               <span class="name">
+                   <a href="{siy:goods_info id=$goods.goods_id type='url'}" class="photo" target="_blank"><img src="{$option.static_path}{$goods.goods_thumb}"/></a>
+                    <a href="{siy:goods_info id=$goods.goods_id type='url'}" class="name" target="_blank">{$goods.goods_name}</a>
+                    <span class="extra_info">
+                        {if $goods.goods_attr}<p>{$goods.goods_attr}</p>{/if}
+                        {if $goods.is_shipping}<p class="carriage_free">{$lang.carriage_free}</p>{/if}
+                        {if $goods.parent_id gt 0}<p class="accessories">{$lang.accessories}</p>{/if}
+                        {if $goods.is_gift gt 0}<p class="largess">{$lang.largess}</p>{/if}
+                    </span>
+               </span>
+               <span class="price">{$goods.goods_price}</span>
+               <span class="quantity">
+                   {if $goods.goods_id gt 0 and $goods.is_gift eq 0 and $goods.parent_id eq 0}
+                    <input type="number" min="1" max="10" step="1" name="goods_number[{$goods.rec_id}]" value="{$goods.goods_number}" title="{$lang.goods_number_tip}"/>
+                    {else}
+                    {$goods.goods_number}
+                    {/if}
+               </span>
+               <span class="handle">
+                   <a href="gio-hang?step=drop_goods&amp;id={$goods.rec_id}" class="drop">{$lang.drop}</a>
+               </span>
+           </li>
+            {/foreach}
+            <li class="carttotal">
+               <span class="name">
+                   <a href="gio-hang?step=clear" class="button text_button"><span>{$lang.clear_cart}</span></a>
+                    <input name="submit" type="submit" value="{$lang.update_cart}" class="button">
+                    <input type="hidden" name="step" value="update_cart">
+               </span>
+               <span class="price"></span>
+               <span class="quantity"></span>
+               <span class="handle"></span>
+           </li>
+       {else}
+       <li><p class="empty">Chưa có gì trong giỏ hàng !</p></li>
+       {/if}
+   </ul>
+   <div class="area_total">
+       <div class="total"><b>Tổng tiền:</b><strong>{$shopping_money}</strong></div>
+    </div>
+  </form>
+
+{/if}
+{if $step eq 'login'}
+<div class="user_form">
+<h3>Đăng nhập thành viên</h3>
+<form action="dang-nhap-thanh-vien" method="post" class="form">
+	<input type="text" name="username" required placeholder="{$lang.label_username}{$lang.colon}">
+	<input type="password" name="password" required placeholder="{$lang.label_password}{$lang.colon}">
+		{if $enabled_register_captcha}
+	<input type="text" name="captcha" maxlength="4" required><span><img src="captcha.php?is_login=1&{$rand}" alt="{$lang.comment_captcha}" class="captcha tip" title="{$lang.captcha_tip}" onClick="this.src='captcha.php?is_login=1&'+Math.random()"></span>
+		{/if}
+	<div class="formcheck">
+	<input type="checkbox" name="remember" value="1">{$lang.remember}</label>
+	<em class="forget"><a href="user.php?act=get_password">{$lang.forgot_password}</a></em>
+	</div>
+	<div class="submit_wrap">
+			<input type="submit" value="{$lang.btn_login}" class="button button_border"/>
+			<input type="hidden" name="act" value="signin">
+			{if $anonymous_buy eq 1}<a href="mua-nhanh" class="button btn-muanhanh"><span>{$lang.direct_shopping}</span></a>{/if}
+	</div>
+	</form>
+
+</div>
+{/if}
+{if $step eq 'consignee'}
+<div class="user_form">
+{foreach from=$consignee_list item=consignee key=sn name=consignee_list}
+{if !$consignee.consignee}<h3>Thông tin giao hàng</h3>{/if}
+<form action="flow.php" method="post" name="theForm" onsubmit="return checkConsignee(this)" class="form">
+	{if $real_goods_count gt 0}
+	<select name="country" id="selCountries_{$sn}" onchange="regionChanged(this, 1, 'selProvinces_{$sn}')">
+		<option value="0">{$lang.please_select}{$name_of_region[0]}</option>
+		{foreach from=$country_list item=country}
+		<option value="{$country.region_id}"{if $consignee.country eq $country.region_id} selected="selected"{/if}>{$country.region_name}</option>
+		{/foreach}
+		</select>
+		<select name="province" id="selProvinces_{$sn}" onchange="regionChanged(this, 2, 'selCities_{$sn}')">
+		<option value="0">{$lang.please_select}{$name_of_region[1]}</option>
+		{foreach from=$province_list.$sn item=province}
+		<option value="{$province.region_id}"{if $consignee.province eq $province.region_id} selected="selected"{/if}>{$province.region_name}</option>
+		{/foreach}
+	</select>
+	<select name="city" id="selCities_{$sn}" onchange="regionChanged(this, 3, 'selDistricts_{$sn}')">
+		<option value="0">{$lang.please_select}{$name_of_region[2]}</option>
+		{foreach from=$city_list.$sn item=city}
+		<option value="{$city.region_id}"{if $consignee.city eq $city.region_id} selected="selected"{/if}>{$city.region_name}</option>
+		{/foreach}
+		</select>
+		<select name="district" id="selDistricts_{$sn}" {if !$district_list.$sn}style="display:none"{/if}>
+		<option value="0">{$lang.please_select}{$name_of_region[3]}</option>
+		{foreach from=$district_list.$sn item=district}
+		<option value="{$district.region_id}"{if $consignee.district eq $district.region_id} selected="selected"{/if}>{$district.region_name}</option>
+		{/foreach}
+	</select>
+	{/if}
+	<input type="text" name="consignee" value="{$consignee.consignee|escape}" required id="consignee_{$sn}" placeholder="{$lang.consignee_name}">
+		<input type="email" name="email" value="{$consignee.email|escape}" required id="email_{$sn}" placeholder="{$lang.email_address}">
+	{if $real_goods_count gt 0}
+		<input type="text" name="address" value="{$consignee.address|escape}" required id="address_{$sn}" placeholder="{$lang.detailed_address}">
+	{/if}
+		<input type="tel" name="mobile" value="{$consignee.mobile|escape}" id="mobile_{$sn}" placeholder="{$lang.backup_phone}">
+	{if $real_goods_count gt 0}
+		<input type="text" name="best_time" value="{$consignee.best_time|escape}" id="best_time_{$sn}" placeholder="{$lang.deliver_goods_time}">
+	{/if}
+	<div class="submit_wrap">
+		{if $smarty.session.user_id gt 0 and $consignee.address_id gt 0}
+		<input type="submit" value="{$lang.shipping_address}" class="button btn_39">
+		<a href="javascript:void(0);" onclick="if (confirm('{$lang.confirm_drop_address}'))location.href='user.php?act=drop_consignee&id={$consignee.address_id}'" class="tool_link"/>{$lang.drop}</a>
+		{else}
+		<input type="submit" value="Xác nhận" class="button">
+		{/if}
+		<input type="hidden" name="step" value="consignee">
+		<input type="hidden" name="act" value="checkout">
+		<input type="hidden" name="address_id" value="{$consignee.address_id}">
+	</div>
+</form>
+{/foreach}
+</div>
+{/if}
+
+{if $step eq 'checkout'}
+<div class="user_form">
+<form action="dat-hang-thanh-cong" method="post" class="form checkout_wrapper" id="checkout_form">
+	<div class="options">
+		{if $total.real_goods_count neq 0}
+				<div class="option_outer">
+					<div class="option_title"><h2>{$lang.shipping_method}</h2><span class="extra"></span></div>
+					<div class="option_inner clearfix">
+						{foreach from=$shipping_list item=shipping name=shipping_list}
+						<div class="option_item">
+							<label for="shipping_method_{$shipping.shipping_id}">
+								<span class="name">{$shipping.shipping_name}</span>
+								{siy:get_extra_image prefix='shipping_method_' fname=$shipping.shipping_code}
+								<input type="radio" name="shipping" value="{$shipping.shipping_id}"{if $order.shipping_id eq $shipping.shipping_id} checked="checked"{/if} id="shipping_method_{$shipping.shipping_id}" supportCod="{$shipping.support_cod}" insure="{$shipping.insure}" />
+							</label>
+							<span class="intro">{$shipping.shipping_desc}</span>
+							<span class="info">
+								{if $shipping.shipping_fee neq 0} {$lang.nofee}<em class="price">{$shipping.format_shipping_fee}</em>{else}<em class="price">{$lang.free}</em>{/if}
+								{if $shipping.free_money neq $option.price_zero_format}<span class="free">{$lang.free_pre}{$shipping.free_money}{$lang.free_suf}</span>{/if}
+							</span>
+						</div>
+						{/foreach}
+						<div class="insure_wrapper"><label for="ECS_NEEDINSURE"><input type="checkbox" name="need_insure" value="1" id="ECS_NEEDINSURE" onclick="selectInsure(this.checked)"{if $order.need_insure} checked="true"{/if}{if $insure_disabled} disabled="disabled"{/if} />{$lang.need_insure}</label></div>
+					</div>
+				</div>
+				{else}
+				<input type="hidden" name="shipping" value="-1" checked="checked"/>
+				{/if}
+				{if $is_exchange_goods neq 1 || $total.real_goods_count neq 0}
+				<div class="option_outer">
+					<div class="option_title"><h2>{$lang.payment_method}</h2><span class="extra"></span></div>
+					<div class="option_inner clearfix">
+						{foreach from=$payment_list item=payment name=payment_list}
+						<div class="option_item">
+							<label for="payment_method_{$payment.pay_id}">
+								<span class="name">{$payment.pay_name}</span>
+								{siy:get_extra_image prefix='payment_method_' fname=$payment.pay_code}
+								<input type="radio" name="payment" value="{$payment.pay_id}"{if $order.pay_id eq $payment.pay_id} checked="checked"{/if} id="payment_method_{$payment.pay_id}" isCod="{$payment.is_cod}" onclick="selectPayment(this)"{if $cod_disabled and $payment.is_cod eq "1"} disabled="disabled"{/if}/>
+							</label>
+							<span class="intro">{$payment.pay_desc}</span>
+							<span class="info">
+								{if $payment.pay_fee neq 0}<em class="price"{if $payment.is_cod eq '1'} id="ECS_CODFEE"{/if}>{$payment.format_pay_fee}</em>{/if}
+							</span>
+						</div>
+						{/foreach}
+					</div>
+				</div>
+				{else}
+				<input type="radio" name="payment" value="-1" checked="checked" style="display:none"/>
+				{/if}
+				<div class="option_outer postscript">
+					<div class="option_title"><h2>{$lang.order_postscript}</h2><span class="extra"></span></div>
+					<div class="option_inner">
+						<textarea name="postscript" cols="60" rows="2" id="postscript">{$order.postscript|escape}</textarea>
+					</div>
+				</div>
+				{if $allow_use_bonus}
+					<div class="item" id="use_bonus">
+						<h3>{$lang.use_bonus}</h3>
+						<div class="inner">
+							{if $bonus_list}
+								{$lang.select_bonus}
+								<select name="bonus" onchange="changeBonus(this.value)" id="ECS_BONUS">
+								<option value="0"{if $order.bonus_id eq 0} selected="selected"{/if}>{$lang.please_select}</option>
+								{foreach from=$bonus_list item=bonus}
+								<option value="{$bonus.bonus_id}"{if $order.bonus_id eq $bonus.bonus_id} selected="selected"{/if}>{$bonus.type_name}[{$bonus.bonus_money_formated}]</option>
+								{/foreach}
+								</select>
+								{$lang.or}{$lang.enter_bonus_sn}
+							{else}
+								{$lang.enter_bonus_sn}
+							{/if}
+								<input type="text" name="bonus_sn" value="{$order.bonus_sn}" class="text_input" id="bonus-sn"/>
+								<input type="button" name="validate_bonus" value="{$lang.validate_bonus}" class="button" onclick="validateBonus()"/>
+							</p>
+						</div>
+					</div>
+					{/if}
+				<div class="cart_list checkout_cart_list">
+					<ul>
+						{foreach from=$goods_list item=goods name=goods_list}
+						<li{if $smarty.foreach.goods_list.first} class="first"{/if}>
+							{if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
+							<a href="{siy:goods_info id=$goods.goods_id type='url'}" class="photo" target="_blank"><img src="{$option.static_path}{siy:goods_info id=$goods.goods_id type='goods_thumb'}"/></a>
+							<a href="{siy:goods_info id=$goods.goods_id type='url'}" class="name" target="_blank">{$goods.goods_name}</a>
+							<span class="extra_info">
+								{if $goods.goods_attr}{$goods.goods_attr}{/if}
+								{if $goods.is_shipping}<em class="carriage_free">{$lang.carriage_free}</em>{/if}
+								{if $goods.parent_id gt 0}<em class="accessories">{$lang.accessories}</em>{/if}
+								{if $goods.is_gift gt 0}<em class="largess">{$lang.largess}</em>{/if}
+							</span>
+							{elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'}
+							<span class="name package_name">{$goods.goods_name}</span>
+							<span class="package_goods_list" >{foreach from=$goods.package_goods_list item=package_goods_list name=package_goods_list}<em>{$package_goods_list.goods_name}</em>{/foreach}</span>
+							{else}
+							{$goods.goods_name}
+							{/if}
+							<p class="price fr">{$goods.goods_price} &times; {$goods.goods_number}</p>
+							<a href="javascript:cartDrop({$goods.rec_id});" class="drop">X</a>
+						</li>
+					{/foreach}
+					</ul>
+					<p class="total">{$shopping_money}<br/>{if $discount gt 0}{$your_discount}{/if}</p>
+				</div>
+				<h2 class="title"><span>{$lang.fee_total}</span></h2>
+				<div class="detail_inner">
+					<div class="order_total" id="order_total">{include file='library/order_total.lbi'}</div>
+					<p class="flow_action">
+						<input type="submit" value="{$lang.submit_order}" class="button">
+						<input type="hidden" name="step" value="done">
+						<a href="{$hu}" class="button button_border">{$lang.continue_shopping}</a>
+					</p>
+				</div>
+	</div>
+</div>
+{/if}
+{if $step eq 'done'}
+<div class="message_wrapper flow_done">
+	<dl>
+			<dt class="title">{$lang.remember_order_number}{$lang.colon}<em>{$order.order_sn}</em></dt>
+			<dd>
+				<p>{if $order.shipping_name}{$lang.select_shipping}{$lang.colon}<em>{$order.shipping_name}</em>
+				{/if}{$lang.select_payment}{$lang.colon}<em>{$order.pay_name}</em>
+				{$lang.order_amount}{$lang.colon}<em class="price">{$total.amount_formated}</em></p>
+			</dd>
+			{if $pay_online}
+			<dd class="pay_online">{$pay_online}</dd>
+			{/if}
+			{if $virtual_card}
+			<dd>
+				<ul class="virtual_card clearfix">
+					{foreach from=$virtual_card item=vgoods name=virtual_card}
+					{foreach from=$vgoods.info item=card name=vgoods_info}
+					<li>
+						<span class="type">{$vgoods.goods_name}</span>
+						{if $card.card_sn}<span class="id"><strong>{$lang.card_sn}{$lang.colon}</strong>{$card.card_sn}</em></span>{/if}
+						{if $card.card_password}<span class="serial_code"><strong>{$lang.card_password}{$lang.colon}</strong><em>{$card.card_password}</em></span>{/if}
+						{if $card.end_date}<span class="expire_date"><strong>{$lang.end_date}{$lang.colon}</strong><em>{$card.end_date}</em></span>{/if}
+					</li>
+					{/foreach}
+					{/foreach}
+				</ul>
+			</dd>
+			{/if}
+			<dd><p><a class="button text-link" href="/thong-tin/giao-hang-thanh-toan-14.html">Hướng dẫn thanh toán</a></p></dd>
+			<dd><p>{$order_submit_back}</p></dd>
+		</dl>
+</div>
+{/if}
+<div class="clr"></div>
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.vi_vn.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/flow.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('input[name^="goods_number"]').tipsy({trigger:'manual',gravity:'sw',fade: true});
+	$('input[name^="goods_number"]').keypress(function(){
+		$(this).tipsy('show');
+	});
+	$('input[name^="goods_number"]').focusout(function(){
+		$(this).tipsy('hide');}
+	);
+	$('#cart').mouseenter(function(){
+		$('#cart .list_wrapper').show();
+	});
+	$('#cart').mouseleave(function(){
+		$('#cart .list_wrapper').hide();
+	});
+	$('.cart_list li').hover(function(){
+		$(this).addClass('hover');
+	}, function(){
+		$(this).removeClass('hover');
+	});
+});
+{if $step eq 'checkout'}var action = 'checkout';{/if}
+</script>
+</body>
+</html>
+
+

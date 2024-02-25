@@ -1,0 +1,24 @@
+{if $best_goods}
+<h1>Phụ kiện nổi bật</h1>
+<ul class="box-product box-recommend">
+    {foreach from=$best_goods item=goods name=best_goods}
+        <li class="one itemacc">
+            
+            <a href="{$goods.url}" title="{$goods.name}">
+            <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.thumb}" width="125" height="125">
+           
+            <h3>{$goods.name}</h3>
+            <div class="box-price">
+                {if $goods.promote_price}
+                <strong class="price">{$goods.promote_price}</strong>
+                {else}
+                  <strong class="price">{$goods.shop_price}</strong>
+                {/if}
+            </div>
+            <label class="onlineonly"><h6 class="textkm">{$goods.text_status}</h6></label>
+
+             </a>
+        </li>
+    {/foreach}
+</ul>
+{/if}

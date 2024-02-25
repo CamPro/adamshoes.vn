@@ -1,0 +1,87 @@
+{if $goods_list}
+ 
+ 
+
+    {foreach from=$goods_list item=goods name=goods_list}
+   {if $goods.goods_id}
+        {if $isacc} {* hien thi item good phu kien *}
+             <li class="one itemacc iproduct">
+                             
+                            <a title="{$goods.goods_style_name}" href="{$goods.url}">
+                            <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="125" height="125">
+                           
+                            <h3>{$goods.goods_style_name}</h3>
+                            <div class="box-price">
+                                
+                                    {if $goods.promote_price}
+                                    <strong class="price">{$goods.promote_price}</strong>
+                                    {else}
+                                      <strong class="price">{$goods.shop_price}</strong>
+                                    {/if}
+                               
+                            </div>
+
+                             </a>
+                            <label class="onlineonly"><h6 class="textkm">{$goods.text_status}</h6></label>
+                        </li>
+        {else}
+                
+                
+
+                 
+           
+                <li class="igoods iproduct itemgoods {if $goods.is_special eq 1 }feature{/if} ">
+                     <a href="{$goods.url}" title="{$goods.name|escape:html}">
+                        <div class="gimage">   
+                         {if $goods.is_special eq 1 }
+                            {$goods.goods_thumb2col}
+                        {else}
+                        <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+                       {/if}
+                       
+                        </div> 
+                            <div class="box_ginfo">
+                            {siy:efom_show_price_online goods=$goods}
+                           <div class="gift">{$goods.goods_gift}{if $goods.text_status}<span>{$goods.text_status}</span> {/if}</div> 
+                        <h3>{$goods.goods_style_name}</h3>
+                        <div class="price_box">
+                        
+                            {siy:egoods_price  goods=$goods cat_root_id=$cat_root_id}
+                           {siy:goods_tagss_status goods=$goods}
+                       
+                        
+                        </div>
+                    </div>
+                        
+                        
+                     
+                         {if $category eq 1 || $category eq 100 || $cat_root_id eq 1} <!-- hien thi cho laptop -->
+                        <figure class="bginfo">
+                            {$goods.short_desc}
+                        </figure>
+                                 {else}
+                        <figure class="bginfo">
+                              <span class="name">{$goods.goods_style_name}</span>
+                            {if $goods.zero_price eq 0}
+                            <p>Mới ra mắt</p>
+                            {else}
+                            <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+                            {/if}
+                             <div class="desc">
+                            {$goods.short_desc}
+                           </div>
+                        </figure>
+                        
+                        {/if}
+                        </a>
+                        <!-- <div class="good_tool">
+            <a   href="{$goods.url}" class="quick_buy">Mua</a>
+            <a   href="{$goods.url}/tra-gop" title="Mua trả góp {$goods.goods_name}" class="installment_buy">Mua trả góp</a>
+            </div>-->
+                </li>
+                 
+    {/if}
+     {/if}
+    {/foreach}
+ 
+{/if}

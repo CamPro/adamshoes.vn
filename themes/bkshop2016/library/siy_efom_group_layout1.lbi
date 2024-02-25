@@ -1,0 +1,84 @@
+<div class="group_goods group1">
+	<div class="group_head">
+
+		<h4>{$group.group_name}</h4>
+		<!--<a href="{$group.link}" class="viewmorelinks">Xem thêm <i class="fa fa-angle-right"></i></a>-->
+	</div>
+	<div class="group_list">
+		<ul class="cate">
+		{foreach from=$list_goods item=goods}
+		<li class="igoods">
+<a href="{$goods.url}" title="{$goods.goods_name|escape:html}">
+				 <div class="gimage">
+             
+            <img width="170" height="170" alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+             
+            {if $category eq 1 || $category eq 100} 
+            <figure class="bginfo">
+                {$goods.goods_desc_short}
+            </figure>
+            {else}
+            <figure class="bginfo">
+               
+                 <div class="desc">
+                 
+              {$goods.goods_desc_short}
+              </div>
+                
+                
+            </figure>
+            {/if}
+            </div>
+            <div class="box_ginfo">
+           
+            <h3>{$goods.goods_name}</h3>
+             {if $is_mobile eq 1}     {*stick neu la giao dien mobile*}
+                {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                <label class="tagss cmsoon">Đặt trước</label>
+            {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                <label class="tagss outstock">Tạm hết hàng</label>
+            {else}
+                {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                <label class="tagss installment">Trả góp 0%</label>
+                {else}
+                    {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                    {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Bán chạy</label>{/if}
+                {/if}
+            {/if}
+            {/if}
+            <div class="price_box">
+            <strong>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</strong>
+
+                {if $is_mobile eq 0}    {*stick neu la giao dien pc*}
+                    {if $goods.stock eq 0 and $goods.is_preoder eq 1}
+                    <label class="tagss cmsoon">Đặt trước</label>
+                {elseif $goods.stock eq 0 and $goods.is_preoder eq 0}
+                    <label class="tagss outstock">Tạm hết hàng</label>
+                {else}
+                    {if $goods.laisuat neq 1 and $goods.laisuat neq NULL}
+                    <label class="tagss installment">Trả góp 0%</label>
+                    {else}
+                        {if $goods.is_new eq 1 and $goods.is_hot eq 0}<label class="tagss new">Mới</label>{/if}
+                        {if $goods.is_new eq 0 and $goods.is_hot eq 1}<label class="tagss hot">Bán chạy</label>{/if}
+                    {/if}
+                {/if}
+            {/if}
+            </div>
+ </div>
+            
+            <div class="promotion">
+               {if $goods.text_status}<span>{$goods.text_status}</span> {/if}
+            </div>
+            
+            <div class="gift">{$goods.seller_note}</div>
+        	 
+</a>
+<div class="good_tool">
+            <a   href="{$goods.url}" class="quick_buy">Mua</a>
+            <a   href="{$goods.url}/tra-gop" title="Mua trả góp {$goods.goods_name}" class="installment_buy">Mua trả góp</a>
+            </div>
+		</li>
+		{/foreach}
+		</ul>
+	</div>
+</div>

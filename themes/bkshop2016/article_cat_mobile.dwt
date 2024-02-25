@@ -1,0 +1,64 @@
+{if $is_ajax}
+{foreach from=$artciles_list item=article name=artciles_list}
+	<li>
+	<a href="{$article.url}"><h3>{$article.title}</h3></a>
+	<a href="{$article.url}" class="img"><img width="" height="auto" alt="" src="{$option.static_path}{$article.thumb}"  alt="{$article.title|escape:html}"></a>
+	<div class="shortdes"><p>{$article.desc}</p>
+        <div class="atags"><span>• {$article.author}</span><span>• {$article.add_time}</span><span>• Lượt xem: {$article.viewed}</span></div>
+    </div><div class="clr"></div></li>
+ {/foreach}
+{else}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+<base href="{$mydomain}">
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+{include file='library/ur_here.lbi'}
+{if $artciles_list}
+<ul class="newslist">
+	{foreach from=$artciles_list item=article name=artciles_list}
+	<li>
+	<a href="{$article.url}"><h3>{$article.title}</h3></a>
+	<a href="{$article.url}" class="img"><img width="" height="auto" alt="" src="{$option.static_path}{$article.thumb}"  alt="{$article.title|escape:html}"></a>
+	<div class="shortdes"><p>{$article.desc}</p>
+        <div class="atags"><span>• {$article.author}</span><span>• {$article.add_time}</span><span>• Lượt xem: {$article.viewed}</span></div>
+    </div><div class="clr"></div></li>
+ {/foreach}
+</ul>
+<!-- #BeginLibraryItem "/library/pages_mobile.lbi" --><!-- #EndLibraryItem -->
+{else}
+<p class="empty">Không có tin nào</p>
+{/if}
+{if $article_categories}
+<div class="article_category">
+	<h4>Các chuyên mục tin</h4>
+	<a href="tin-tuc/tin-cong-nghe/9">Tin Công Nghệ</a>
+    <a href="tin-tuc/tin-khuyen-mai/10">Tin Khuyến Mãi</a>
+    <a href="tin-tuc/thu-thuat-may-tinh/14">Thủ thuật laptop</a>
+    <a href="tin-tuc/thu-thuat-android/11">Thủ thuật Android</a>
+    <a href="tin-tuc/thu-thuat-ios/12">Thủ thuật iOS</a>
+    <a href="tin-tuc/thu-thuat-windows-phone/13">Thủ thuật Windows Phone</a>
+</div>
+{/if}
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+
+{/if}

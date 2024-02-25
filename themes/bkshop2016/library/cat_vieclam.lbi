@@ -1,0 +1,11 @@
+{if $catvl}
+<div class="hotweek">
+	<h4>Vị trí cần tuyển</h4>
+	<div class="vieclam_category">
+		{foreach from=$catvl item=catvl}
+		<a href="{$catvl.cat_url}">{$catvl.cat_name} <span>{$catvl.count}</span></a>
+	    {/foreach}
+	</div>
+
+</div>
+{/if}

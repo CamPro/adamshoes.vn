@@ -1,0 +1,72 @@
+<div class="has_tab_box">
+<div class="tab_wrapper">
+	<p class="tabs">
+		<a href="user.php?act=collection_list" id="tab_collection_list" class="current"><span>{$lang.label_collection}</span></a>
+		<a href="user.php?act=booking_list" id="tab_booking_list"><span>{$lang.label_booking}</span></a>
+	</p>
+	<div class="extra"></div>
+</div>
+<div class="collection_list box">
+	<div class="hd"><h3>{$lang.label_collection}</h3><div class="extra"></div></div>
+	<div class="bd product_list display_text">
+		{if $goods_list}
+		<ul>
+			{foreach from=$goods_list item=goods name=goods_list}
+			<li>
+				<span class="photo">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="image"><img src="{$option.static_path}{siy:goods_info id=$goods.goods_id type='goods_thumb'}" alt="{$goods.goods_name|escape:html}"/></a>
+				</span>
+				<span class="info">
+					<a href="{$goods.url}" title="{$goods.goods_name|escape:html}" class="name">{$goods.goods_name}</a>
+					<span class="price">{if $goods.promote_price}<span class="promo"><em>{$goods.promote_price}</em></span>{else}{$goods.shop_price}{/if}</span>
+				</span>
+				<span class="actions">
+					<a href="javascript:buy({$goods.goods_id})" class="button dim_button"><span>{$lang.add_to_cart}</span></a>
+					<a href="user.php?act=delete_collection&collection_id={$goods.rec_id}" class="button text_button"><span>{$lang.drop}</span></a>
+				</span>
+			</li>
+			{/foreach}
+		</ul>
+		{else}
+		<p class="empty">{$lang.collection_empty}</p>
+		{/if}
+		{if $goods_list}{include file='library/pages.lbi'}{/if}
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+var elements = document.forms['theForm'].elements;
+var url = '{$url}';
+var u   = '{$user_id}';
+function genCode() {
+	if (isNaN(parseInt(elements['goods_num'].value))) {
+		alert('{$lang.goods_num_must_be_int}');
+		return;
+	}
+	if (elements['goods_num'].value < 1) {
+		alert('{$lang.goods_num_must_over_0}');
+		return;
+	}
+	if (isNaN(parseInt(elements['rows_num'].value))) {
+		alert('{$lang.rows_num_must_be_int}');
+		return;
+	}
+	if (elements['rows_num'].value < 1) {
+		alert('{$lang.rows_num_must_over_0}');
+		return;
+	}
+	var code = '\<script src=\"' + url + 'goods_script.php?';
+	code += 'need_image=' + elements['need_image'].value + '&';
+	code += 'goods_num=' + elements['goods_num'].value + '&';
+	code += 'arrange=' + elements['arrange'].value + '&';
+	code += 'rows_num=' + elements['rows_num'].value + '&';
+	code += 'charset=' + elements['charset'].value + '&u=' + u;
+	code += '\"\>\</script\>';
+	elements['code'].value = code;
+	elements['code'].select();
+	if (Browser.isIE) {
+		window.clipboardData.setData("Text",code);
+	}
+}
+</script>

@@ -1,0 +1,15 @@
+ 
+					 {if $pager.page_count > 0}<div class="clear"></div>
+	<div class="pagi_ajax" id="pagi_ajax_review">
+		<form action="{$cat_url}" class="form frmpagisize" method="get" data-size="{$pager.size}">
+		<input type="hidden" name="start" value="0"/>	
+		 <input name="pager" type="hidden" value="2"/>
+		 <input name="type" type="hidden" value="{$comment_type}"/>
+		 <input name="product" type="hidden" value="{$id}"/>
+		<input type="hidden" name="total" value="{$pager.record_count}"/>
+			<a href="#">Xem thêm <font>{$pager.record_count -$pager.size}</font> bình luận <i class="fa fa-caret-down"></i></a>
+			 
+	</form>
+	</div>
+	{/if}
+ 

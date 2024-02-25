@@ -1,0 +1,51 @@
+  <div class="col_sub">
+        {$render.before_col_sub}
+        <!-- TemplateBeginEditable name="Top Right" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+        <div class="titlehome">Bạn đọc xem nhiều</div>
+            <div class="summarycomment">
+                {foreach from=$top_view item=article name=view_list}
+                <a title="{$article.title}" href="{$article.url|escape:html}">
+                    <div>{$smarty.foreach.view_list.iteration}</div>
+                    <h3>{$article.title}<span class="morecom">• {$article.viewed} lượt xem</span></h3>
+                </a>
+              {/foreach}
+            </div>
+            {if $new_goods.length > 0}
+            <div class="titlehome">Sản phẩm mới</div>
+            <ul class="newsproduct">
+                {foreach from=$new_goods item=goods name=goods_list}
+                <li>
+                    <a href="{$goods.url}">
+                        <img src="{$option.static_path}{$goods.thumb}"  width="100" height="70">
+                        <h3>{$goods.name|truncate:40}</h3>
+                        {if $goods.org_price neq 0}
+                        <label>{if $goods.promote_price}{$goods.promote_price}{else}{$goods.shop_price}{/if}</label>
+                        {else}
+                        <label>Mới ra mắt</label>
+                        {/if}
+                    </a>
+                </li>
+                {/foreach}
+            </ul>
+            {/if}
+            <div class="box_widget">
+            <div class="widget_title"><a href="/tin-tuc/tin-khuyen-mai/10">Khuyến mãi</a></div>
+               <ul class="newspromotion">
+               {foreach from=$promo_article_list item=article name=article_list}
+                <li>
+                      <a href="{$article.url|escape:html}" title="{$article.title|escape:html}">
+                        <img  alt="{$article.title|escape:html}" src="{$option.static_path}{$article.thumb}" width="380" height="215">
+                        <h3>{$article.title|truncate:80}</h3>
+                    </a>
+                </li>
+                {/foreach}
+            </ul>
+                <!-- TemplateBeginEditable name="Bottom Right" -->
+<!-- TemplateEndEditable -->
+        </div>
+        </div>
+    <!-- TemplateBeginEditable name="Main-Bottom" --><!-- TemplateEndEditable -->

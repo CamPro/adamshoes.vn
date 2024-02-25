@@ -1,0 +1,103 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+{if $topic.title_pic}
+<img src="{$topic.title_pic}" alt="">
+{/if}
+<section>
+	<div class="topic_content clearfix">{$topic.intro}</div>
+    <div class="box_topic">
+   		{foreach from=$sort_goods_arr item=sort key=sort_name name=sorts}
+        <div class="item_topic">
+		<h2 class="cat_topic"><span><a name="cat{$smarty.foreach.sorts.index}"></a>{$sort_name}</span></h2>
+        {if $sort}
+            <ul class="cate">
+                {foreach from=$sort item=goods name=sort}
+                    {if $goods.goods_id}
+                    <li class="igoods iproduct itemgoods  {if $goods.is_special eq 1 }feature{/if} ">
+
+                        <a href="{$goods.url}" title="{$goods.goods_style_name|escape:html}">
+                        <div class="gimage">
+                            {if $goods.is_special eq 1 }
+                            {$goods.goods_thumb2col}
+                        {else}
+                        <img  alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}">
+                       {/if}
+
+                       
+                            {if $goods.text_status neq ""}
+                                <div class="note">{$goods.text_status}</div>
+                            {/if}
+                        </div> 
+                        <h3>{$goods.goods_style_name|truncate:50}</h3>
+                        <div class="price_box">
+                        <!--gia tra gop -->
+                        {if $topic.topic_id eq 11 || $topic.topic_id eq 67 || $topic.topic_id eq 68}
+                            <strong>{$goods.tragop_price}</strong>
+                        {else}
+                            {if $goods.promote_price}
+                            <strong>{$goods.promote_price}</strong><i>{$goods.shop_price}</i>
+                            {else}
+                            <strong>{$goods.shop_price}</strong>
+                            {/if}
+                        {/if}
+
+                         {if $topic.discount_method eq 0}
+                            {if $goods.rate_sale and $goods.rate_sale > 1} <label><span>Đang giảm</span>{$goods.rate_sale}%</label>{/if}
+                        {else}
+                            {if $goods.discount}
+                            <label>
+                                <span>Đang giảm</span>
+                            {$goods.discount}</label>
+                            {/if}
+                        {/if}    
+
+                        </div>
+
+                         
+
+                         </a>    
+                        
+                        
+                        
+                        
+                        
+                       
+                        
+
+                       
+                        <div class="good_tool">
+
+                         
+                       <div class="tool1col">
+                            <a   href="{$goods.url}" class="quick_buy">Mua ngay</a>
+                            </div>
+                         
+            </div>
+                    </li>
+                    {/if}
+                {/foreach}
+            </ul><div class="clear"></div>
+            {/if}
+            </div>
+        {/foreach}
+        </div>
+	<!-- TemplateBeginEditable name="Bottom" --><!-- TemplateEndEditable -->
+</section>
+ <div class="topic-comment clearfix">
+    <section>
+   
+<div class="comment_box clearfix" id="comment">
+    <h2>Bình luận của bạn về chương trình khuyến mãi</h2>
+    <div id="comment_wrapper">{insert name='comments' type=5 id=0}</div>
+</div>
+
+    <div class="topic-bn">
+        {siy:topic_banner id=22}
+    </div>
+<div class="clear"></div>
+    </section>
+</div>
+
+
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

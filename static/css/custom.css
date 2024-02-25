@@ -1,0 +1,36 @@
+ #quick_support a{position:fixed;right:1px;top:135px;width:54px;height:38px;max-height:120px;background:url(../img/iconchat.png) no-repeat center 6px #39b54a ;opacity:.9;text-align:center;cursor:pointer;z-index:100;border-radius:80px;padding-top: 42px;background-size: 32px 30px; transition: 0.5s all;color:#fff;display: block;}
+ #quick_support a{}
+ 
+
+.tipr_content
+{
+     
+     color: #fff; font-size: 12px;
+     background-color: #333;
+     padding: 5px 10px;
+}
+ 
+.tipr_container_above
+{
+     display: none;
+     position: absolute;
+      left:-110px;
+     top:25px;
+     z-index: 1000;
+}
+.tipr_point_above, .tipr_point_below 
+{
+     position: relative;
+	background: #fff;
+	 
+}
+ 
+.tipr_point_above:after
+{
+	 content: '';
+	border-top: 5px transparent solid;
+	border-bottom: 5px transparent solid;
+	border-left: 5px solid #333;
+	right: -5px;position: absolute;top: 8px;
+	 
+}

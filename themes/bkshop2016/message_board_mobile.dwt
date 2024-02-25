@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+{include file='library/mobile_page_header.lbi'}
+<section>
+<div style="line-height: 24px;margin: 10px 0">
+<h3>Thông tin liên hệ BÁCH KHOA IT Mart</h3>
+Trụ sở văn phòng: 113-117 Hàm Nghi, Q.Thanh Khê, TP Đà Nẵng <br>
+Điện thoại: 1900 66 36 (ext 2)  - (05113) 691.243<br>
+Email: cskh1@bachkhoashop.com <br>
+Website: www.bachkhoashop.com<br>
+</div>
+<div class="clearfix"></div>
+<div class="map">
+	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2279.7494557007767!2d108.20809717780844!3d16.062049490568707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b453ac45b1%3A0x23df8210a29f6765!2s113+H%C3%A0m+Nghi!5e0!3m2!1svi!2s!4v1437187784898" width="600" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
+<div class="gototop"><i></i>Về đầu trang</div>
+</section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+<!--- Javascrip Plugin Bottom Page -->
+
+</body>
+</html>
+
+

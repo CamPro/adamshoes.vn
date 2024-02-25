@@ -1,0 +1,22 @@
+<div class="homenews">
+<figure>
+    <h2><a href="/tin-tuc/tin-cong-nghe/9">Tin công nghệ</a></h2>
+    <a href="/tin-tuc/tin-cong-nghe/9" class="readmore">Đọc thêm <i class="fa fa-angle-right"></i></a>
+    <div class="clear clearfix"></div>
+</figure>
+<ul>
+    {foreach from=$new_articles item=article key=k name=new_articles}
+    {if $k lt 3}
+    <li class="item{$k}">
+       <a href="{$article.url}" title="{$article.title|escape:html}">
+            <img src="{$article.thumb}" alt="{$article.title|escape:html}" width="100" height="70">
+            <h3>{$article.title|escape:html}</h3>
+            <span>{$article.add_time}</span>
+            <label> • {$article.cat_name}</label>
+        </a>
+    </li>
+    {/if}
+    {/foreach}
+</ul>
+</div>
+

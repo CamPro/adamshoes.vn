@@ -1,0 +1,28 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+<section class="clearfix">
+{include file='library/ur_here.lbi'}
+<!-- TemplateBeginEditable name="Top" --><!-- TemplateEndEditable -->
+{if $buytragop eq 1}
+    {include file='library/goods_tragop.lbi'}
+{else}
+    <!-- layout mobile|laptop|tablet -->
+    {if $parent_catid eq 1 || $parent_catid eq 2 || $parent_catid eq 3 || $parent_catid eq 4 || $parent_catid eq 9 || $parent_catid eq 91}
+        {if $goods.online_raw and $goods.on_sale eq 1}
+            {include file='layout/layout_goods1_online.lbi'}
+        {else}
+            {include file='layout/layout_goods1.lbi'}
+        {/if}
+    {else}
+        {include file='layout/layout_goods2.lbi'}
+    {/if}
+{/if}<!-- endif Notragop -->
+</section><div id="footerstop"></div>
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}
+<!-- TemplateBeginEditable name="Stick-Global" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+

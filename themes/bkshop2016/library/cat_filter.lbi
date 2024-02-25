@@ -1,0 +1,68 @@
+
+{if $brands.1 || $price_grade.1 || $filter_attr_list || $show_sub eq 1}
+<div id="wrap-filter">
+	<ul class="filter-bar">
+		<li><a class="first">Tìm Theo: </a></li>
+        {if $show_sub eq 1}
+            <li><a href="">{$lang.brand}{foreach from=$list_sub_cat item=catsub}{if $catsub.selected eq 1}: <trong>{$catsub.cat_name}</strong>{/if}{/foreach}</a>
+            <ul>
+                
+                {foreach from=$list_sub_cat item=catsub}
+                    <li class="item {if $catsub.all eq 1} all {/if} {if $catsub.selected eq 1} current {/if}"><a href="{$catsub.cat_url_seo}" title="{$catsub.cat_name}">{$catsub.cat_name}</a></li>
+                {/foreach}
+            </ul>
+        {else}
+            {if $category eq 2}
+            <li><a href="">{$lang.brand}</a>
+                <ul>
+                    <li class="item {if $category eq 2}all {/if}"><a href="/dtdd.html">Tất cả</a> </li>
+                    <li class="item"><a href="dien-thoai-apple-iphone.html">Apple (iPhone)</a> </li>
+                    <li class="item"><a href="dien-thoai-samsung.html">Samsung</a> </li>
+                    <li class="item"><a href="dien-thoai-oppo.html">OPPO</a> </li>
+                    <li class="item"><a href="dien-thoai-asus-zenfone.html">Asus (Zenfone)</a> </li>
+                    <li class="item"><a href="dien-thoai-xiaomi.html">Xiaomi</a> </li>
+                    <li class="item"><a href="dien-thoai-nokia-microsoft.html">Nokia - Microsoft</a> </li>
+                    <li class="item"><a href="dien-thoai-huawei.html">Huawei</a> </li>
+                    <li class="item"><a href="dien-thoai-land-rover.html">Land Rover</a> </li>
+                    <li class="item"><a href="dien-thoai-arbutus.html">Arbutus</a> </li>
+                    <li class="item"><a href="dien-thoai-hyundai.html">Hyundai</a> </li>
+                    <li class="item"><a href="dien-thoai-vivo.html">Vivo</a> </li>
+                    <li class="item"><a href="dien-thoai-bavapen.html">Bavapen</a> </li>
+                    <li class="item"><a href="dien-thoai-lv-mobile.html">LV Mobile</a> </li>
+
+                </ul>
+            </li>
+            {else}
+            		{if $brands.1}
+            		<li><a href="">{$lang.brand}</a>
+            			<ul>
+            				{foreach from=$brands item=brand name=brands}
+            			   <li class="item{if $smarty.foreach.brands.first} all{/if}{if $brand.selected} current{/if}"><a href="{$brand.url}">{$brand.brand_name}</a> </li>
+            			   {/foreach}
+            			</ul>
+            		</li>
+            		{/if}
+            {/if}
+        {/if}    
+		{if $price_grade.1}
+		<li><a href="">{$lang.price}</a>
+			<ul style="min-width:180px;">
+				{foreach from=$price_grade item=grade name=price_grade}
+			   <li style="width:100%;" class="item{if $smarty.foreach.price_grade.first} all{/if}{if $grade.selected} current{/if}"><a href="{$grade.url}">{$grade.price_range}</a> </li>
+			   {/foreach}
+			</ul>
+		</li>
+		{/if}
+		{foreach from=$filter_attr_list item=filter_attr name=filter_attr_list}
+		<li><a href="">{$filter_attr.filter_attr_name|escape:html}</a>
+			<ul>
+				{foreach from=$filter_attr.attr_list item=attr name=filter_attr}
+			   <li class="item{if $smarty.foreach.filter_attr.first} all{/if}{if $attr.selected} current{/if}"><a href="{$attr.url}">{$attr.attr_value}</a> </li>
+			   {/foreach}
+			</ul>
+		</li>
+		{/foreach}
+
+	</ul>
+</div>
+{/if}

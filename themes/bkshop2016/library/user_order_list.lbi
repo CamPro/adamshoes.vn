@@ -1,0 +1,8 @@
+<div class="order_list box">
+	<div class="hd"><h3>{$lang.label_order}</h3><div class="extra"></div></div>
+	<div class="bd">
+		{siy:user_orders number='10' start=$pager.start}
+		{if $orders}{include file='library/pages.lbi'}{/if}
+		
+	</div>
+</div>

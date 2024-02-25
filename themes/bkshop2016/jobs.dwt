@@ -1,0 +1,72 @@
+{include file='library/html_header.lbi'}
+<link href="{$option.static_path}static/asset_mobile/css/owl.carousel.css" rel="stylesheet" />
+ <style>
+    .agency_wrap{display: block;width: 100%;margin-top:30px; }
+    .agency ul{list-style-type: decimal !important;}
+    .agency li{display: block;line-height: 18px;border: 1px solid #f1f1f1;margin-bottom: 5px;padding: 10px;cursor: pointer;}
+    .agency li.active, .agency li:hover{background: #fafafa;}
+    .agency h3{padding: 10px 0;}
+    .agency h3 .badge{background: #fafafa;color: #1f7bd9;border:1px solid #ddd;border-radius: 15px;padding: 3px 8px;font-size: 10px }
+    .head-agency{padding: 10px;border-left: 3px solid #39B54A;margin-bottom: 10px;background: #fafafa;text-transform: uppercase;color: #39B54A !important;}
+     .wrap_address{max-height: 600px;height: 100%;overflow-y:scroll;}
+</style>
+{include file='library/page_header_vieclam.lbi'}
+<section>
+
+    <aside class="col_main">
+       <!-- TemplateBeginEditable name="Slide ViecLam" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+       {if $jmod eq 'quy-trinh'}
+             {include file='jobs/quytrinh.lbi'}
+       {elseif $jmod eq 'ung-tuyen'}
+            {include file='jobs/ungtuyen.lbi'}
+       {else}
+            {include file='jobs/tuyendung.lbi'}
+       {/if}
+
+    </aside>
+    <aside class="col_sub">
+        <a target="_blank" href="https://www.dropbox.com/s/m6lknjoftqpp6cq/Phieu-Ho-So-Ung-Vien.doc?dl=0" class="dowloads-file ">Tải mẩu Hồ sơ ứng tuyển</a>
+        {include file='library/hethong-sieu-thi.lbi'}
+            <!-- TemplateBeginEditable name="Left Vieclam" -->
+<!-- TemplateEndEditable -->
+    </aside>
+</section>
+<section>
+    <div class="qa">
+            <h3>Hỏi đáp tuyển dụng</h3>
+            <div class="ask">
+                <p>1. Làm thế nào để ứng tuyển ?</p>
+                <p class="ans">
+                    Trả lời:  Mời bạn đọc ngay <a href="viec-lam/quy-trinh">Quy trình</a> tuyển dụng nhé !
+                </p>
+            </div>
+            <div class="ask">
+                <p>2. Sau bao lâu thì có kết quả ứng tuyển ?</p>
+                <p class="ans">
+                    Trả lời: Quá trình chọn lựa, cân nhắc ứng viên sau tối đa 7 ngày sẽ có thông báo nhé.
+                </p>
+            </div>
+            <div class="ask">
+                <p>3. Không có tin tuyển dụng, ứng viên có thể tham gia ứng tuyển không ?</p>
+                <p class="ans">
+                    Trả lời: Hoàn toàn được nhé, sau khi nhận được thông tin ứng viên, bộ phận tuyển dụng sẽ lưu trữ thông tin và liên lạc lại với ứng viên khi có nhu cầu tuyển dụng.
+                </p>
+            </div>
+
+        </div>
+    </section>
+<div class="rowfoot2" style="margin-top: 20px;">
+<section>
+        <p>
+      {$copyright} <br/>
+      Văn phòng: <span class="address">{$shop_address}</span><br/>
+      GPĐKKD số 0400539861 do Sở KHĐT Tp.Đà Nẵng cấp ngày 08/05/2006<br/>
+        </p>
+        </section>
+</div>
+<a href="#top" rel="nofollow" title="Về Đầu Trang" id="back-top"><i class="iconbkit-gotop"></i></a>
+{include file='library/html_footer.lbi'}

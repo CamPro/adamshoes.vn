@@ -1,0 +1,16 @@
+
+{include file="pageheader_mobile.htm"}
+
+ <div class="container">
+    {if $smarty.session.admin_id}
+    <ul class="anav">
+        <li><a href="order.php?act=list">Đơn hàng</a></li>
+        <li><a href="comment_manage.php?act=list">Bình luận</a></li>
+    </ul>
+    {/if}
+    <div class="mobile">
+        Mới chỉ hỗ trợ 2 Modules trên được xem giao diện Mobile
+    </div>
+ </div>
+
+{include file="pagefooter_mobile.htm"}

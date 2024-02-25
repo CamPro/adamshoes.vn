@@ -1,0 +1,74 @@
+<div class="fcontact">
+<form action="message.php" method="post" onSubmit="return submitMsgBoard(this)" class="form">
+	<input type="text" name="user_name" value="{if $smarty.session.user_name}{$username}{/if}" autocomplete="on" required placeholder="{$lang.username}">
+    <input type="email" name="user_email" value="{$smarty.session.email|escape}" autocomplete="on" required placeholder="{$lang.email}">
+    <div class="radio_wrap">
+            <label><input type="radio" name="msg_type" value="0" checked="checked">{$lang.message_type[0]}</label>
+            <label><input type="radio" name="msg_type" value="1">{$lang.message_type[1]}</label>
+            <label><input type="radio" name="msg_type" value="2">{$lang.message_type[2]}</label>
+            <label><input type="radio" name="msg_type" value="3">{$lang.message_type[3]}</label>
+            <label><input type="radio" name="msg_type" value="4">{$lang.message_type[4]}</label>
+        </div>
+		<input type="text" name="msg_title" required placeholder="{$lang.message_title}">
+        <textarea name="msg_content" rows="3" cols="3" required style="width:350px;" placeholder="Nội dung"></textarea>
+
+		<div class="action">
+			<input type="submit" class="button" value="{$lang.post_message}">
+		</div>
+		<input type="hidden" name="act" value="act_add_message">
+		<input type="hidden" name="id" value="{$id}">
+	</fieldset>
+</form>
+</div>
+<script type="text/javascript">
+{foreach from=$lang.message_board_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+function submitMsgBoard(frm)
+{
+	var msg = new Object;
+	msg.user_email  = frm.elements['user_email'].value;
+	msg.msg_title   = frm.elements['msg_title'].value;
+	msg.msg_content = frm.elements['msg_content'].value;
+	msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+	var msg_err = '';
+	if (msg.user_email.length > 0)
+	{
+		if (!isValidEmail(msg.user_email))
+		{
+			msg_err += msg_error_email + '\n';
+		}
+	}
+	else
+	{
+		msg_err += msg_empty_email + '\n';
+	}
+	if (msg.msg_title.length == 0)
+	{
+		msg_err += msg_title_empty + '\n';
+	}
+	if (frm.elements['captcha'] && msg.captcha.length==0)
+	{
+		msg_err += msg_captcha_empty + '\n'
+	}
+	if (msg.msg_content.length == 0)
+	{
+		msg_err += msg_content_empty + '\n'
+	}
+	if (msg.msg_title.length > 200)
+	{
+		msg_err += msg_title_limit + '\n';
+	}
+	if (msg_err.length > 0)
+	{
+		alert(msg_err);
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+{/literal}
+</script>

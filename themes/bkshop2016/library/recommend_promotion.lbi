@@ -1,0 +1,16 @@
+{if $promotion_goods}
+<div class="box promotion_goods special_goods">
+	<div class="hd"><h3>{$lang.promotion_goods}</h3><div class="extra"><a href="search.php?intro=promotion">{$lang.more}</a></div></div>
+	<div class="bd product_list">
+		<ul>
+			{foreach from=$promotion_goods item=goods name=promotion_goods}
+			<li>
+				<a href="{$goods.url}" title="{$goods.name|escape:html}" class="photo"><img src="{$option.static_path}{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+				<a href="{$goods.url}" title="{$goods.name|escape:html}" class="name">{$goods.short_style_name}</a>
+				<span class="price">{if $goods.promote_price}<span class="promo"><em>{$goods.promote_price}</em></span>{else}{$goods.shop_price}{/if}</span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>
+{/if}

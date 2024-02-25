@@ -1,0 +1,52 @@
+<div class="col_main">
+	<div class="consignee_list box">
+	<div class="bd">
+		{foreach from=$consignee_list item=consignee key=sn name=consignee_list}
+		{if !$consignee.consignee}<h4>Thông tin giao hàng</h4>{/if}
+		<form action="flow.php" method="post" name="theForm" onsubmit="return checkConsignee(this)" class="form address_form">
+			{include file='library/consignee.lbi'}
+		</form>
+		{/foreach}
+	</div>
+</div>
+</div>
+<div class="col_sub checkout_wrapper">
+	<div class="box">
+		<div class="bd">
+			<h4>Thông tin sản phẩm</h4>
+	<ul class="cart_list">
+		{foreach from=$goods_list item=goods name=goods_list}
+		<li{if $smarty.foreach.goods_list.first} class="first"{/if}>
+			{if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'}
+			<a href="{siy:goods_info id=$goods.goods_id type='url'}" class="photo" target="_blank"><img src="{$option.static_path}{siy:goods_info id=$goods.goods_id type='goods_thumb'}"/></a>
+			<a href="{siy:goods_info id=$goods.goods_id type='url'}" class="name" target="_blank">{$goods.goods_name}</a>
+			<p class="extra_info">
+				{if $goods.goods_attr}{$goods.goods_attr}{/if}
+				{if $goods.is_shipping}<em class="carriage_free">{$lang.carriage_free}</em>{/if}
+				{if $goods.parent_id gt 0}<em class="accessories">{$lang.accessories}</em>{/if}
+				{if $goods.is_gift gt 0}<em class="largess">{$lang.largess}</em>{/if}
+			</p>
+			{elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'}
+			<p class="name package_name">{$goods.goods_name}</p>
+			<p class="package_goods_list" >{foreach from=$goods.package_goods_list item=package_goods_list name=package_goods_list}<em>{$package_goods_list.goods_name}</em>{/foreach}</p>
+			{else}
+			{$goods.goods_name}
+			{/if}
+			<span class="price fr">{$goods.formated_goods_price} &times; {$goods.goods_number}</span>
+			<a href="javascript:cartDrop({$goods.rec_id});" class="drop"><span>X</span></a>
+		</li>
+	{/foreach}
+	   
+	</ul>
+		</div>
+	</div>
+	
+
+</div>
+
+
+<script type="text/javascript">
+{foreach from=$lang.flow_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+</script>

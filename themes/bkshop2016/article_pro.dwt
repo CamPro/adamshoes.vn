@@ -1,0 +1,56 @@
+{include file='library/html_header.lbi'}
+{include file='library/page_header.lbi'}
+
+    <section class=" clearfix">
+    {include file='library/ur_here.lbi'}
+    <div class="article_pro">
+    <div class="col_sub fl">
+        {$render.before_col_sub}
+        <!-- TemplateBeginEditable name="Top Left" --><!-- TemplateEndEditable -->
+        <aside id="help-navigation">
+            <ul class="nolist  ">
+                <li><a title="Giới thiệu" href="/thong-tin/gioi-thieu-5.html">Giới thiệu</a></li>
+                <li><a title="Giao hàng" href="/thong-tin/giao-hang-thanh-toan-14.html">Giao hàng</a></li>
+                <li><a title="Thanh toán" href="/thong-tin/giao-hang-thanh-toan-14.html">Thanh toán</a></li>
+                <li><a title="Góp ý, báo lỗi" href="/lien-he">Góp ý, báo lỗi</a></li>
+                <li><a title="Chính sách đổi trả" href="/thong-tin/chinh-sach-doi-tra-1.html">Chính sách đổi trả</a></li>
+                 <li><a title="Chính sách bảo hành" href="/thong-tin/chinh-sach-bao-hanh-8.html">Chính sách bảo hành</a></li>
+                <li><a title="Điều khoản sử dụng" href="">Điều khoản sử dụng</a></li>
+                <li><a title="Hệ thống chi nhánh" href="/he-thong-sieu-thi">Hệ thống chi nhánh</a></li>
+            </ul>
+        </aside>
+        <!-- TemplateBeginEditable name="Bottom left" --><!-- TemplateEndEditable -->
+        </div>
+    <article class="col_main article fr">
+        {$render.before_main}
+        <!-- TemplateBeginEditable name="Top" --><!-- TemplateEndEditable -->
+        <div class="article_title clearfix">
+                <h1>{$article.title|escape:html}</h1>
+                <p class="article_info"><span class="author">• {$article.author}</span><span class="time">• {$article.add_time}</span><span>• Lượt xem: {$article.viewed}</span><span style="width:50px;"><div class="fb-send" data-href="{$option.static_path}{$request_uri}" data-layout="button_count"></div> </span> <span><span class="fb-like" data-href="{$option.static_path}{$request_uri}" data-send="true" data-layout="button_count" data-width="90" data-show-faces="false"></span></span></p>
+        </div>
+        {if $article.content}
+            <div class="article_content">
+            {$article.content}
+            </div>
+            {if $article.tags}
+            <p class="tag"> Từ khóa:
+             <!-- {foreach from=$article.tags item=tag}-->
+              <a href="tin-tuc/tin-tuc/8?keywords={$tag}">{$tag},</a>
+             <!-- {/foreach} -->
+            </p>
+            {/if}
+        {else}
+        <p class="empty">{$lang.content_empty}</p>
+        {/if}
+        
+            <!-- TemplateBeginEditable name="Bottom" -->
+<!-- TemplateEndEditable -->
+
+    {$render.after_main}
+    </article>
+    <div class="clear"></div>
+    </div>
+    </section>
+
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}

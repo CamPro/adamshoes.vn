@@ -1,0 +1,79 @@
+{if $is_ajax eq 1} 
+ {foreach from=$goods_list item=goods name=goods_list}
+           {if $goods.goods_id}<li>
+                <a href="{$goods.url}">
+                    <aside class="left">
+                        <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="100" height="100">
+                    </aside>
+                    <aside class="right">
+                     <div class="price-box">
+                        <h3>{$goods.goods_name}</h3>
+                        {siy:goods_tagss_status goods=$goods}
+                        </div>
+                        {if $goods.text_status and $goods.onsale neq 0}
+                            <div class="promotion">
+                               <span>{$goods.text_status}</span>
+                            </div>
+                         {/if}
+                    </aside>
+                </a>
+            </li>{/if}
+             {/foreach}
+{else}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{$page_title}</title>
+{include file='library/html_header_mobile.lbi'}
+<!-- Css -->
+<link href="{$option.static_path}static/asset_mobile/css/style.mobile.mini.css" rel="stylesheet" />
+<link href="{$option.static_path}static/asset_mobile/css/custom.css" rel="stylesheet" />
+</head>
+<body id="page_{$pname}">
+ {include file='library/mobile_page_header.lbi'}
+
+ <section>
+
+<div class="clr"></div>
+ 	{if $goods_list}
+        <ul class="cate">
+            {foreach from=$goods_list item=goods name=goods_list}
+           {if $goods.goods_id}
+            <li>
+                <a href="{$goods.url}">
+                    <aside class="left">
+                        <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="100" height="100">
+                    </aside>
+                    <aside class="right">
+                     <div class="price-box">
+                        <h3>{$goods.goods_name}</h3>
+                        {siy:goods_tagss_status goods=$goods}
+                        </div>
+                        {if $goods.text_status and $goods.onsale neq 0}
+                            <div class="promotion">
+                               <span>{$goods.text_status}</span>
+                            </div>
+                         {/if}
+                    </aside>
+                </a>
+            </li>
+         {/if}
+        {/foreach}
+        </ul>
+   <div class="clearfix"></div>
+   {include file='library/pages_ajax_mobile.lbi'}
+   {else}
+    <p class="empty">{$lang.goods_empty}</p>
+    {/if}
+
+   <div class="gototop"><i></i>Về đầu trang</div>
+  </section>
+{include file='library/mobile_page_footer.lbi'}
+{include file='library/mobile_html_footer.lbi'}
+
+</body>
+</html>
+
+{/if}

@@ -1,0 +1,194 @@
+<div class="wrapper_checkout">
+    <ul class="step">
+        <li class="finalstep one activestep"><i class="iconcart-step">1</i> <label>Đặt mua</label> <b>›</b> </li>
+        <li class="two"><i class="iconcart-step">2</i><label>Chọn cách thanh toán</label> </li>
+    </ul>
+    <form action="javascript:;" onsubmit="sendorder({$steporder})" method="post" id="purchase_form">
+        <div class="infocart">
+        <aside class="left_cart content_one">
+              <img width="120" id="gthumb" src="{$option.static_path}{$goods.goods_thumb}" title="{$goods.goods_name|escape:html}" alt="{$goods.goods_name|escape:html}">
+              <h3 id="gdsname">{$goods.goods_name|escape:html}</h3>
+                <div class="pricediv priceproduct"> {if $steporder eq 3} Giá dự kiến: {/if}
+                    {if $goods.is_promote and $goods.gmt_end_time}
+                     <span itemprop="price" class="pricesell" fprice="{$price_final}" id="gdsprice">{$goods.promote_price}</span>
+                    {else}
+                    <span itemprop="price" class="pricesell" fprice="{$price_final}" id="gdsprice">{if $price_final eq 0} Đang cập nhật... {else}{$goods.shop_price_formated} {/if}</span>
+                    {/if}
+                </div>
+                 {if $specification}
+                <div class="properties clearfix">
+                    {foreach from=$specification item=spec key=spec_key name=specification}
+                    <dl{if $spec.attr_type eq 2} title="{$lang.multi_choice}"{/if}>
+                        <dt></dt>
+                        {if $spec.attr_type eq 1}
+                        <dd class="radio">
+                            {foreach from=$spec.values item=value key=key}
+                            <label for="spec_value_{$value.id}" >
+                                <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" data="{$value.price}" data-attr="{$value.label}" {if $key eq 0} checked="checked"{/if} />
+                            {$value.label}</label>
+                            {/foreach}
+                        </dd>
+                        {else}
+                        <dd class="checkbox">
+                            {foreach from=$spec.values item=value key=key}
+                            <label for="spec_value_{$value.id}" >
+                                <input type="checkbox" data="{$value.price}" name="spec_{$spec_key}" value="{$value.id}" data-attr="{$value.label}" id="spec_value_{$value.id}" />
+                            {$value.label}</label>
+                            {/foreach}
+                        </dd>
+                        {/if}
+                    </dl>
+                    <input type="hidden" name="spec_list" value="{$key}" />
+                    {/foreach}
+                </div>
+                {/if}
+                 {if $goods.goods_gift || $goods.online_raw}
+                <div class="promodiv">
+                    <label class="infopromotion"><b>Quà khuyến mãi</b></label>
+                    <div class="detailpromotion" id="gdsgift">
+                        {if $goods.online_raw}
+                        <p> Giảm thêm <strong>{$goods.online_price}</strong> khi mua Online. </p>
+                        {/if}
+                        {$goods.goods_gift}
+                    <!-- tragop va uu dai khac -->
+                    {if $catid eq 1 || $catid eq 2 || $catid eq 3 || $catid eq 49 || $catid eq 50}
+                        <br/>
+                         <!-- qua tang more -->
+                         {if $catid eq 1 and $goods.goods_brand eq 'Dell'}
+                         - Tặng thẻ vào Mobifone 300.000 khi mua Laptop Dell Win 8.1/10 bản quyền (đến 25/11, tại Đà Nẵng)<br/>
+                         {/if}
+                         {if $catid eq 1 and $goods.goods_brand eq 'Lenovo'}
+                            - Tặng ngay bộ quà 900.000 mua Laptop Lenovo Core i3-i7 (chỉ tại Đà Nẵng, đến 30/11) <br/>
+                         {/if}
+                         {if $catid eq 1}
+                         - Tặng Voucher 100.000 cho Sinh viên mua Laptop(*) <br/>
+                         - Mua Office 365 bản quyền với giá chỉ 199.000đ cho sinh viên <a target="_blank" href="/phan-mem-office/phan-mem-office-365-personal">Chi tiết</a><br/>
+                        {/if}
+                         <!-- tra gop more -->
+                        {if viettin || $sacom || $acs || $hc || $fe || $hd}
+
+                            {if $catid eq 1 and $goods.shop_price > 2000000 and $goods.shop_price < 7000000}
+                            - Trả góp trả trước 0đ với HDSS đến 31/10.<br/>
+                            {/if}
+                            {if $acs} - Trả góp {$acs.laisuat}% lãi suất với ACS (đến {$acs.endday}) <br/>{/if}
+                            {if $hc} - Trả góp {$hc.laisuat}% lãi suất với HomeCredit (đến {$hc.endday}) <br/> {/if}
+                            {if $hd} - Trả góp {$hd.laisuat}% lãi suất với HD Saison (đến {$hd.endday}) <br/> {/if}
+                            {if $fe} - Trả góp {$fe.laisuat}% lãi suất với FECredit (đến {$fe.endday}) <br/>{/if}
+                            {if $sacom eq 1 || $viettin eq 1}
+                            - Trả góp 0% lãi suất với thẻ VISA {if $viettin eq 1}Viettin{/if}{if $sacom eq 1} / Sacombank{/if} (đến 31/12) <br/>
+                            {/if}
+                        {/if}
+                    {/if}
+                    </div>
+                </div>
+                {/if}
+            </aside>
+        <aside class="right_cart content_one">
+            <div class="consegine" id="step1">
+               <div class="choisesex">
+                 <span>1. Thông tin người mua:</span>
+                  <input type="radio" name="sex" value="1" checked id="male">
+                  <label for="male">Anh</label>
+                   <input type="radio" name="sex" value="0" id="female">
+                 <label for="female">Chị</label>
+                </div>
+                <div class="input_form">
+                    <input type="text" maxlength="50" placeholder="Họ tên của bạn (Bắt buộc)" name="fullname" required>
+                    <input type="text" minlength="10" maxlength="11"  placeholder="Số di động (Bắt buộc)" name="mobile" required>
+                    <input type="email"   placeholder="Email (Không Bắt buộc)" name="email" >
+                    <button id="nextstep" type="submit" class="btnfinal">Đặt trước</button>
+                    <div class="tos">
+                        Xem hướng dẫn thanh toán <a href="thong-tin/giao-hang-thanh-toan-14.html" target="_blank">tại đây</a>
+                    </div>
+                     <div class="phonehelp">
+                            <div class="call"><i class="iconcart-phone"></i>Hỗ trợ: <a href="tel:1900636472">1900.63.64.72</a> hoặc <a href="tel:0905418111">0905.418.111</a></div>
+                            <div class="time">Từ 8h00 - 17h30 (Thứ 2 - 7 hàng tuần)</div>
+                    </div>
+                </div>
+            </div><!-- end step 1-->
+
+       </aside>
+       </div>
+    </form>
+
+</div>
+
+<script src="{$option.static_path}/static/asset_mobile/js/jquery.min.1.8.3.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/plugins.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/lang.{$option.lang}.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/global.js"></script>
+<script type="text/javascript" src="{$option.static_path}static/js/init.js"></script>
+
+<script type="text/javascript">
+    var fprice = $('#gdsprice').attr('fprice');
+    function preorder(type){
+        //sanpham
+        var form = $("#purchase_form");
+        var goods = new Object();
+        goods.goods_rprice = $('#gdsprice').attr('fprice'); //raw price
+        goods.goods_name = $('#gdsname').text();
+        goods.goods_fprice = $('#gdsprice').text();
+        goods.goods_gift = $('#gdsgift').text();
+        goods.goods_id = form.find('[name="goods_id"]').val();
+        goods.goods_sn = form.find('[name="goods_sn"]').val();
+
+        var thuoctinh = new  Array();
+        $('#purchase_form .radio input[name^="spec_"]:checked').each(function(i) {
+             thuoctinh[i] = $(this).attr('data-attr');
+        });
+        goods.goodsattr = '';
+        $.each(thuoctinh, function(key, attr) {
+          goods.goodsattr += attr;
+        });
+        goods.goods_url = window.location.href;
+
+
+        var customer = new Object();
+        customer.sex    = form.find('[name="sex"]:checked').val();
+        customer.name   = form.find('[name="fullname"]').val();
+        customer.mobile = form.find('[name="mobile"]').val();
+        customer.email  = form.find('[name="email"]').val();
+
+        var error = 0;
+        var msg = '';
+
+        if(customer.name == '' ||   customer.mobile  ==''){
+            var error = 1;
+            msg += '- Vui lòng điền thông tin khách hàng <br/>';
+        }
+        var va_mobile = customer.mobile.substring(0,1); //lay ki tu dau cua mobile
+        if(customer.mobile.length < 10 || customer.mobile.length > 11 || va_mobile != 0){
+            var error = 1;
+            msg += '- Số điện thoại không hợp lệ <br/>';
+        }
+
+        //Xuat loi khi ko loi
+        if(error == 1){
+         $.fn.colorbox({html:'<div class="message_box mb_info">'+msg+'</div>'});
+        }
+
+        //Send Order khi hop le
+        if(error == 0){
+            $.post(
+                'order.php?step=preorder',
+                {goods: $.toJSON(goods), customer: $.toJSON(customer)},
+                function(response){
+                    var res = $.evalJSON(response);
+                    if (res.error == 0) {
+                        //reset form
+                        form.find('[name="fullname"]').val('');
+                        form.find('[name="mobile"]').val('');
+                        form.find('[name="address"]').val('');
+
+                       cLink(res.message, res.link); // Bao thanh cong va chuyen  link ve sp
+                    }else{
+                        $.fn.colorbox({html:'<div class="message_box mb_info">'+res.message+'</div>'});
+                    }
+                },
+                'text'
+            );
+        }
+
+    }
+
+ </script>

@@ -1,0 +1,139 @@
+{include file='library/html_header.lbi'}
+{if $cat_root_id eq 1 || $cat_root_id eq 2 || $cat_root_id eq 3}
+<!-- TemplateBeginEditable name="TOP" -->
+<!-- TemplateEndEditable -->
+{/if}
+{include file='library/page_header.lbi'}
+<section>
+    {if $cat_root_id eq 1 || $cat_root_id eq 2 || $cat_root_id eq 3}
+	{include file='library/cat_filter_v2.lbi'}
+    {/if}
+	{$render.before_main}
+	<!-- Custom cat cho Phu kien -->
+
+	{if $isnetwork}
+		{include file='library/catsub_network.lbi'}
+		<!-- TemplateBeginEditable name="QCHeader TBMang" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	{/if}
+	{if $ispcmvp}
+		{include file='library/catsub_pcmvp.lbi'}
+	   <!-- TemplateBeginEditable name="QCHeader PCMayVanPhong" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	{/if}
+	{if $isdoitra}
+
+	   <!-- TemplateBeginEditable name="QCHeader Maydoitra" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+{include file='library/catsub_maydoitra.lbi'}
+	{/if}
+	<!-- Banner danh muc laptop -->
+	{if $category eq 1	|| $cat_root_id eq 1}
+		<!-- TemplateBeginEditable name="QCHeader Laptop" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	{/if}<!-- Banner danh muc dien thoai -->
+	{if $category eq 2	|| $cat_root_id eq 2}
+		<!-- TemplateBeginEditable name="QCHeader Mobile" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+     {/if}
+	{if $category eq 3 || $cat_root_id eq 3}
+		<!-- TemplateBeginEditable name="QCHeader Tablet" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	{/if}
+	<!-- #end custom ad -->
+
+	{if $category eq 227 || $cat_root_id eq 227}
+	   {include file='library/catsub_suachuathaythe.lbi'}
+
+ 	{/if}
+	{if $isacc }
+<!-- TemplateEndEditable -->
+ {include file='library/catsub_phukien.lbi'}
+	<aside  class="cate-acc clearfix">
+		<!-- TemplateBeginEditable name="Ads PhuKien 935px" -->
+<!-- TemplateEndEditable -->
+		{if $category eq 5}
+            <!-- TemplateBeginEditable name="QCHeader PhuKien" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+{insert name=ads id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+			{include file='library/recommend_best_cat.lbi'}
+		{else}
+			{if $goods_list}
+            <div class="fb-acc">
+                <h1>Tìm thấy {$total_full} {$cat_name}</h1>
+                {* include file='library/cat_filter_phukien.lbi'	*}
+            </div>
+				<ul class="box-product">
+					 {foreach from=$goods_list item=goods name=goods_list}
+    			    	{if $goods.goods_id}
+                        <li class="one itemacc">
+
+                            <a title="{$goods.goods_style_name}" href="{$goods.url}">
+                            <img alt="{$goods.goods_name|escape:html}" src="{$option.static_path}{$goods.goods_thumb}" width="125" height="125">
+
+                            <h3>{$goods.goods_style_name}</h3>
+                            <div class="box-price">
+                                {if $goods.promote_price}
+                                <strong class="price">{$goods.promote_price}</strong>
+                                {else}
+                                  <strong class="price">{$goods.shop_price}</strong>
+                                {/if}
+                            </div>
+
+                             </a>
+                            <label class="onlineonly"><h6 class="textkm">{$goods.text_status}</h6></label>
+                        </li>
+				      {/if}
+				    {/foreach}
+				</ul>
+			{include file='library/pages_ajax.lbi'}
+			{/if}
+		{/if}<!--if else cat 5 -->
+
+	</aside >
+     {include file='library/icon_phukien.lbi'}
+	{elseif $isdoitra}
+
+        {if $category eq 9}
+            {include file='library/goods_maydoitra2.lbi'}
+        {else}
+		   {include file='library/goods_maydoitra.lbi'}
+        {/if}
+	{else}
+		{include file='library/goods_list.lbi'}
+	{/if}
+
+	{$render.after_main}
+
+</section>
+{if $tags}
+<div class="keyword  {if $isacc }keyword_acc{/if}"><em>{$lang.hot_search}</em>
+        {foreach from=$tags item=val}
+        <a href="tim-kiem?keywords={$val|escape:url}">• {$val}</a>
+        {/foreach}
+</div>
+{/if}
+<!-- TemplateBeginEditable name="Stick-Global" -->
+<!-- TemplateEndEditable -->
+{include file='library/page_footer.lbi'}
+{include file='library/html_footer.lbi'}
